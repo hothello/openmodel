@@ -41,7 +41,7 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
    ```
    | Initial structure | Relaxed structure |
    | --- | --- |
-   | <img src="images/02_cg_slab_01.png" alt="01_slab_f1000000.dump" width="41%"/> | <img src="images/02_cg_slab_02.png" alt="02_cg_slab_01.dump" width="45%"/> |
+   | <img src="images/02_cg_slab_01.png" alt="01_slab_f1000000.dump" width="91%"/> | <img src="images/02_cg_slab_02.png" alt="02_cg_slab_01.dump" width="100%"/> |
 3. Create a supercell of solvent big enough to fill the simulation cell containing the slab. Trim the solvent supercell as to avoid bad contacts with the polymer slab. Write the input files for the next CG-MD simulation.
    ```sh
    bash 03_postprocess.sh
@@ -52,14 +52,14 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
    ```
    | Initial structure | Relaxed structure |
    | --- | --- |
-   | <img src="images/04_cg_sample_01.png" alt="03_merged.dump" width="40%"/> | <img src="images/04_cg_sample_02.png" alt="04_cg_sample_01.dump" width="50%"/> |
+   | <img src="images/04_cg_sample_01.png" alt="03_merged.dump" width="80%"/> | <img src="images/04_cg_sample_02.png" alt="04_cg_sample_01.dump" width="100%"/> |
 5. Wrap the last frame of the CG structure and patch the bead types as to distinguish between the initial and final monomers in the polymer chain. Convert the wrapped structure to atomistic coordinates and write the input files for the following all-atom MD simulation.
    ```sh
    bash 05_postprocess.sh
    ```
    | Wrapped CG structure | Backmapped atomistic structure |
    | --- | --- |
-   | <img src="images/04_cg_sample_03.png" alt="04_cg_sample_01_f100000.dump" width="45%"/> | <img src="images/05_sample_aa.png" alt="05_sample_aa.pdb" width="45%"/> | 
+   | <img src="images/04_cg_sample_03.png" alt="04_cg_sample_01_f100000.dump" width="100%"/> | <img src="images/05_sample_aa.png" alt="05_sample_aa.pdb" width="100%"/> | 
 6. Anneal the structure at room temperature. This simulation is computationally quite expensive.
    ```
    mpirun -np 1280 lmp_bin -in 04_cg_sample_01.in
