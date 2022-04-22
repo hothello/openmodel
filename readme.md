@@ -3,10 +3,7 @@ Mesoscopic Multiscale Simulationations
 
 ###  Description
 
-This Use Case describes the creation of a 2D-periodic membrane of poly-lactic-glycolic-acid (*PLGA*)
-surrounded by water (*TIP4P 2005* model). The workflow starts with a coarse-grained force field
-based on the [**MOLC**](https://doi.org/10.1039/c9cp04120f) model, implemented in a
-fork of [**LAMMPS**](https://lammps.org), version [30 Oct 2019](https://github.com/matteoeghirotta/lammps-30Oct19).
+This Use Case for the [OpenModel](https://open-model.eu/) project describes the creation of a 2D-periodic membrane of poly-lactic-glycolic-acid (*PLGA*) surrounded by water (*TIP4P 2005* model). The workflow starts with a coarse-grained force field based on the [**MOLC**](https://doi.org/10.1039/c9cp04120f) model, implemented in a fork of [**LAMMPS**](https://lammps.org), version [30 Oct 2019](https://github.com/matteoeghirotta/lammps-30Oct19).
 The sample is first assembled in the desired configuration, annealed, and then converted to
 atomistic coordinates with the program [**BACKMAP**](https://github.com/matteoeghirotta/backmap_legacy), and
 finally annealed with a type-I atomistic force field (*OPLS*). The resulting structure is suitable to run
@@ -16,9 +13,6 @@ and is not covered here.
 The whole procedure is based on open-source software and relies on a coarse-grained force field parametrised
 consistently with the atomistic force field. Since LAMMPS has limited capabilities to handle complex structure,
 the strategy used here is to manipulate molecular samples with a custom-written program, [**dumptools**](./scripts/dumptools.pl), and to combine the structure with the force field using [MOLTEMPLATE](https://github.com/jewettaij/moltemplate).
-
-| test | test |
-| b    | b    |
 
 
 ### Software Dependency
