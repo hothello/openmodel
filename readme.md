@@ -35,7 +35,7 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
    ```sh
    bash 01_preprocess.sh
    ```
-2. Anneal the slab in vacuum. LAMMPS is
+2. Anneal the slab in vacuum. LAMMPS is typically executed in parallel, depending on the architecture on which it has been compiled. A batch script for the SLURM workload manager is also provided as an example of usage on HPC facilities.
    ```
    mpirun -np 128 lmp_bin -in 02_cg_slab_01.in
    ```
