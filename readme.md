@@ -14,9 +14,6 @@ The whole procedure is based on open-source software and relies on a coarse-grai
 consistently with the atomistic force field. Since LAMMPS has limited capabilities to handle complex structure,
 the strategy used here is to manipulate molecular samples with a custom-written program, [**dumptools**](./scripts/dumptools.pl), and to combine the structure with the force field using [MOLTEMPLATE](https://github.com/jewettaij/moltemplate).
 
- | :-- | :-- |
- | Initial structure | Relaxed structure |
-
 ### Software Dependency
 
 This Use Case depends on the following software. Additional scripts are included in the
@@ -31,8 +28,12 @@ This Use Case depends on the following software. Additional scripts are included
 Go to the [multiscale](./multiscale/) folder and execute the following commands.
 
 1. Create a 2x2x1 supercell from the bulk model the polymer, turn it into a slab, and create the input files
-   for the first molecular dynamics simulation.
-   
+   for the first molecular dynamics simulation.  
+   | test    |
+   | --- |
+   |  1   |
+   |  3   |
+
    <img src="images/plga_cg_amorphous.png" alt="plga_cg_amorphous.dump" width="45%"/>
    Amorphous bulk structure of PLGA
    ```sh
