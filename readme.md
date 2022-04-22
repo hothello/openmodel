@@ -30,8 +30,8 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
 
 1. Create a 2x2x1 supercell from the bulk model the polymer, turn it into a slab, and create the input files
    for the first molecular dynamics simulation.
-   | <img src="images/plga_cg_amorphous.png" alt="plga_cg_amorphous.dump" width="45%"/> | 
-   | Amorphous bulk structure of PLGA |
+   | :-- | |
+   | <img src="images/plga_cg_amorphous.png" alt="plga_cg_amorphous.dump" width="45%"/> | Amorphous bulk structure of PLGA |
    ```sh
    bash 01_preprocess.sh
    ```
@@ -39,7 +39,8 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
    ```
    mpirun -np 128 lmp_bin -in 02_cg_slab_01.in
    ```
-   | <img src="images/02_cg_slab_01.png" alt="01_slab_f1000000.dump" width="45%"/> | <img src="images/02_cg_slab_02.png" alt="02_cg_slab_01.dump" width="45%"/> |
+   | :-- | :-- |
+   | <img src="images/02_cg_slab_01.png" alt="01_slab_f1000000.dump" width="40%"/> | <img src="images/02_cg_slab_02.png" alt="02_cg_slab_01.dump" width="45%"/> |
    | Initial structure | Relaxed structure |
 3. Create a supercell of solvent big enough to fill the simulation cell containing the slab. Trim the solvent supercell as to avoid bad contacts with the polymer slab. Write the input files for the next CG-MD simulation.
    ```sh
@@ -49,12 +50,14 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
    ```
    mpirun -np 128 lmp_bin -in 04_cg_sample_01.in
    ```
-   | <img src="images/04_cg_sample_01.png" alt="03_merged.dump" width="45%"/> | <img src="images/04_cg_sample_02.png" alt="04_cg_sample_01.dump" width="45%"/> | 
+   | :--: | :--: |
+   | <img src="images/04_cg_sample_01.png" alt="03_merged.dump" width="40%"/> | <img src="images/04_cg_sample_02.png" alt="04_cg_sample_01.dump" width="50%"/> | 
    | Initial structure | Relaxed structure |
 5. Wrap the last frame of the CG structure and patch the bead types as to distinguish between the initial and final monomers in the polymer chain. Convert the wrapped structure to atomistic coordinates and write the input files for the following all-atom MD simulation.
    ```sh
    bash 05_postprocess.sh
    ```
+   | :-- | :-- |
    | <img src="images/04_cg_sample_03.png" alt="04_cg_sample_01_f100000.dump" width="45%"/> | <img src="images/05_sample_aa.png" alt="05_sample_aa.pdb" width="45%"/> | 
    | Wrapped CG structure | Backmapped atomistic structure |
 6. Anneal the structure at room temperature. This simulation is computationally quite expensive.
