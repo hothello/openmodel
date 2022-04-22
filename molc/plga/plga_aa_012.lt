@@ -1,0 +1,738 @@
+import "lac_aa_01.lt"
+import "lac1_aa_01.lt"
+import "gly_aa_01.lt"
+import "gly2_aa_01.lt"
+
+PLGA12 inherits OPLS {
+  # force all monomers to share the same molecule-ID
+  create_var {$mol}
+  plga0 = new lac1.move(0,0,0)
+  plga1 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(3.25,1.60,0)
+  plga2 = new lac.move(6.50,3.20,0)
+  plga3 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(9.75,4.80,0)
+  plga4 = new lac.move(13.00,6.40,0)
+  plga5 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(16.25,8.00,0)
+  plga6 = new lac.move(19.50,9.60,0)
+  plga7 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(22.75,11.20,0)
+  plga8 = new lac.move(26.00,12.80,0)
+  plga9 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(29.25,14.40,0)
+  plga10 = new lac.move(32.50,16.00,0)
+  plga11 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(35.75,17.60,0)
+  plga12 = new lac.move(39.00,19.20,0)
+  plga13 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(42.25,20.80,0)
+  plga14 = new lac.move(45.50,22.40,0)
+  plga15 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(48.75,24.00,0)
+  plga16 = new lac.move(52.00,25.60,0)
+  plga17 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(55.25,27.20,0)
+  plga18 = new lac.move(58.50,28.80,0)
+  plga19 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(61.75,30.40,0)
+  plga20 = new lac.move(65.00,32.00,0)
+  plga21 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(68.25,33.60,0)
+  plga22 = new lac.move(71.50,35.20,0)
+  plga23 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(74.75,36.80,0)
+  plga24 = new lac.move(78.00,38.40,0)
+  plga25 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(81.25,40.00,0)
+  plga26 = new lac.move(84.50,41.60,0)
+  plga27 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(87.75,43.20,0)
+  plga28 = new lac.move(91.00,44.80,0)
+  plga29 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(94.25,46.40,0)
+  plga30 = new lac.move(97.50,48.00,0)
+  plga31 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(100.75,49.60,0)
+  plga32 = new lac.move(104.00,51.20,0)
+  plga33 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(107.25,52.80,0)
+  plga34 = new lac.move(110.50,54.40,0)
+  plga35 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(113.75,56.00,0)
+  plga36 = new lac.move(117.00,57.60,0)
+  plga37 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(120.25,59.20,0)
+  plga38 = new lac.move(123.50,60.80,0)
+  plga39 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(126.75,62.40,0)
+  plga40 = new lac.move(130.00,64.00,0)
+  plga41 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(133.25,65.60,0)
+  plga42 = new lac.move(136.50,67.20,0)
+  plga43 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(139.75,68.80,0)
+  plga44 = new lac.move(143.00,70.40,0)
+  plga45 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(146.25,72.00,0)
+  plga46 = new lac.move(149.50,73.60,0)
+  plga47 = new gly2.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(152.75,75.20,0)
+
+  write("Data Bonds") {
+    $bond:bkb0 @bond:type214 $atom:plga0/C2 $atom:plga1/O2
+    $bond:bkb1 @bond:type214 $atom:plga1/C2 $atom:plga2/O2
+    $bond:bkb2 @bond:type214 $atom:plga2/C2 $atom:plga3/O3
+    $bond:bkb3 @bond:type214 $atom:plga3/C4 $atom:plga4/O2
+    $bond:bkb4 @bond:type214 $atom:plga4/C2 $atom:plga5/O2
+    $bond:bkb5 @bond:type214 $atom:plga5/C2 $atom:plga6/O2
+    $bond:bkb6 @bond:type214 $atom:plga6/C2 $atom:plga7/O3
+    $bond:bkb7 @bond:type214 $atom:plga7/C4 $atom:plga8/O2
+    $bond:bkb8 @bond:type214 $atom:plga8/C2 $atom:plga9/O2
+    $bond:bkb9 @bond:type214 $atom:plga9/C2 $atom:plga10/O2
+    $bond:bkb10 @bond:type214 $atom:plga10/C2 $atom:plga11/O3
+    $bond:bkb11 @bond:type214 $atom:plga11/C4 $atom:plga12/O2
+    $bond:bkb12 @bond:type214 $atom:plga12/C2 $atom:plga13/O2
+    $bond:bkb13 @bond:type214 $atom:plga13/C2 $atom:plga14/O2
+    $bond:bkb14 @bond:type214 $atom:plga14/C2 $atom:plga15/O3
+    $bond:bkb15 @bond:type214 $atom:plga15/C4 $atom:plga16/O2
+    $bond:bkb16 @bond:type214 $atom:plga16/C2 $atom:plga17/O2
+    $bond:bkb17 @bond:type214 $atom:plga17/C2 $atom:plga18/O2
+    $bond:bkb18 @bond:type214 $atom:plga18/C2 $atom:plga19/O3
+    $bond:bkb19 @bond:type214 $atom:plga19/C4 $atom:plga20/O2
+    $bond:bkb20 @bond:type214 $atom:plga20/C2 $atom:plga21/O2
+    $bond:bkb21 @bond:type214 $atom:plga21/C2 $atom:plga22/O2
+    $bond:bkb22 @bond:type214 $atom:plga22/C2 $atom:plga23/O3
+    $bond:bkb23 @bond:type214 $atom:plga23/C4 $atom:plga24/O2
+    $bond:bkb24 @bond:type214 $atom:plga24/C2 $atom:plga25/O2
+    $bond:bkb25 @bond:type214 $atom:plga25/C2 $atom:plga26/O2
+    $bond:bkb26 @bond:type214 $atom:plga26/C2 $atom:plga27/O3
+    $bond:bkb27 @bond:type214 $atom:plga27/C4 $atom:plga28/O2
+    $bond:bkb28 @bond:type214 $atom:plga28/C2 $atom:plga29/O2
+    $bond:bkb29 @bond:type214 $atom:plga29/C2 $atom:plga30/O2
+    $bond:bkb30 @bond:type214 $atom:plga30/C2 $atom:plga31/O3
+    $bond:bkb31 @bond:type214 $atom:plga31/C4 $atom:plga32/O2
+    $bond:bkb32 @bond:type214 $atom:plga32/C2 $atom:plga33/O2
+    $bond:bkb33 @bond:type214 $atom:plga33/C2 $atom:plga34/O2
+    $bond:bkb34 @bond:type214 $atom:plga34/C2 $atom:plga35/O3
+    $bond:bkb35 @bond:type214 $atom:plga35/C4 $atom:plga36/O2
+    $bond:bkb36 @bond:type214 $atom:plga36/C2 $atom:plga37/O2
+    $bond:bkb37 @bond:type214 $atom:plga37/C2 $atom:plga38/O2
+    $bond:bkb38 @bond:type214 $atom:plga38/C2 $atom:plga39/O3
+    $bond:bkb39 @bond:type214 $atom:plga39/C4 $atom:plga40/O2
+    $bond:bkb40 @bond:type214 $atom:plga40/C2 $atom:plga41/O2
+    $bond:bkb41 @bond:type214 $atom:plga41/C2 $atom:plga42/O2
+    $bond:bkb42 @bond:type214 $atom:plga42/C2 $atom:plga43/O3
+    $bond:bkb43 @bond:type214 $atom:plga43/C4 $atom:plga44/O2
+    $bond:bkb44 @bond:type214 $atom:plga44/C2 $atom:plga45/O2
+    $bond:bkb45 @bond:type214 $atom:plga45/C2 $atom:plga46/O2
+    $bond:bkb46 @bond:type214 $atom:plga46/C2 $atom:plga47/O3
+  }
+
+  write("Data Angles") {
+    $angle:bka0 @angle:type889 $atom:plga0/C3 $atom:plga0/C2 $atom:plga1/O2
+    $angle:bka1 @angle:type540 $atom:plga0/C1 $atom:plga0/C2 $atom:plga1/O2
+    $angle:bka2 @angle:type593 $atom:plga0/H1 $atom:plga0/C2 $atom:plga1/O2
+    $angle:bka3 @angle:type731 $atom:plga0/C2 $atom:plga1/O2 $atom:plga1/C3
+    $angle:bka4 @angle:type889 $atom:plga1/C3 $atom:plga1/C2 $atom:plga2/O2
+    $angle:bka5 @angle:type540 $atom:plga1/C1 $atom:plga1/C2 $atom:plga2/O2
+    $angle:bka6 @angle:type593 $atom:plga1/H1 $atom:plga1/C2 $atom:plga2/O2
+    $angle:bka7 @angle:type731 $atom:plga1/C2 $atom:plga2/O2 $atom:plga2/C3
+    $angle:bka8 @angle:type889 $atom:plga2/C3 $atom:plga2/C2 $atom:plga3/O3
+    $angle:bka9 @angle:type540 $atom:plga2/C1 $atom:plga2/C2 $atom:plga3/O3
+    $angle:bka10 @angle:type593 $atom:plga2/H1 $atom:plga2/C2 $atom:plga3/O3
+    $angle:bka11 @angle:type731 $atom:plga2/C2 $atom:plga3/O3 $atom:plga3/C5
+    $angle:bka12 @angle:type889 $atom:plga3/C5 $atom:plga3/C4 $atom:plga4/O2
+    $angle:bka13 @angle:type593 $atom:plga3/H5 $atom:plga3/C4 $atom:plga4/O2
+    $angle:bka14 @angle:type593 $atom:plga3/H6 $atom:plga3/C4 $atom:plga4/O2
+    $angle:bka15 @angle:type731 $atom:plga3/C4 $atom:plga4/O2 $atom:plga4/C3
+    $angle:bka16 @angle:type889 $atom:plga4/C3 $atom:plga4/C2 $atom:plga5/O2
+    $angle:bka17 @angle:type540 $atom:plga4/C1 $atom:plga4/C2 $atom:plga5/O2
+    $angle:bka18 @angle:type593 $atom:plga4/H1 $atom:plga4/C2 $atom:plga5/O2
+    $angle:bka19 @angle:type731 $atom:plga4/C2 $atom:plga5/O2 $atom:plga5/C3
+    $angle:bka20 @angle:type889 $atom:plga5/C3 $atom:plga5/C2 $atom:plga6/O2
+    $angle:bka21 @angle:type540 $atom:plga5/C1 $atom:plga5/C2 $atom:plga6/O2
+    $angle:bka22 @angle:type593 $atom:plga5/H1 $atom:plga5/C2 $atom:plga6/O2
+    $angle:bka23 @angle:type731 $atom:plga5/C2 $atom:plga6/O2 $atom:plga6/C3
+    $angle:bka24 @angle:type889 $atom:plga6/C3 $atom:plga6/C2 $atom:plga7/O3
+    $angle:bka25 @angle:type540 $atom:plga6/C1 $atom:plga6/C2 $atom:plga7/O3
+    $angle:bka26 @angle:type593 $atom:plga6/H1 $atom:plga6/C2 $atom:plga7/O3
+    $angle:bka27 @angle:type731 $atom:plga6/C2 $atom:plga7/O3 $atom:plga7/C5
+    $angle:bka28 @angle:type889 $atom:plga7/C5 $atom:plga7/C4 $atom:plga8/O2
+    $angle:bka29 @angle:type593 $atom:plga7/H5 $atom:plga7/C4 $atom:plga8/O2
+    $angle:bka30 @angle:type593 $atom:plga7/H6 $atom:plga7/C4 $atom:plga8/O2
+    $angle:bka31 @angle:type731 $atom:plga7/C4 $atom:plga8/O2 $atom:plga8/C3
+    $angle:bka32 @angle:type889 $atom:plga8/C3 $atom:plga8/C2 $atom:plga9/O2
+    $angle:bka33 @angle:type540 $atom:plga8/C1 $atom:plga8/C2 $atom:plga9/O2
+    $angle:bka34 @angle:type593 $atom:plga8/H1 $atom:plga8/C2 $atom:plga9/O2
+    $angle:bka35 @angle:type731 $atom:plga8/C2 $atom:plga9/O2 $atom:plga9/C3
+    $angle:bka36 @angle:type889 $atom:plga9/C3 $atom:plga9/C2 $atom:plga10/O2
+    $angle:bka37 @angle:type540 $atom:plga9/C1 $atom:plga9/C2 $atom:plga10/O2
+    $angle:bka38 @angle:type593 $atom:plga9/H1 $atom:plga9/C2 $atom:plga10/O2
+    $angle:bka39 @angle:type731 $atom:plga9/C2 $atom:plga10/O2 $atom:plga10/C3
+    $angle:bka40 @angle:type889 $atom:plga10/C3 $atom:plga10/C2 $atom:plga11/O3
+    $angle:bka41 @angle:type540 $atom:plga10/C1 $atom:plga10/C2 $atom:plga11/O3
+    $angle:bka42 @angle:type593 $atom:plga10/H1 $atom:plga10/C2 $atom:plga11/O3
+    $angle:bka43 @angle:type731 $atom:plga10/C2 $atom:plga11/O3 $atom:plga11/C5
+    $angle:bka44 @angle:type889 $atom:plga11/C5 $atom:plga11/C4 $atom:plga12/O2
+    $angle:bka45 @angle:type593 $atom:plga11/H5 $atom:plga11/C4 $atom:plga12/O2
+    $angle:bka46 @angle:type593 $atom:plga11/H6 $atom:plga11/C4 $atom:plga12/O2
+    $angle:bka47 @angle:type731 $atom:plga11/C4 $atom:plga12/O2 $atom:plga12/C3
+    $angle:bka48 @angle:type889 $atom:plga12/C3 $atom:plga12/C2 $atom:plga13/O2
+    $angle:bka49 @angle:type540 $atom:plga12/C1 $atom:plga12/C2 $atom:plga13/O2
+    $angle:bka50 @angle:type593 $atom:plga12/H1 $atom:plga12/C2 $atom:plga13/O2
+    $angle:bka51 @angle:type731 $atom:plga12/C2 $atom:plga13/O2 $atom:plga13/C3
+    $angle:bka52 @angle:type889 $atom:plga13/C3 $atom:plga13/C2 $atom:plga14/O2
+    $angle:bka53 @angle:type540 $atom:plga13/C1 $atom:plga13/C2 $atom:plga14/O2
+    $angle:bka54 @angle:type593 $atom:plga13/H1 $atom:plga13/C2 $atom:plga14/O2
+    $angle:bka55 @angle:type731 $atom:plga13/C2 $atom:plga14/O2 $atom:plga14/C3
+    $angle:bka56 @angle:type889 $atom:plga14/C3 $atom:plga14/C2 $atom:plga15/O3
+    $angle:bka57 @angle:type540 $atom:plga14/C1 $atom:plga14/C2 $atom:plga15/O3
+    $angle:bka58 @angle:type593 $atom:plga14/H1 $atom:plga14/C2 $atom:plga15/O3
+    $angle:bka59 @angle:type731 $atom:plga14/C2 $atom:plga15/O3 $atom:plga15/C5
+    $angle:bka60 @angle:type889 $atom:plga15/C5 $atom:plga15/C4 $atom:plga16/O2
+    $angle:bka61 @angle:type593 $atom:plga15/H5 $atom:plga15/C4 $atom:plga16/O2
+    $angle:bka62 @angle:type593 $atom:plga15/H6 $atom:plga15/C4 $atom:plga16/O2
+    $angle:bka63 @angle:type731 $atom:plga15/C4 $atom:plga16/O2 $atom:plga16/C3
+    $angle:bka64 @angle:type889 $atom:plga16/C3 $atom:plga16/C2 $atom:plga17/O2
+    $angle:bka65 @angle:type540 $atom:plga16/C1 $atom:plga16/C2 $atom:plga17/O2
+    $angle:bka66 @angle:type593 $atom:plga16/H1 $atom:plga16/C2 $atom:plga17/O2
+    $angle:bka67 @angle:type731 $atom:plga16/C2 $atom:plga17/O2 $atom:plga17/C3
+    $angle:bka68 @angle:type889 $atom:plga17/C3 $atom:plga17/C2 $atom:plga18/O2
+    $angle:bka69 @angle:type540 $atom:plga17/C1 $atom:plga17/C2 $atom:plga18/O2
+    $angle:bka70 @angle:type593 $atom:plga17/H1 $atom:plga17/C2 $atom:plga18/O2
+    $angle:bka71 @angle:type731 $atom:plga17/C2 $atom:plga18/O2 $atom:plga18/C3
+    $angle:bka72 @angle:type889 $atom:plga18/C3 $atom:plga18/C2 $atom:plga19/O3
+    $angle:bka73 @angle:type540 $atom:plga18/C1 $atom:plga18/C2 $atom:plga19/O3
+    $angle:bka74 @angle:type593 $atom:plga18/H1 $atom:plga18/C2 $atom:plga19/O3
+    $angle:bka75 @angle:type731 $atom:plga18/C2 $atom:plga19/O3 $atom:plga19/C5
+    $angle:bka76 @angle:type889 $atom:plga19/C5 $atom:plga19/C4 $atom:plga20/O2
+    $angle:bka77 @angle:type593 $atom:plga19/H5 $atom:plga19/C4 $atom:plga20/O2
+    $angle:bka78 @angle:type593 $atom:plga19/H6 $atom:plga19/C4 $atom:plga20/O2
+    $angle:bka79 @angle:type731 $atom:plga19/C4 $atom:plga20/O2 $atom:plga20/C3
+    $angle:bka80 @angle:type889 $atom:plga20/C3 $atom:plga20/C2 $atom:plga21/O2
+    $angle:bka81 @angle:type540 $atom:plga20/C1 $atom:plga20/C2 $atom:plga21/O2
+    $angle:bka82 @angle:type593 $atom:plga20/H1 $atom:plga20/C2 $atom:plga21/O2
+    $angle:bka83 @angle:type731 $atom:plga20/C2 $atom:plga21/O2 $atom:plga21/C3
+    $angle:bka84 @angle:type889 $atom:plga21/C3 $atom:plga21/C2 $atom:plga22/O2
+    $angle:bka85 @angle:type540 $atom:plga21/C1 $atom:plga21/C2 $atom:plga22/O2
+    $angle:bka86 @angle:type593 $atom:plga21/H1 $atom:plga21/C2 $atom:plga22/O2
+    $angle:bka87 @angle:type731 $atom:plga21/C2 $atom:plga22/O2 $atom:plga22/C3
+    $angle:bka88 @angle:type889 $atom:plga22/C3 $atom:plga22/C2 $atom:plga23/O3
+    $angle:bka89 @angle:type540 $atom:plga22/C1 $atom:plga22/C2 $atom:plga23/O3
+    $angle:bka90 @angle:type593 $atom:plga22/H1 $atom:plga22/C2 $atom:plga23/O3
+    $angle:bka91 @angle:type731 $atom:plga22/C2 $atom:plga23/O3 $atom:plga23/C5
+    $angle:bka92 @angle:type889 $atom:plga23/C5 $atom:plga23/C4 $atom:plga24/O2
+    $angle:bka93 @angle:type593 $atom:plga23/H5 $atom:plga23/C4 $atom:plga24/O2
+    $angle:bka94 @angle:type593 $atom:plga23/H6 $atom:plga23/C4 $atom:plga24/O2
+    $angle:bka95 @angle:type731 $atom:plga23/C4 $atom:plga24/O2 $atom:plga24/C3
+    $angle:bka96 @angle:type889 $atom:plga24/C3 $atom:plga24/C2 $atom:plga25/O2
+    $angle:bka97 @angle:type540 $atom:plga24/C1 $atom:plga24/C2 $atom:plga25/O2
+    $angle:bka98 @angle:type593 $atom:plga24/H1 $atom:plga24/C2 $atom:plga25/O2
+    $angle:bka99 @angle:type731 $atom:plga24/C2 $atom:plga25/O2 $atom:plga25/C3
+    $angle:bka100 @angle:type889 $atom:plga25/C3 $atom:plga25/C2 $atom:plga26/O2
+    $angle:bka101 @angle:type540 $atom:plga25/C1 $atom:plga25/C2 $atom:plga26/O2
+    $angle:bka102 @angle:type593 $atom:plga25/H1 $atom:plga25/C2 $atom:plga26/O2
+    $angle:bka103 @angle:type731 $atom:plga25/C2 $atom:plga26/O2 $atom:plga26/C3
+    $angle:bka104 @angle:type889 $atom:plga26/C3 $atom:plga26/C2 $atom:plga27/O3
+    $angle:bka105 @angle:type540 $atom:plga26/C1 $atom:plga26/C2 $atom:plga27/O3
+    $angle:bka106 @angle:type593 $atom:plga26/H1 $atom:plga26/C2 $atom:plga27/O3
+    $angle:bka107 @angle:type731 $atom:plga26/C2 $atom:plga27/O3 $atom:plga27/C5
+    $angle:bka108 @angle:type889 $atom:plga27/C5 $atom:plga27/C4 $atom:plga28/O2
+    $angle:bka109 @angle:type593 $atom:plga27/H5 $atom:plga27/C4 $atom:plga28/O2
+    $angle:bka110 @angle:type593 $atom:plga27/H6 $atom:plga27/C4 $atom:plga28/O2
+    $angle:bka111 @angle:type731 $atom:plga27/C4 $atom:plga28/O2 $atom:plga28/C3
+    $angle:bka112 @angle:type889 $atom:plga28/C3 $atom:plga28/C2 $atom:plga29/O2
+    $angle:bka113 @angle:type540 $atom:plga28/C1 $atom:plga28/C2 $atom:plga29/O2
+    $angle:bka114 @angle:type593 $atom:plga28/H1 $atom:plga28/C2 $atom:plga29/O2
+    $angle:bka115 @angle:type731 $atom:plga28/C2 $atom:plga29/O2 $atom:plga29/C3
+    $angle:bka116 @angle:type889 $atom:plga29/C3 $atom:plga29/C2 $atom:plga30/O2
+    $angle:bka117 @angle:type540 $atom:plga29/C1 $atom:plga29/C2 $atom:plga30/O2
+    $angle:bka118 @angle:type593 $atom:plga29/H1 $atom:plga29/C2 $atom:plga30/O2
+    $angle:bka119 @angle:type731 $atom:plga29/C2 $atom:plga30/O2 $atom:plga30/C3
+    $angle:bka120 @angle:type889 $atom:plga30/C3 $atom:plga30/C2 $atom:plga31/O3
+    $angle:bka121 @angle:type540 $atom:plga30/C1 $atom:plga30/C2 $atom:plga31/O3
+    $angle:bka122 @angle:type593 $atom:plga30/H1 $atom:plga30/C2 $atom:plga31/O3
+    $angle:bka123 @angle:type731 $atom:plga30/C2 $atom:plga31/O3 $atom:plga31/C5
+    $angle:bka124 @angle:type889 $atom:plga31/C5 $atom:plga31/C4 $atom:plga32/O2
+    $angle:bka125 @angle:type593 $atom:plga31/H5 $atom:plga31/C4 $atom:plga32/O2
+    $angle:bka126 @angle:type593 $atom:plga31/H6 $atom:plga31/C4 $atom:plga32/O2
+    $angle:bka127 @angle:type731 $atom:plga31/C4 $atom:plga32/O2 $atom:plga32/C3
+    $angle:bka128 @angle:type889 $atom:plga32/C3 $atom:plga32/C2 $atom:plga33/O2
+    $angle:bka129 @angle:type540 $atom:plga32/C1 $atom:plga32/C2 $atom:plga33/O2
+    $angle:bka130 @angle:type593 $atom:plga32/H1 $atom:plga32/C2 $atom:plga33/O2
+    $angle:bka131 @angle:type731 $atom:plga32/C2 $atom:plga33/O2 $atom:plga33/C3
+    $angle:bka132 @angle:type889 $atom:plga33/C3 $atom:plga33/C2 $atom:plga34/O2
+    $angle:bka133 @angle:type540 $atom:plga33/C1 $atom:plga33/C2 $atom:plga34/O2
+    $angle:bka134 @angle:type593 $atom:plga33/H1 $atom:plga33/C2 $atom:plga34/O2
+    $angle:bka135 @angle:type731 $atom:plga33/C2 $atom:plga34/O2 $atom:plga34/C3
+    $angle:bka136 @angle:type889 $atom:plga34/C3 $atom:plga34/C2 $atom:plga35/O3
+    $angle:bka137 @angle:type540 $atom:plga34/C1 $atom:plga34/C2 $atom:plga35/O3
+    $angle:bka138 @angle:type593 $atom:plga34/H1 $atom:plga34/C2 $atom:plga35/O3
+    $angle:bka139 @angle:type731 $atom:plga34/C2 $atom:plga35/O3 $atom:plga35/C5
+    $angle:bka140 @angle:type889 $atom:plga35/C5 $atom:plga35/C4 $atom:plga36/O2
+    $angle:bka141 @angle:type593 $atom:plga35/H5 $atom:plga35/C4 $atom:plga36/O2
+    $angle:bka142 @angle:type593 $atom:plga35/H6 $atom:plga35/C4 $atom:plga36/O2
+    $angle:bka143 @angle:type731 $atom:plga35/C4 $atom:plga36/O2 $atom:plga36/C3
+    $angle:bka144 @angle:type889 $atom:plga36/C3 $atom:plga36/C2 $atom:plga37/O2
+    $angle:bka145 @angle:type540 $atom:plga36/C1 $atom:plga36/C2 $atom:plga37/O2
+    $angle:bka146 @angle:type593 $atom:plga36/H1 $atom:plga36/C2 $atom:plga37/O2
+    $angle:bka147 @angle:type731 $atom:plga36/C2 $atom:plga37/O2 $atom:plga37/C3
+    $angle:bka148 @angle:type889 $atom:plga37/C3 $atom:plga37/C2 $atom:plga38/O2
+    $angle:bka149 @angle:type540 $atom:plga37/C1 $atom:plga37/C2 $atom:plga38/O2
+    $angle:bka150 @angle:type593 $atom:plga37/H1 $atom:plga37/C2 $atom:plga38/O2
+    $angle:bka151 @angle:type731 $atom:plga37/C2 $atom:plga38/O2 $atom:plga38/C3
+    $angle:bka152 @angle:type889 $atom:plga38/C3 $atom:plga38/C2 $atom:plga39/O3
+    $angle:bka153 @angle:type540 $atom:plga38/C1 $atom:plga38/C2 $atom:plga39/O3
+    $angle:bka154 @angle:type593 $atom:plga38/H1 $atom:plga38/C2 $atom:plga39/O3
+    $angle:bka155 @angle:type731 $atom:plga38/C2 $atom:plga39/O3 $atom:plga39/C5
+    $angle:bka156 @angle:type889 $atom:plga39/C5 $atom:plga39/C4 $atom:plga40/O2
+    $angle:bka157 @angle:type593 $atom:plga39/H5 $atom:plga39/C4 $atom:plga40/O2
+    $angle:bka158 @angle:type593 $atom:plga39/H6 $atom:plga39/C4 $atom:plga40/O2
+    $angle:bka159 @angle:type731 $atom:plga39/C4 $atom:plga40/O2 $atom:plga40/C3
+    $angle:bka160 @angle:type889 $atom:plga40/C3 $atom:plga40/C2 $atom:plga41/O2
+    $angle:bka161 @angle:type540 $atom:plga40/C1 $atom:plga40/C2 $atom:plga41/O2
+    $angle:bka162 @angle:type593 $atom:plga40/H1 $atom:plga40/C2 $atom:plga41/O2
+    $angle:bka163 @angle:type731 $atom:plga40/C2 $atom:plga41/O2 $atom:plga41/C3
+    $angle:bka164 @angle:type889 $atom:plga41/C3 $atom:plga41/C2 $atom:plga42/O2
+    $angle:bka165 @angle:type540 $atom:plga41/C1 $atom:plga41/C2 $atom:plga42/O2
+    $angle:bka166 @angle:type593 $atom:plga41/H1 $atom:plga41/C2 $atom:plga42/O2
+    $angle:bka167 @angle:type731 $atom:plga41/C2 $atom:plga42/O2 $atom:plga42/C3
+    $angle:bka168 @angle:type889 $atom:plga42/C3 $atom:plga42/C2 $atom:plga43/O3
+    $angle:bka169 @angle:type540 $atom:plga42/C1 $atom:plga42/C2 $atom:plga43/O3
+    $angle:bka170 @angle:type593 $atom:plga42/H1 $atom:plga42/C2 $atom:plga43/O3
+    $angle:bka171 @angle:type731 $atom:plga42/C2 $atom:plga43/O3 $atom:plga43/C5
+    $angle:bka172 @angle:type889 $atom:plga43/C5 $atom:plga43/C4 $atom:plga44/O2
+    $angle:bka173 @angle:type593 $atom:plga43/H5 $atom:plga43/C4 $atom:plga44/O2
+    $angle:bka174 @angle:type593 $atom:plga43/H6 $atom:plga43/C4 $atom:plga44/O2
+    $angle:bka175 @angle:type731 $atom:plga43/C4 $atom:plga44/O2 $atom:plga44/C3
+    $angle:bka176 @angle:type889 $atom:plga44/C3 $atom:plga44/C2 $atom:plga45/O2
+    $angle:bka177 @angle:type540 $atom:plga44/C1 $atom:plga44/C2 $atom:plga45/O2
+    $angle:bka178 @angle:type593 $atom:plga44/H1 $atom:plga44/C2 $atom:plga45/O2
+    $angle:bka179 @angle:type731 $atom:plga44/C2 $atom:plga45/O2 $atom:plga45/C3
+    $angle:bka180 @angle:type889 $atom:plga45/C3 $atom:plga45/C2 $atom:plga46/O2
+    $angle:bka181 @angle:type540 $atom:plga45/C1 $atom:plga45/C2 $atom:plga46/O2
+    $angle:bka182 @angle:type593 $atom:plga45/H1 $atom:plga45/C2 $atom:plga46/O2
+    $angle:bka183 @angle:type731 $atom:plga45/C2 $atom:plga46/O2 $atom:plga46/C3
+    $angle:bka184 @angle:type889 $atom:plga46/C3 $atom:plga46/C2 $atom:plga47/O3
+    $angle:bka185 @angle:type540 $atom:plga46/C1 $atom:plga46/C2 $atom:plga47/O3
+    $angle:bka186 @angle:type593 $atom:plga46/H1 $atom:plga46/C2 $atom:plga47/O3
+    $angle:bka187 @angle:type731 $atom:plga46/C2 $atom:plga47/O3 $atom:plga47/C5
+  }
+
+  write("Data Dihedrals") {
+    $dihedral:bkd0 @dihedral:type1150 $atom:plga0/O2 $atom:plga0/C3 $atom:plga0/C2 $atom:plga1/O2
+    $dihedral:bkd1 @dihedral:type1154 $atom:plga0/O1 $atom:plga0/C3 $atom:plga0/C2 $atom:plga1/O2
+    $dihedral:bkd2 @dihedral:type1153 $atom:plga0/C3 $atom:plga0/C2 $atom:plga1/O2 $atom:plga1/C3
+    $dihedral:bkd3 @dihedral:type200  $atom:plga0/C1 $atom:plga0/C2 $atom:plga1/O2 $atom:plga1/C3
+    $dihedral:bkd4 @dihedral:type201  $atom:plga0/H1 $atom:plga0/C2 $atom:plga1/O2 $atom:plga1/C3
+    $dihedral:bkd5 @dihedral:type520  $atom:plga0/H2 $atom:plga0/C1 $atom:plga0/C2 $atom:plga1/O2
+    $dihedral:bkd6 @dihedral:type520  $atom:plga0/H3 $atom:plga0/C1 $atom:plga0/C2 $atom:plga1/O2
+    $dihedral:bkd7 @dihedral:type520  $atom:plga0/H4 $atom:plga0/C1 $atom:plga0/C2 $atom:plga1/O2
+    $dihedral:bkd8 @dihedral:type373  $atom:plga0/C2 $atom:plga1/O2 $atom:plga1/C3 $atom:plga1/C2
+    $dihedral:bkd9 @dihedral:type367  $atom:plga0/C2 $atom:plga1/O2 $atom:plga1/C3 $atom:plga1/O1
+    $dihedral:bkd10 @dihedral:type1150 $atom:plga1/O2 $atom:plga1/C3 $atom:plga1/C2 $atom:plga2/O2
+    $dihedral:bkd11 @dihedral:type1154 $atom:plga1/O1 $atom:plga1/C3 $atom:plga1/C2 $atom:plga2/O2
+    $dihedral:bkd12 @dihedral:type1153 $atom:plga1/C3 $atom:plga1/C2 $atom:plga2/O2 $atom:plga2/C3
+    $dihedral:bkd13 @dihedral:type200  $atom:plga1/C1 $atom:plga1/C2 $atom:plga2/O2 $atom:plga2/C3
+    $dihedral:bkd14 @dihedral:type201  $atom:plga1/H1 $atom:plga1/C2 $atom:plga2/O2 $atom:plga2/C3
+    $dihedral:bkd15 @dihedral:type520  $atom:plga1/H2 $atom:plga1/C1 $atom:plga1/C2 $atom:plga2/O2
+    $dihedral:bkd16 @dihedral:type520  $atom:plga1/H3 $atom:plga1/C1 $atom:plga1/C2 $atom:plga2/O2
+    $dihedral:bkd17 @dihedral:type520  $atom:plga1/H4 $atom:plga1/C1 $atom:plga1/C2 $atom:plga2/O2
+    $dihedral:bkd18 @dihedral:type373  $atom:plga1/C2 $atom:plga2/O2 $atom:plga2/C3 $atom:plga2/C2
+    $dihedral:bkd19 @dihedral:type367  $atom:plga1/C2 $atom:plga2/O2 $atom:plga2/C3 $atom:plga2/O1
+    $dihedral:bkd20 @dihedral:type1150 $atom:plga2/O2 $atom:plga2/C3 $atom:plga2/C2 $atom:plga3/O3
+    $dihedral:bkd21 @dihedral:type1154 $atom:plga2/O1 $atom:plga2/C3 $atom:plga2/C2 $atom:plga3/O3
+    $dihedral:bkd22 @dihedral:type1153 $atom:plga2/C3 $atom:plga2/C2 $atom:plga3/O3 $atom:plga3/C5
+    $dihedral:bkd23 @dihedral:type200  $atom:plga2/C1 $atom:plga2/C2 $atom:plga3/O3 $atom:plga3/C5
+    $dihedral:bkd24 @dihedral:type201  $atom:plga2/H1 $atom:plga2/C2 $atom:plga3/O3 $atom:plga3/C5
+    $dihedral:bkd25 @dihedral:type520  $atom:plga2/H2 $atom:plga2/C1 $atom:plga2/C2 $atom:plga3/O3
+    $dihedral:bkd26 @dihedral:type520  $atom:plga2/H3 $atom:plga2/C1 $atom:plga2/C2 $atom:plga3/O3
+    $dihedral:bkd27 @dihedral:type520  $atom:plga2/H4 $atom:plga2/C1 $atom:plga2/C2 $atom:plga3/O3
+    $dihedral:bkd28 @dihedral:type373  $atom:plga2/C2 $atom:plga3/O3 $atom:plga3/C5 $atom:plga3/C4
+    $dihedral:bkd29 @dihedral:type367  $atom:plga2/C2 $atom:plga3/O3 $atom:plga3/C5 $atom:plga3/O4
+    $dihedral:bkd30 @dihedral:type1144 $atom:plga3/O3 $atom:plga3/C5 $atom:plga3/C4 $atom:plga4/O2
+    $dihedral:bkd31 @dihedral:type1149 $atom:plga3/O4 $atom:plga3/C5 $atom:plga3/C4 $atom:plga4/O2
+    $dihedral:bkd32 @dihedral:type1156 $atom:plga3/C5 $atom:plga3/C4 $atom:plga4/O2 $atom:plga4/C3
+    $dihedral:bkd33 @dihedral:type201  $atom:plga3/H5 $atom:plga3/C4 $atom:plga4/O2 $atom:plga4/C3
+    $dihedral:bkd34 @dihedral:type201  $atom:plga3/H6 $atom:plga3/C4 $atom:plga4/O2 $atom:plga4/C3
+    $dihedral:bkd35 @dihedral:type373  $atom:plga3/C4 $atom:plga4/O2 $atom:plga4/C3 $atom:plga4/C2
+    $dihedral:bkd36 @dihedral:type367  $atom:plga3/C4 $atom:plga4/O2 $atom:plga4/C3 $atom:plga4/O1
+    $dihedral:bkd37 @dihedral:type1150 $atom:plga4/O2 $atom:plga4/C3 $atom:plga4/C2 $atom:plga5/O2
+    $dihedral:bkd38 @dihedral:type1154 $atom:plga4/O1 $atom:plga4/C3 $atom:plga4/C2 $atom:plga5/O2
+    $dihedral:bkd39 @dihedral:type1153 $atom:plga4/C3 $atom:plga4/C2 $atom:plga5/O2 $atom:plga5/C3
+    $dihedral:bkd40 @dihedral:type200  $atom:plga4/C1 $atom:plga4/C2 $atom:plga5/O2 $atom:plga5/C3
+    $dihedral:bkd41 @dihedral:type201  $atom:plga4/H1 $atom:plga4/C2 $atom:plga5/O2 $atom:plga5/C3
+    $dihedral:bkd42 @dihedral:type520  $atom:plga4/H2 $atom:plga4/C1 $atom:plga4/C2 $atom:plga5/O2
+    $dihedral:bkd43 @dihedral:type520  $atom:plga4/H3 $atom:plga4/C1 $atom:plga4/C2 $atom:plga5/O2
+    $dihedral:bkd44 @dihedral:type520  $atom:plga4/H4 $atom:plga4/C1 $atom:plga4/C2 $atom:plga5/O2
+    $dihedral:bkd45 @dihedral:type373  $atom:plga4/C2 $atom:plga5/O2 $atom:plga5/C3 $atom:plga5/C2
+    $dihedral:bkd46 @dihedral:type367  $atom:plga4/C2 $atom:plga5/O2 $atom:plga5/C3 $atom:plga5/O1
+    $dihedral:bkd47 @dihedral:type1150 $atom:plga5/O2 $atom:plga5/C3 $atom:plga5/C2 $atom:plga6/O2
+    $dihedral:bkd48 @dihedral:type1154 $atom:plga5/O1 $atom:plga5/C3 $atom:plga5/C2 $atom:plga6/O2
+    $dihedral:bkd49 @dihedral:type1153 $atom:plga5/C3 $atom:plga5/C2 $atom:plga6/O2 $atom:plga6/C3
+    $dihedral:bkd50 @dihedral:type200  $atom:plga5/C1 $atom:plga5/C2 $atom:plga6/O2 $atom:plga6/C3
+    $dihedral:bkd51 @dihedral:type201  $atom:plga5/H1 $atom:plga5/C2 $atom:plga6/O2 $atom:plga6/C3
+    $dihedral:bkd52 @dihedral:type520  $atom:plga5/H2 $atom:plga5/C1 $atom:plga5/C2 $atom:plga6/O2
+    $dihedral:bkd53 @dihedral:type520  $atom:plga5/H3 $atom:plga5/C1 $atom:plga5/C2 $atom:plga6/O2
+    $dihedral:bkd54 @dihedral:type520  $atom:plga5/H4 $atom:plga5/C1 $atom:plga5/C2 $atom:plga6/O2
+    $dihedral:bkd55 @dihedral:type373  $atom:plga5/C2 $atom:plga6/O2 $atom:plga6/C3 $atom:plga6/C2
+    $dihedral:bkd56 @dihedral:type367  $atom:plga5/C2 $atom:plga6/O2 $atom:plga6/C3 $atom:plga6/O1
+    $dihedral:bkd57 @dihedral:type1150 $atom:plga6/O2 $atom:plga6/C3 $atom:plga6/C2 $atom:plga7/O3
+    $dihedral:bkd58 @dihedral:type1154 $atom:plga6/O1 $atom:plga6/C3 $atom:plga6/C2 $atom:plga7/O3
+    $dihedral:bkd59 @dihedral:type1153 $atom:plga6/C3 $atom:plga6/C2 $atom:plga7/O3 $atom:plga7/C5
+    $dihedral:bkd60 @dihedral:type200  $atom:plga6/C1 $atom:plga6/C2 $atom:plga7/O3 $atom:plga7/C5
+    $dihedral:bkd61 @dihedral:type201  $atom:plga6/H1 $atom:plga6/C2 $atom:plga7/O3 $atom:plga7/C5
+    $dihedral:bkd62 @dihedral:type520  $atom:plga6/H2 $atom:plga6/C1 $atom:plga6/C2 $atom:plga7/O3
+    $dihedral:bkd63 @dihedral:type520  $atom:plga6/H3 $atom:plga6/C1 $atom:plga6/C2 $atom:plga7/O3
+    $dihedral:bkd64 @dihedral:type520  $atom:plga6/H4 $atom:plga6/C1 $atom:plga6/C2 $atom:plga7/O3
+    $dihedral:bkd65 @dihedral:type373  $atom:plga6/C2 $atom:plga7/O3 $atom:plga7/C5 $atom:plga7/C4
+    $dihedral:bkd66 @dihedral:type367  $atom:plga6/C2 $atom:plga7/O3 $atom:plga7/C5 $atom:plga7/O4
+    $dihedral:bkd67 @dihedral:type1144 $atom:plga7/O3 $atom:plga7/C5 $atom:plga7/C4 $atom:plga8/O2
+    $dihedral:bkd68 @dihedral:type1149 $atom:plga7/O4 $atom:plga7/C5 $atom:plga7/C4 $atom:plga8/O2
+    $dihedral:bkd69 @dihedral:type1156 $atom:plga7/C5 $atom:plga7/C4 $atom:plga8/O2 $atom:plga8/C3
+    $dihedral:bkd70 @dihedral:type201  $atom:plga7/H5 $atom:plga7/C4 $atom:plga8/O2 $atom:plga8/C3
+    $dihedral:bkd71 @dihedral:type201  $atom:plga7/H6 $atom:plga7/C4 $atom:plga8/O2 $atom:plga8/C3
+    $dihedral:bkd72 @dihedral:type373  $atom:plga7/C4 $atom:plga8/O2 $atom:plga8/C3 $atom:plga8/C2
+    $dihedral:bkd73 @dihedral:type367  $atom:plga7/C4 $atom:plga8/O2 $atom:plga8/C3 $atom:plga8/O1
+    $dihedral:bkd74 @dihedral:type1150 $atom:plga8/O2 $atom:plga8/C3 $atom:plga8/C2 $atom:plga9/O2
+    $dihedral:bkd75 @dihedral:type1154 $atom:plga8/O1 $atom:plga8/C3 $atom:plga8/C2 $atom:plga9/O2
+    $dihedral:bkd76 @dihedral:type1153 $atom:plga8/C3 $atom:plga8/C2 $atom:plga9/O2 $atom:plga9/C3
+    $dihedral:bkd77 @dihedral:type200  $atom:plga8/C1 $atom:plga8/C2 $atom:plga9/O2 $atom:plga9/C3
+    $dihedral:bkd78 @dihedral:type201  $atom:plga8/H1 $atom:plga8/C2 $atom:plga9/O2 $atom:plga9/C3
+    $dihedral:bkd79 @dihedral:type520  $atom:plga8/H2 $atom:plga8/C1 $atom:plga8/C2 $atom:plga9/O2
+    $dihedral:bkd80 @dihedral:type520  $atom:plga8/H3 $atom:plga8/C1 $atom:plga8/C2 $atom:plga9/O2
+    $dihedral:bkd81 @dihedral:type520  $atom:plga8/H4 $atom:plga8/C1 $atom:plga8/C2 $atom:plga9/O2
+    $dihedral:bkd82 @dihedral:type373  $atom:plga8/C2 $atom:plga9/O2 $atom:plga9/C3 $atom:plga9/C2
+    $dihedral:bkd83 @dihedral:type367  $atom:plga8/C2 $atom:plga9/O2 $atom:plga9/C3 $atom:plga9/O1
+    $dihedral:bkd84 @dihedral:type1150 $atom:plga9/O2 $atom:plga9/C3 $atom:plga9/C2 $atom:plga10/O2
+    $dihedral:bkd85 @dihedral:type1154 $atom:plga9/O1 $atom:plga9/C3 $atom:plga9/C2 $atom:plga10/O2
+    $dihedral:bkd86 @dihedral:type1153 $atom:plga9/C3 $atom:plga9/C2 $atom:plga10/O2 $atom:plga10/C3
+    $dihedral:bkd87 @dihedral:type200  $atom:plga9/C1 $atom:plga9/C2 $atom:plga10/O2 $atom:plga10/C3
+    $dihedral:bkd88 @dihedral:type201  $atom:plga9/H1 $atom:plga9/C2 $atom:plga10/O2 $atom:plga10/C3
+    $dihedral:bkd89 @dihedral:type520  $atom:plga9/H2 $atom:plga9/C1 $atom:plga9/C2 $atom:plga10/O2
+    $dihedral:bkd90 @dihedral:type520  $atom:plga9/H3 $atom:plga9/C1 $atom:plga9/C2 $atom:plga10/O2
+    $dihedral:bkd91 @dihedral:type520  $atom:plga9/H4 $atom:plga9/C1 $atom:plga9/C2 $atom:plga10/O2
+    $dihedral:bkd92 @dihedral:type373  $atom:plga9/C2 $atom:plga10/O2 $atom:plga10/C3 $atom:plga10/C2
+    $dihedral:bkd93 @dihedral:type367  $atom:plga9/C2 $atom:plga10/O2 $atom:plga10/C3 $atom:plga10/O1
+    $dihedral:bkd94 @dihedral:type1150 $atom:plga10/O2 $atom:plga10/C3 $atom:plga10/C2 $atom:plga11/O3
+    $dihedral:bkd95 @dihedral:type1154 $atom:plga10/O1 $atom:plga10/C3 $atom:plga10/C2 $atom:plga11/O3
+    $dihedral:bkd96 @dihedral:type1153 $atom:plga10/C3 $atom:plga10/C2 $atom:plga11/O3 $atom:plga11/C5
+    $dihedral:bkd97 @dihedral:type200  $atom:plga10/C1 $atom:plga10/C2 $atom:plga11/O3 $atom:plga11/C5
+    $dihedral:bkd98 @dihedral:type201  $atom:plga10/H1 $atom:plga10/C2 $atom:plga11/O3 $atom:plga11/C5
+    $dihedral:bkd99 @dihedral:type520  $atom:plga10/H2 $atom:plga10/C1 $atom:plga10/C2 $atom:plga11/O3
+    $dihedral:bkd100 @dihedral:type520  $atom:plga10/H3 $atom:plga10/C1 $atom:plga10/C2 $atom:plga11/O3
+    $dihedral:bkd101 @dihedral:type520  $atom:plga10/H4 $atom:plga10/C1 $atom:plga10/C2 $atom:plga11/O3
+    $dihedral:bkd102 @dihedral:type373  $atom:plga10/C2 $atom:plga11/O3 $atom:plga11/C5 $atom:plga11/C4
+    $dihedral:bkd103 @dihedral:type367  $atom:plga10/C2 $atom:plga11/O3 $atom:plga11/C5 $atom:plga11/O4
+    $dihedral:bkd104 @dihedral:type1144 $atom:plga11/O3 $atom:plga11/C5 $atom:plga11/C4 $atom:plga12/O2
+    $dihedral:bkd105 @dihedral:type1149 $atom:plga11/O4 $atom:plga11/C5 $atom:plga11/C4 $atom:plga12/O2
+    $dihedral:bkd106 @dihedral:type1156 $atom:plga11/C5 $atom:plga11/C4 $atom:plga12/O2 $atom:plga12/C3
+    $dihedral:bkd107 @dihedral:type201  $atom:plga11/H5 $atom:plga11/C4 $atom:plga12/O2 $atom:plga12/C3
+    $dihedral:bkd108 @dihedral:type201  $atom:plga11/H6 $atom:plga11/C4 $atom:plga12/O2 $atom:plga12/C3
+    $dihedral:bkd109 @dihedral:type373  $atom:plga11/C4 $atom:plga12/O2 $atom:plga12/C3 $atom:plga12/C2
+    $dihedral:bkd110 @dihedral:type367  $atom:plga11/C4 $atom:plga12/O2 $atom:plga12/C3 $atom:plga12/O1
+    $dihedral:bkd111 @dihedral:type1150 $atom:plga12/O2 $atom:plga12/C3 $atom:plga12/C2 $atom:plga13/O2
+    $dihedral:bkd112 @dihedral:type1154 $atom:plga12/O1 $atom:plga12/C3 $atom:plga12/C2 $atom:plga13/O2
+    $dihedral:bkd113 @dihedral:type1153 $atom:plga12/C3 $atom:plga12/C2 $atom:plga13/O2 $atom:plga13/C3
+    $dihedral:bkd114 @dihedral:type200  $atom:plga12/C1 $atom:plga12/C2 $atom:plga13/O2 $atom:plga13/C3
+    $dihedral:bkd115 @dihedral:type201  $atom:plga12/H1 $atom:plga12/C2 $atom:plga13/O2 $atom:plga13/C3
+    $dihedral:bkd116 @dihedral:type520  $atom:plga12/H2 $atom:plga12/C1 $atom:plga12/C2 $atom:plga13/O2
+    $dihedral:bkd117 @dihedral:type520  $atom:plga12/H3 $atom:plga12/C1 $atom:plga12/C2 $atom:plga13/O2
+    $dihedral:bkd118 @dihedral:type520  $atom:plga12/H4 $atom:plga12/C1 $atom:plga12/C2 $atom:plga13/O2
+    $dihedral:bkd119 @dihedral:type373  $atom:plga12/C2 $atom:plga13/O2 $atom:plga13/C3 $atom:plga13/C2
+    $dihedral:bkd120 @dihedral:type367  $atom:plga12/C2 $atom:plga13/O2 $atom:plga13/C3 $atom:plga13/O1
+    $dihedral:bkd121 @dihedral:type1150 $atom:plga13/O2 $atom:plga13/C3 $atom:plga13/C2 $atom:plga14/O2
+    $dihedral:bkd122 @dihedral:type1154 $atom:plga13/O1 $atom:plga13/C3 $atom:plga13/C2 $atom:plga14/O2
+    $dihedral:bkd123 @dihedral:type1153 $atom:plga13/C3 $atom:plga13/C2 $atom:plga14/O2 $atom:plga14/C3
+    $dihedral:bkd124 @dihedral:type200  $atom:plga13/C1 $atom:plga13/C2 $atom:plga14/O2 $atom:plga14/C3
+    $dihedral:bkd125 @dihedral:type201  $atom:plga13/H1 $atom:plga13/C2 $atom:plga14/O2 $atom:plga14/C3
+    $dihedral:bkd126 @dihedral:type520  $atom:plga13/H2 $atom:plga13/C1 $atom:plga13/C2 $atom:plga14/O2
+    $dihedral:bkd127 @dihedral:type520  $atom:plga13/H3 $atom:plga13/C1 $atom:plga13/C2 $atom:plga14/O2
+    $dihedral:bkd128 @dihedral:type520  $atom:plga13/H4 $atom:plga13/C1 $atom:plga13/C2 $atom:plga14/O2
+    $dihedral:bkd129 @dihedral:type373  $atom:plga13/C2 $atom:plga14/O2 $atom:plga14/C3 $atom:plga14/C2
+    $dihedral:bkd130 @dihedral:type367  $atom:plga13/C2 $atom:plga14/O2 $atom:plga14/C3 $atom:plga14/O1
+    $dihedral:bkd131 @dihedral:type1150 $atom:plga14/O2 $atom:plga14/C3 $atom:plga14/C2 $atom:plga15/O3
+    $dihedral:bkd132 @dihedral:type1154 $atom:plga14/O1 $atom:plga14/C3 $atom:plga14/C2 $atom:plga15/O3
+    $dihedral:bkd133 @dihedral:type1153 $atom:plga14/C3 $atom:plga14/C2 $atom:plga15/O3 $atom:plga15/C5
+    $dihedral:bkd134 @dihedral:type200  $atom:plga14/C1 $atom:plga14/C2 $atom:plga15/O3 $atom:plga15/C5
+    $dihedral:bkd135 @dihedral:type201  $atom:plga14/H1 $atom:plga14/C2 $atom:plga15/O3 $atom:plga15/C5
+    $dihedral:bkd136 @dihedral:type520  $atom:plga14/H2 $atom:plga14/C1 $atom:plga14/C2 $atom:plga15/O3
+    $dihedral:bkd137 @dihedral:type520  $atom:plga14/H3 $atom:plga14/C1 $atom:plga14/C2 $atom:plga15/O3
+    $dihedral:bkd138 @dihedral:type520  $atom:plga14/H4 $atom:plga14/C1 $atom:plga14/C2 $atom:plga15/O3
+    $dihedral:bkd139 @dihedral:type373  $atom:plga14/C2 $atom:plga15/O3 $atom:plga15/C5 $atom:plga15/C4
+    $dihedral:bkd140 @dihedral:type367  $atom:plga14/C2 $atom:plga15/O3 $atom:plga15/C5 $atom:plga15/O4
+    $dihedral:bkd141 @dihedral:type1144 $atom:plga15/O3 $atom:plga15/C5 $atom:plga15/C4 $atom:plga16/O2
+    $dihedral:bkd142 @dihedral:type1149 $atom:plga15/O4 $atom:plga15/C5 $atom:plga15/C4 $atom:plga16/O2
+    $dihedral:bkd143 @dihedral:type1156 $atom:plga15/C5 $atom:plga15/C4 $atom:plga16/O2 $atom:plga16/C3
+    $dihedral:bkd144 @dihedral:type201  $atom:plga15/H5 $atom:plga15/C4 $atom:plga16/O2 $atom:plga16/C3
+    $dihedral:bkd145 @dihedral:type201  $atom:plga15/H6 $atom:plga15/C4 $atom:plga16/O2 $atom:plga16/C3
+    $dihedral:bkd146 @dihedral:type373  $atom:plga15/C4 $atom:plga16/O2 $atom:plga16/C3 $atom:plga16/C2
+    $dihedral:bkd147 @dihedral:type367  $atom:plga15/C4 $atom:plga16/O2 $atom:plga16/C3 $atom:plga16/O1
+    $dihedral:bkd148 @dihedral:type1150 $atom:plga16/O2 $atom:plga16/C3 $atom:plga16/C2 $atom:plga17/O2
+    $dihedral:bkd149 @dihedral:type1154 $atom:plga16/O1 $atom:plga16/C3 $atom:plga16/C2 $atom:plga17/O2
+    $dihedral:bkd150 @dihedral:type1153 $atom:plga16/C3 $atom:plga16/C2 $atom:plga17/O2 $atom:plga17/C3
+    $dihedral:bkd151 @dihedral:type200  $atom:plga16/C1 $atom:plga16/C2 $atom:plga17/O2 $atom:plga17/C3
+    $dihedral:bkd152 @dihedral:type201  $atom:plga16/H1 $atom:plga16/C2 $atom:plga17/O2 $atom:plga17/C3
+    $dihedral:bkd153 @dihedral:type520  $atom:plga16/H2 $atom:plga16/C1 $atom:plga16/C2 $atom:plga17/O2
+    $dihedral:bkd154 @dihedral:type520  $atom:plga16/H3 $atom:plga16/C1 $atom:plga16/C2 $atom:plga17/O2
+    $dihedral:bkd155 @dihedral:type520  $atom:plga16/H4 $atom:plga16/C1 $atom:plga16/C2 $atom:plga17/O2
+    $dihedral:bkd156 @dihedral:type373  $atom:plga16/C2 $atom:plga17/O2 $atom:plga17/C3 $atom:plga17/C2
+    $dihedral:bkd157 @dihedral:type367  $atom:plga16/C2 $atom:plga17/O2 $atom:plga17/C3 $atom:plga17/O1
+    $dihedral:bkd158 @dihedral:type1150 $atom:plga17/O2 $atom:plga17/C3 $atom:plga17/C2 $atom:plga18/O2
+    $dihedral:bkd159 @dihedral:type1154 $atom:plga17/O1 $atom:plga17/C3 $atom:plga17/C2 $atom:plga18/O2
+    $dihedral:bkd160 @dihedral:type1153 $atom:plga17/C3 $atom:plga17/C2 $atom:plga18/O2 $atom:plga18/C3
+    $dihedral:bkd161 @dihedral:type200  $atom:plga17/C1 $atom:plga17/C2 $atom:plga18/O2 $atom:plga18/C3
+    $dihedral:bkd162 @dihedral:type201  $atom:plga17/H1 $atom:plga17/C2 $atom:plga18/O2 $atom:plga18/C3
+    $dihedral:bkd163 @dihedral:type520  $atom:plga17/H2 $atom:plga17/C1 $atom:plga17/C2 $atom:plga18/O2
+    $dihedral:bkd164 @dihedral:type520  $atom:plga17/H3 $atom:plga17/C1 $atom:plga17/C2 $atom:plga18/O2
+    $dihedral:bkd165 @dihedral:type520  $atom:plga17/H4 $atom:plga17/C1 $atom:plga17/C2 $atom:plga18/O2
+    $dihedral:bkd166 @dihedral:type373  $atom:plga17/C2 $atom:plga18/O2 $atom:plga18/C3 $atom:plga18/C2
+    $dihedral:bkd167 @dihedral:type367  $atom:plga17/C2 $atom:plga18/O2 $atom:plga18/C3 $atom:plga18/O1
+    $dihedral:bkd168 @dihedral:type1150 $atom:plga18/O2 $atom:plga18/C3 $atom:plga18/C2 $atom:plga19/O3
+    $dihedral:bkd169 @dihedral:type1154 $atom:plga18/O1 $atom:plga18/C3 $atom:plga18/C2 $atom:plga19/O3
+    $dihedral:bkd170 @dihedral:type1153 $atom:plga18/C3 $atom:plga18/C2 $atom:plga19/O3 $atom:plga19/C5
+    $dihedral:bkd171 @dihedral:type200  $atom:plga18/C1 $atom:plga18/C2 $atom:plga19/O3 $atom:plga19/C5
+    $dihedral:bkd172 @dihedral:type201  $atom:plga18/H1 $atom:plga18/C2 $atom:plga19/O3 $atom:plga19/C5
+    $dihedral:bkd173 @dihedral:type520  $atom:plga18/H2 $atom:plga18/C1 $atom:plga18/C2 $atom:plga19/O3
+    $dihedral:bkd174 @dihedral:type520  $atom:plga18/H3 $atom:plga18/C1 $atom:plga18/C2 $atom:plga19/O3
+    $dihedral:bkd175 @dihedral:type520  $atom:plga18/H4 $atom:plga18/C1 $atom:plga18/C2 $atom:plga19/O3
+    $dihedral:bkd176 @dihedral:type373  $atom:plga18/C2 $atom:plga19/O3 $atom:plga19/C5 $atom:plga19/C4
+    $dihedral:bkd177 @dihedral:type367  $atom:plga18/C2 $atom:plga19/O3 $atom:plga19/C5 $atom:plga19/O4
+    $dihedral:bkd178 @dihedral:type1144 $atom:plga19/O3 $atom:plga19/C5 $atom:plga19/C4 $atom:plga20/O2
+    $dihedral:bkd179 @dihedral:type1149 $atom:plga19/O4 $atom:plga19/C5 $atom:plga19/C4 $atom:plga20/O2
+    $dihedral:bkd180 @dihedral:type1156 $atom:plga19/C5 $atom:plga19/C4 $atom:plga20/O2 $atom:plga20/C3
+    $dihedral:bkd181 @dihedral:type201  $atom:plga19/H5 $atom:plga19/C4 $atom:plga20/O2 $atom:plga20/C3
+    $dihedral:bkd182 @dihedral:type201  $atom:plga19/H6 $atom:plga19/C4 $atom:plga20/O2 $atom:plga20/C3
+    $dihedral:bkd183 @dihedral:type373  $atom:plga19/C4 $atom:plga20/O2 $atom:plga20/C3 $atom:plga20/C2
+    $dihedral:bkd184 @dihedral:type367  $atom:plga19/C4 $atom:plga20/O2 $atom:plga20/C3 $atom:plga20/O1
+    $dihedral:bkd185 @dihedral:type1150 $atom:plga20/O2 $atom:plga20/C3 $atom:plga20/C2 $atom:plga21/O2
+    $dihedral:bkd186 @dihedral:type1154 $atom:plga20/O1 $atom:plga20/C3 $atom:plga20/C2 $atom:plga21/O2
+    $dihedral:bkd187 @dihedral:type1153 $atom:plga20/C3 $atom:plga20/C2 $atom:plga21/O2 $atom:plga21/C3
+    $dihedral:bkd188 @dihedral:type200  $atom:plga20/C1 $atom:plga20/C2 $atom:plga21/O2 $atom:plga21/C3
+    $dihedral:bkd189 @dihedral:type201  $atom:plga20/H1 $atom:plga20/C2 $atom:plga21/O2 $atom:plga21/C3
+    $dihedral:bkd190 @dihedral:type520  $atom:plga20/H2 $atom:plga20/C1 $atom:plga20/C2 $atom:plga21/O2
+    $dihedral:bkd191 @dihedral:type520  $atom:plga20/H3 $atom:plga20/C1 $atom:plga20/C2 $atom:plga21/O2
+    $dihedral:bkd192 @dihedral:type520  $atom:plga20/H4 $atom:plga20/C1 $atom:plga20/C2 $atom:plga21/O2
+    $dihedral:bkd193 @dihedral:type373  $atom:plga20/C2 $atom:plga21/O2 $atom:plga21/C3 $atom:plga21/C2
+    $dihedral:bkd194 @dihedral:type367  $atom:plga20/C2 $atom:plga21/O2 $atom:plga21/C3 $atom:plga21/O1
+    $dihedral:bkd195 @dihedral:type1150 $atom:plga21/O2 $atom:plga21/C3 $atom:plga21/C2 $atom:plga22/O2
+    $dihedral:bkd196 @dihedral:type1154 $atom:plga21/O1 $atom:plga21/C3 $atom:plga21/C2 $atom:plga22/O2
+    $dihedral:bkd197 @dihedral:type1153 $atom:plga21/C3 $atom:plga21/C2 $atom:plga22/O2 $atom:plga22/C3
+    $dihedral:bkd198 @dihedral:type200  $atom:plga21/C1 $atom:plga21/C2 $atom:plga22/O2 $atom:plga22/C3
+    $dihedral:bkd199 @dihedral:type201  $atom:plga21/H1 $atom:plga21/C2 $atom:plga22/O2 $atom:plga22/C3
+    $dihedral:bkd200 @dihedral:type520  $atom:plga21/H2 $atom:plga21/C1 $atom:plga21/C2 $atom:plga22/O2
+    $dihedral:bkd201 @dihedral:type520  $atom:plga21/H3 $atom:plga21/C1 $atom:plga21/C2 $atom:plga22/O2
+    $dihedral:bkd202 @dihedral:type520  $atom:plga21/H4 $atom:plga21/C1 $atom:plga21/C2 $atom:plga22/O2
+    $dihedral:bkd203 @dihedral:type373  $atom:plga21/C2 $atom:plga22/O2 $atom:plga22/C3 $atom:plga22/C2
+    $dihedral:bkd204 @dihedral:type367  $atom:plga21/C2 $atom:plga22/O2 $atom:plga22/C3 $atom:plga22/O1
+    $dihedral:bkd205 @dihedral:type1150 $atom:plga22/O2 $atom:plga22/C3 $atom:plga22/C2 $atom:plga23/O3
+    $dihedral:bkd206 @dihedral:type1154 $atom:plga22/O1 $atom:plga22/C3 $atom:plga22/C2 $atom:plga23/O3
+    $dihedral:bkd207 @dihedral:type1153 $atom:plga22/C3 $atom:plga22/C2 $atom:plga23/O3 $atom:plga23/C5
+    $dihedral:bkd208 @dihedral:type200  $atom:plga22/C1 $atom:plga22/C2 $atom:plga23/O3 $atom:plga23/C5
+    $dihedral:bkd209 @dihedral:type201  $atom:plga22/H1 $atom:plga22/C2 $atom:plga23/O3 $atom:plga23/C5
+    $dihedral:bkd210 @dihedral:type520  $atom:plga22/H2 $atom:plga22/C1 $atom:plga22/C2 $atom:plga23/O3
+    $dihedral:bkd211 @dihedral:type520  $atom:plga22/H3 $atom:plga22/C1 $atom:plga22/C2 $atom:plga23/O3
+    $dihedral:bkd212 @dihedral:type520  $atom:plga22/H4 $atom:plga22/C1 $atom:plga22/C2 $atom:plga23/O3
+    $dihedral:bkd213 @dihedral:type373  $atom:plga22/C2 $atom:plga23/O3 $atom:plga23/C5 $atom:plga23/C4
+    $dihedral:bkd214 @dihedral:type367  $atom:plga22/C2 $atom:plga23/O3 $atom:plga23/C5 $atom:plga23/O4
+    $dihedral:bkd215 @dihedral:type1144 $atom:plga23/O3 $atom:plga23/C5 $atom:plga23/C4 $atom:plga24/O2
+    $dihedral:bkd216 @dihedral:type1149 $atom:plga23/O4 $atom:plga23/C5 $atom:plga23/C4 $atom:plga24/O2
+    $dihedral:bkd217 @dihedral:type1156 $atom:plga23/C5 $atom:plga23/C4 $atom:plga24/O2 $atom:plga24/C3
+    $dihedral:bkd218 @dihedral:type201  $atom:plga23/H5 $atom:plga23/C4 $atom:plga24/O2 $atom:plga24/C3
+    $dihedral:bkd219 @dihedral:type201  $atom:plga23/H6 $atom:plga23/C4 $atom:plga24/O2 $atom:plga24/C3
+    $dihedral:bkd220 @dihedral:type373  $atom:plga23/C4 $atom:plga24/O2 $atom:plga24/C3 $atom:plga24/C2
+    $dihedral:bkd221 @dihedral:type367  $atom:plga23/C4 $atom:plga24/O2 $atom:plga24/C3 $atom:plga24/O1
+    $dihedral:bkd222 @dihedral:type1150 $atom:plga24/O2 $atom:plga24/C3 $atom:plga24/C2 $atom:plga25/O2
+    $dihedral:bkd223 @dihedral:type1154 $atom:plga24/O1 $atom:plga24/C3 $atom:plga24/C2 $atom:plga25/O2
+    $dihedral:bkd224 @dihedral:type1153 $atom:plga24/C3 $atom:plga24/C2 $atom:plga25/O2 $atom:plga25/C3
+    $dihedral:bkd225 @dihedral:type200  $atom:plga24/C1 $atom:plga24/C2 $atom:plga25/O2 $atom:plga25/C3
+    $dihedral:bkd226 @dihedral:type201  $atom:plga24/H1 $atom:plga24/C2 $atom:plga25/O2 $atom:plga25/C3
+    $dihedral:bkd227 @dihedral:type520  $atom:plga24/H2 $atom:plga24/C1 $atom:plga24/C2 $atom:plga25/O2
+    $dihedral:bkd228 @dihedral:type520  $atom:plga24/H3 $atom:plga24/C1 $atom:plga24/C2 $atom:plga25/O2
+    $dihedral:bkd229 @dihedral:type520  $atom:plga24/H4 $atom:plga24/C1 $atom:plga24/C2 $atom:plga25/O2
+    $dihedral:bkd230 @dihedral:type373  $atom:plga24/C2 $atom:plga25/O2 $atom:plga25/C3 $atom:plga25/C2
+    $dihedral:bkd231 @dihedral:type367  $atom:plga24/C2 $atom:plga25/O2 $atom:plga25/C3 $atom:plga25/O1
+    $dihedral:bkd232 @dihedral:type1150 $atom:plga25/O2 $atom:plga25/C3 $atom:plga25/C2 $atom:plga26/O2
+    $dihedral:bkd233 @dihedral:type1154 $atom:plga25/O1 $atom:plga25/C3 $atom:plga25/C2 $atom:plga26/O2
+    $dihedral:bkd234 @dihedral:type1153 $atom:plga25/C3 $atom:plga25/C2 $atom:plga26/O2 $atom:plga26/C3
+    $dihedral:bkd235 @dihedral:type200  $atom:plga25/C1 $atom:plga25/C2 $atom:plga26/O2 $atom:plga26/C3
+    $dihedral:bkd236 @dihedral:type201  $atom:plga25/H1 $atom:plga25/C2 $atom:plga26/O2 $atom:plga26/C3
+    $dihedral:bkd237 @dihedral:type520  $atom:plga25/H2 $atom:plga25/C1 $atom:plga25/C2 $atom:plga26/O2
+    $dihedral:bkd238 @dihedral:type520  $atom:plga25/H3 $atom:plga25/C1 $atom:plga25/C2 $atom:plga26/O2
+    $dihedral:bkd239 @dihedral:type520  $atom:plga25/H4 $atom:plga25/C1 $atom:plga25/C2 $atom:plga26/O2
+    $dihedral:bkd240 @dihedral:type373  $atom:plga25/C2 $atom:plga26/O2 $atom:plga26/C3 $atom:plga26/C2
+    $dihedral:bkd241 @dihedral:type367  $atom:plga25/C2 $atom:plga26/O2 $atom:plga26/C3 $atom:plga26/O1
+    $dihedral:bkd242 @dihedral:type1150 $atom:plga26/O2 $atom:plga26/C3 $atom:plga26/C2 $atom:plga27/O3
+    $dihedral:bkd243 @dihedral:type1154 $atom:plga26/O1 $atom:plga26/C3 $atom:plga26/C2 $atom:plga27/O3
+    $dihedral:bkd244 @dihedral:type1153 $atom:plga26/C3 $atom:plga26/C2 $atom:plga27/O3 $atom:plga27/C5
+    $dihedral:bkd245 @dihedral:type200  $atom:plga26/C1 $atom:plga26/C2 $atom:plga27/O3 $atom:plga27/C5
+    $dihedral:bkd246 @dihedral:type201  $atom:plga26/H1 $atom:plga26/C2 $atom:plga27/O3 $atom:plga27/C5
+    $dihedral:bkd247 @dihedral:type520  $atom:plga26/H2 $atom:plga26/C1 $atom:plga26/C2 $atom:plga27/O3
+    $dihedral:bkd248 @dihedral:type520  $atom:plga26/H3 $atom:plga26/C1 $atom:plga26/C2 $atom:plga27/O3
+    $dihedral:bkd249 @dihedral:type520  $atom:plga26/H4 $atom:plga26/C1 $atom:plga26/C2 $atom:plga27/O3
+    $dihedral:bkd250 @dihedral:type373  $atom:plga26/C2 $atom:plga27/O3 $atom:plga27/C5 $atom:plga27/C4
+    $dihedral:bkd251 @dihedral:type367  $atom:plga26/C2 $atom:plga27/O3 $atom:plga27/C5 $atom:plga27/O4
+    $dihedral:bkd252 @dihedral:type1144 $atom:plga27/O3 $atom:plga27/C5 $atom:plga27/C4 $atom:plga28/O2
+    $dihedral:bkd253 @dihedral:type1149 $atom:plga27/O4 $atom:plga27/C5 $atom:plga27/C4 $atom:plga28/O2
+    $dihedral:bkd254 @dihedral:type1156 $atom:plga27/C5 $atom:plga27/C4 $atom:plga28/O2 $atom:plga28/C3
+    $dihedral:bkd255 @dihedral:type201  $atom:plga27/H5 $atom:plga27/C4 $atom:plga28/O2 $atom:plga28/C3
+    $dihedral:bkd256 @dihedral:type201  $atom:plga27/H6 $atom:plga27/C4 $atom:plga28/O2 $atom:plga28/C3
+    $dihedral:bkd257 @dihedral:type373  $atom:plga27/C4 $atom:plga28/O2 $atom:plga28/C3 $atom:plga28/C2
+    $dihedral:bkd258 @dihedral:type367  $atom:plga27/C4 $atom:plga28/O2 $atom:plga28/C3 $atom:plga28/O1
+    $dihedral:bkd259 @dihedral:type1150 $atom:plga28/O2 $atom:plga28/C3 $atom:plga28/C2 $atom:plga29/O2
+    $dihedral:bkd260 @dihedral:type1154 $atom:plga28/O1 $atom:plga28/C3 $atom:plga28/C2 $atom:plga29/O2
+    $dihedral:bkd261 @dihedral:type1153 $atom:plga28/C3 $atom:plga28/C2 $atom:plga29/O2 $atom:plga29/C3
+    $dihedral:bkd262 @dihedral:type200  $atom:plga28/C1 $atom:plga28/C2 $atom:plga29/O2 $atom:plga29/C3
+    $dihedral:bkd263 @dihedral:type201  $atom:plga28/H1 $atom:plga28/C2 $atom:plga29/O2 $atom:plga29/C3
+    $dihedral:bkd264 @dihedral:type520  $atom:plga28/H2 $atom:plga28/C1 $atom:plga28/C2 $atom:plga29/O2
+    $dihedral:bkd265 @dihedral:type520  $atom:plga28/H3 $atom:plga28/C1 $atom:plga28/C2 $atom:plga29/O2
+    $dihedral:bkd266 @dihedral:type520  $atom:plga28/H4 $atom:plga28/C1 $atom:plga28/C2 $atom:plga29/O2
+    $dihedral:bkd267 @dihedral:type373  $atom:plga28/C2 $atom:plga29/O2 $atom:plga29/C3 $atom:plga29/C2
+    $dihedral:bkd268 @dihedral:type367  $atom:plga28/C2 $atom:plga29/O2 $atom:plga29/C3 $atom:plga29/O1
+    $dihedral:bkd269 @dihedral:type1150 $atom:plga29/O2 $atom:plga29/C3 $atom:plga29/C2 $atom:plga30/O2
+    $dihedral:bkd270 @dihedral:type1154 $atom:plga29/O1 $atom:plga29/C3 $atom:plga29/C2 $atom:plga30/O2
+    $dihedral:bkd271 @dihedral:type1153 $atom:plga29/C3 $atom:plga29/C2 $atom:plga30/O2 $atom:plga30/C3
+    $dihedral:bkd272 @dihedral:type200  $atom:plga29/C1 $atom:plga29/C2 $atom:plga30/O2 $atom:plga30/C3
+    $dihedral:bkd273 @dihedral:type201  $atom:plga29/H1 $atom:plga29/C2 $atom:plga30/O2 $atom:plga30/C3
+    $dihedral:bkd274 @dihedral:type520  $atom:plga29/H2 $atom:plga29/C1 $atom:plga29/C2 $atom:plga30/O2
+    $dihedral:bkd275 @dihedral:type520  $atom:plga29/H3 $atom:plga29/C1 $atom:plga29/C2 $atom:plga30/O2
+    $dihedral:bkd276 @dihedral:type520  $atom:plga29/H4 $atom:plga29/C1 $atom:plga29/C2 $atom:plga30/O2
+    $dihedral:bkd277 @dihedral:type373  $atom:plga29/C2 $atom:plga30/O2 $atom:plga30/C3 $atom:plga30/C2
+    $dihedral:bkd278 @dihedral:type367  $atom:plga29/C2 $atom:plga30/O2 $atom:plga30/C3 $atom:plga30/O1
+    $dihedral:bkd279 @dihedral:type1150 $atom:plga30/O2 $atom:plga30/C3 $atom:plga30/C2 $atom:plga31/O3
+    $dihedral:bkd280 @dihedral:type1154 $atom:plga30/O1 $atom:plga30/C3 $atom:plga30/C2 $atom:plga31/O3
+    $dihedral:bkd281 @dihedral:type1153 $atom:plga30/C3 $atom:plga30/C2 $atom:plga31/O3 $atom:plga31/C5
+    $dihedral:bkd282 @dihedral:type200  $atom:plga30/C1 $atom:plga30/C2 $atom:plga31/O3 $atom:plga31/C5
+    $dihedral:bkd283 @dihedral:type201  $atom:plga30/H1 $atom:plga30/C2 $atom:plga31/O3 $atom:plga31/C5
+    $dihedral:bkd284 @dihedral:type520  $atom:plga30/H2 $atom:plga30/C1 $atom:plga30/C2 $atom:plga31/O3
+    $dihedral:bkd285 @dihedral:type520  $atom:plga30/H3 $atom:plga30/C1 $atom:plga30/C2 $atom:plga31/O3
+    $dihedral:bkd286 @dihedral:type520  $atom:plga30/H4 $atom:plga30/C1 $atom:plga30/C2 $atom:plga31/O3
+    $dihedral:bkd287 @dihedral:type373  $atom:plga30/C2 $atom:plga31/O3 $atom:plga31/C5 $atom:plga31/C4
+    $dihedral:bkd288 @dihedral:type367  $atom:plga30/C2 $atom:plga31/O3 $atom:plga31/C5 $atom:plga31/O4
+    $dihedral:bkd289 @dihedral:type1144 $atom:plga31/O3 $atom:plga31/C5 $atom:plga31/C4 $atom:plga32/O2
+    $dihedral:bkd290 @dihedral:type1149 $atom:plga31/O4 $atom:plga31/C5 $atom:plga31/C4 $atom:plga32/O2
+    $dihedral:bkd291 @dihedral:type1156 $atom:plga31/C5 $atom:plga31/C4 $atom:plga32/O2 $atom:plga32/C3
+    $dihedral:bkd292 @dihedral:type201  $atom:plga31/H5 $atom:plga31/C4 $atom:plga32/O2 $atom:plga32/C3
+    $dihedral:bkd293 @dihedral:type201  $atom:plga31/H6 $atom:plga31/C4 $atom:plga32/O2 $atom:plga32/C3
+    $dihedral:bkd294 @dihedral:type373  $atom:plga31/C4 $atom:plga32/O2 $atom:plga32/C3 $atom:plga32/C2
+    $dihedral:bkd295 @dihedral:type367  $atom:plga31/C4 $atom:plga32/O2 $atom:plga32/C3 $atom:plga32/O1
+    $dihedral:bkd296 @dihedral:type1150 $atom:plga32/O2 $atom:plga32/C3 $atom:plga32/C2 $atom:plga33/O2
+    $dihedral:bkd297 @dihedral:type1154 $atom:plga32/O1 $atom:plga32/C3 $atom:plga32/C2 $atom:plga33/O2
+    $dihedral:bkd298 @dihedral:type1153 $atom:plga32/C3 $atom:plga32/C2 $atom:plga33/O2 $atom:plga33/C3
+    $dihedral:bkd299 @dihedral:type200  $atom:plga32/C1 $atom:plga32/C2 $atom:plga33/O2 $atom:plga33/C3
+    $dihedral:bkd300 @dihedral:type201  $atom:plga32/H1 $atom:plga32/C2 $atom:plga33/O2 $atom:plga33/C3
+    $dihedral:bkd301 @dihedral:type520  $atom:plga32/H2 $atom:plga32/C1 $atom:plga32/C2 $atom:plga33/O2
+    $dihedral:bkd302 @dihedral:type520  $atom:plga32/H3 $atom:plga32/C1 $atom:plga32/C2 $atom:plga33/O2
+    $dihedral:bkd303 @dihedral:type520  $atom:plga32/H4 $atom:plga32/C1 $atom:plga32/C2 $atom:plga33/O2
+    $dihedral:bkd304 @dihedral:type373  $atom:plga32/C2 $atom:plga33/O2 $atom:plga33/C3 $atom:plga33/C2
+    $dihedral:bkd305 @dihedral:type367  $atom:plga32/C2 $atom:plga33/O2 $atom:plga33/C3 $atom:plga33/O1
+    $dihedral:bkd306 @dihedral:type1150 $atom:plga33/O2 $atom:plga33/C3 $atom:plga33/C2 $atom:plga34/O2
+    $dihedral:bkd307 @dihedral:type1154 $atom:plga33/O1 $atom:plga33/C3 $atom:plga33/C2 $atom:plga34/O2
+    $dihedral:bkd308 @dihedral:type1153 $atom:plga33/C3 $atom:plga33/C2 $atom:plga34/O2 $atom:plga34/C3
+    $dihedral:bkd309 @dihedral:type200  $atom:plga33/C1 $atom:plga33/C2 $atom:plga34/O2 $atom:plga34/C3
+    $dihedral:bkd310 @dihedral:type201  $atom:plga33/H1 $atom:plga33/C2 $atom:plga34/O2 $atom:plga34/C3
+    $dihedral:bkd311 @dihedral:type520  $atom:plga33/H2 $atom:plga33/C1 $atom:plga33/C2 $atom:plga34/O2
+    $dihedral:bkd312 @dihedral:type520  $atom:plga33/H3 $atom:plga33/C1 $atom:plga33/C2 $atom:plga34/O2
+    $dihedral:bkd313 @dihedral:type520  $atom:plga33/H4 $atom:plga33/C1 $atom:plga33/C2 $atom:plga34/O2
+    $dihedral:bkd314 @dihedral:type373  $atom:plga33/C2 $atom:plga34/O2 $atom:plga34/C3 $atom:plga34/C2
+    $dihedral:bkd315 @dihedral:type367  $atom:plga33/C2 $atom:plga34/O2 $atom:plga34/C3 $atom:plga34/O1
+    $dihedral:bkd316 @dihedral:type1150 $atom:plga34/O2 $atom:plga34/C3 $atom:plga34/C2 $atom:plga35/O3
+    $dihedral:bkd317 @dihedral:type1154 $atom:plga34/O1 $atom:plga34/C3 $atom:plga34/C2 $atom:plga35/O3
+    $dihedral:bkd318 @dihedral:type1153 $atom:plga34/C3 $atom:plga34/C2 $atom:plga35/O3 $atom:plga35/C5
+    $dihedral:bkd319 @dihedral:type200  $atom:plga34/C1 $atom:plga34/C2 $atom:plga35/O3 $atom:plga35/C5
+    $dihedral:bkd320 @dihedral:type201  $atom:plga34/H1 $atom:plga34/C2 $atom:plga35/O3 $atom:plga35/C5
+    $dihedral:bkd321 @dihedral:type520  $atom:plga34/H2 $atom:plga34/C1 $atom:plga34/C2 $atom:plga35/O3
+    $dihedral:bkd322 @dihedral:type520  $atom:plga34/H3 $atom:plga34/C1 $atom:plga34/C2 $atom:plga35/O3
+    $dihedral:bkd323 @dihedral:type520  $atom:plga34/H4 $atom:plga34/C1 $atom:plga34/C2 $atom:plga35/O3
+    $dihedral:bkd324 @dihedral:type373  $atom:plga34/C2 $atom:plga35/O3 $atom:plga35/C5 $atom:plga35/C4
+    $dihedral:bkd325 @dihedral:type367  $atom:plga34/C2 $atom:plga35/O3 $atom:plga35/C5 $atom:plga35/O4
+    $dihedral:bkd326 @dihedral:type1144 $atom:plga35/O3 $atom:plga35/C5 $atom:plga35/C4 $atom:plga36/O2
+    $dihedral:bkd327 @dihedral:type1149 $atom:plga35/O4 $atom:plga35/C5 $atom:plga35/C4 $atom:plga36/O2
+    $dihedral:bkd328 @dihedral:type1156 $atom:plga35/C5 $atom:plga35/C4 $atom:plga36/O2 $atom:plga36/C3
+    $dihedral:bkd329 @dihedral:type201  $atom:plga35/H5 $atom:plga35/C4 $atom:plga36/O2 $atom:plga36/C3
+    $dihedral:bkd330 @dihedral:type201  $atom:plga35/H6 $atom:plga35/C4 $atom:plga36/O2 $atom:plga36/C3
+    $dihedral:bkd331 @dihedral:type373  $atom:plga35/C4 $atom:plga36/O2 $atom:plga36/C3 $atom:plga36/C2
+    $dihedral:bkd332 @dihedral:type367  $atom:plga35/C4 $atom:plga36/O2 $atom:plga36/C3 $atom:plga36/O1
+    $dihedral:bkd333 @dihedral:type1150 $atom:plga36/O2 $atom:plga36/C3 $atom:plga36/C2 $atom:plga37/O2
+    $dihedral:bkd334 @dihedral:type1154 $atom:plga36/O1 $atom:plga36/C3 $atom:plga36/C2 $atom:plga37/O2
+    $dihedral:bkd335 @dihedral:type1153 $atom:plga36/C3 $atom:plga36/C2 $atom:plga37/O2 $atom:plga37/C3
+    $dihedral:bkd336 @dihedral:type200  $atom:plga36/C1 $atom:plga36/C2 $atom:plga37/O2 $atom:plga37/C3
+    $dihedral:bkd337 @dihedral:type201  $atom:plga36/H1 $atom:plga36/C2 $atom:plga37/O2 $atom:plga37/C3
+    $dihedral:bkd338 @dihedral:type520  $atom:plga36/H2 $atom:plga36/C1 $atom:plga36/C2 $atom:plga37/O2
+    $dihedral:bkd339 @dihedral:type520  $atom:plga36/H3 $atom:plga36/C1 $atom:plga36/C2 $atom:plga37/O2
+    $dihedral:bkd340 @dihedral:type520  $atom:plga36/H4 $atom:plga36/C1 $atom:plga36/C2 $atom:plga37/O2
+    $dihedral:bkd341 @dihedral:type373  $atom:plga36/C2 $atom:plga37/O2 $atom:plga37/C3 $atom:plga37/C2
+    $dihedral:bkd342 @dihedral:type367  $atom:plga36/C2 $atom:plga37/O2 $atom:plga37/C3 $atom:plga37/O1
+    $dihedral:bkd343 @dihedral:type1150 $atom:plga37/O2 $atom:plga37/C3 $atom:plga37/C2 $atom:plga38/O2
+    $dihedral:bkd344 @dihedral:type1154 $atom:plga37/O1 $atom:plga37/C3 $atom:plga37/C2 $atom:plga38/O2
+    $dihedral:bkd345 @dihedral:type1153 $atom:plga37/C3 $atom:plga37/C2 $atom:plga38/O2 $atom:plga38/C3
+    $dihedral:bkd346 @dihedral:type200  $atom:plga37/C1 $atom:plga37/C2 $atom:plga38/O2 $atom:plga38/C3
+    $dihedral:bkd347 @dihedral:type201  $atom:plga37/H1 $atom:plga37/C2 $atom:plga38/O2 $atom:plga38/C3
+    $dihedral:bkd348 @dihedral:type520  $atom:plga37/H2 $atom:plga37/C1 $atom:plga37/C2 $atom:plga38/O2
+    $dihedral:bkd349 @dihedral:type520  $atom:plga37/H3 $atom:plga37/C1 $atom:plga37/C2 $atom:plga38/O2
+    $dihedral:bkd350 @dihedral:type520  $atom:plga37/H4 $atom:plga37/C1 $atom:plga37/C2 $atom:plga38/O2
+    $dihedral:bkd351 @dihedral:type373  $atom:plga37/C2 $atom:plga38/O2 $atom:plga38/C3 $atom:plga38/C2
+    $dihedral:bkd352 @dihedral:type367  $atom:plga37/C2 $atom:plga38/O2 $atom:plga38/C3 $atom:plga38/O1
+    $dihedral:bkd353 @dihedral:type1150 $atom:plga38/O2 $atom:plga38/C3 $atom:plga38/C2 $atom:plga39/O3
+    $dihedral:bkd354 @dihedral:type1154 $atom:plga38/O1 $atom:plga38/C3 $atom:plga38/C2 $atom:plga39/O3
+    $dihedral:bkd355 @dihedral:type1153 $atom:plga38/C3 $atom:plga38/C2 $atom:plga39/O3 $atom:plga39/C5
+    $dihedral:bkd356 @dihedral:type200  $atom:plga38/C1 $atom:plga38/C2 $atom:plga39/O3 $atom:plga39/C5
+    $dihedral:bkd357 @dihedral:type201  $atom:plga38/H1 $atom:plga38/C2 $atom:plga39/O3 $atom:plga39/C5
+    $dihedral:bkd358 @dihedral:type520  $atom:plga38/H2 $atom:plga38/C1 $atom:plga38/C2 $atom:plga39/O3
+    $dihedral:bkd359 @dihedral:type520  $atom:plga38/H3 $atom:plga38/C1 $atom:plga38/C2 $atom:plga39/O3
+    $dihedral:bkd360 @dihedral:type520  $atom:plga38/H4 $atom:plga38/C1 $atom:plga38/C2 $atom:plga39/O3
+    $dihedral:bkd361 @dihedral:type373  $atom:plga38/C2 $atom:plga39/O3 $atom:plga39/C5 $atom:plga39/C4
+    $dihedral:bkd362 @dihedral:type367  $atom:plga38/C2 $atom:plga39/O3 $atom:plga39/C5 $atom:plga39/O4
+    $dihedral:bkd363 @dihedral:type1144 $atom:plga39/O3 $atom:plga39/C5 $atom:plga39/C4 $atom:plga40/O2
+    $dihedral:bkd364 @dihedral:type1149 $atom:plga39/O4 $atom:plga39/C5 $atom:plga39/C4 $atom:plga40/O2
+    $dihedral:bkd365 @dihedral:type1156 $atom:plga39/C5 $atom:plga39/C4 $atom:plga40/O2 $atom:plga40/C3
+    $dihedral:bkd366 @dihedral:type201  $atom:plga39/H5 $atom:plga39/C4 $atom:plga40/O2 $atom:plga40/C3
+    $dihedral:bkd367 @dihedral:type201  $atom:plga39/H6 $atom:plga39/C4 $atom:plga40/O2 $atom:plga40/C3
+    $dihedral:bkd368 @dihedral:type373  $atom:plga39/C4 $atom:plga40/O2 $atom:plga40/C3 $atom:plga40/C2
+    $dihedral:bkd369 @dihedral:type367  $atom:plga39/C4 $atom:plga40/O2 $atom:plga40/C3 $atom:plga40/O1
+    $dihedral:bkd370 @dihedral:type1150 $atom:plga40/O2 $atom:plga40/C3 $atom:plga40/C2 $atom:plga41/O2
+    $dihedral:bkd371 @dihedral:type1154 $atom:plga40/O1 $atom:plga40/C3 $atom:plga40/C2 $atom:plga41/O2
+    $dihedral:bkd372 @dihedral:type1153 $atom:plga40/C3 $atom:plga40/C2 $atom:plga41/O2 $atom:plga41/C3
+    $dihedral:bkd373 @dihedral:type200  $atom:plga40/C1 $atom:plga40/C2 $atom:plga41/O2 $atom:plga41/C3
+    $dihedral:bkd374 @dihedral:type201  $atom:plga40/H1 $atom:plga40/C2 $atom:plga41/O2 $atom:plga41/C3
+    $dihedral:bkd375 @dihedral:type520  $atom:plga40/H2 $atom:plga40/C1 $atom:plga40/C2 $atom:plga41/O2
+    $dihedral:bkd376 @dihedral:type520  $atom:plga40/H3 $atom:plga40/C1 $atom:plga40/C2 $atom:plga41/O2
+    $dihedral:bkd377 @dihedral:type520  $atom:plga40/H4 $atom:plga40/C1 $atom:plga40/C2 $atom:plga41/O2
+    $dihedral:bkd378 @dihedral:type373  $atom:plga40/C2 $atom:plga41/O2 $atom:plga41/C3 $atom:plga41/C2
+    $dihedral:bkd379 @dihedral:type367  $atom:plga40/C2 $atom:plga41/O2 $atom:plga41/C3 $atom:plga41/O1
+    $dihedral:bkd380 @dihedral:type1150 $atom:plga41/O2 $atom:plga41/C3 $atom:plga41/C2 $atom:plga42/O2
+    $dihedral:bkd381 @dihedral:type1154 $atom:plga41/O1 $atom:plga41/C3 $atom:plga41/C2 $atom:plga42/O2
+    $dihedral:bkd382 @dihedral:type1153 $atom:plga41/C3 $atom:plga41/C2 $atom:plga42/O2 $atom:plga42/C3
+    $dihedral:bkd383 @dihedral:type200  $atom:plga41/C1 $atom:plga41/C2 $atom:plga42/O2 $atom:plga42/C3
+    $dihedral:bkd384 @dihedral:type201  $atom:plga41/H1 $atom:plga41/C2 $atom:plga42/O2 $atom:plga42/C3
+    $dihedral:bkd385 @dihedral:type520  $atom:plga41/H2 $atom:plga41/C1 $atom:plga41/C2 $atom:plga42/O2
+    $dihedral:bkd386 @dihedral:type520  $atom:plga41/H3 $atom:plga41/C1 $atom:plga41/C2 $atom:plga42/O2
+    $dihedral:bkd387 @dihedral:type520  $atom:plga41/H4 $atom:plga41/C1 $atom:plga41/C2 $atom:plga42/O2
+    $dihedral:bkd388 @dihedral:type373  $atom:plga41/C2 $atom:plga42/O2 $atom:plga42/C3 $atom:plga42/C2
+    $dihedral:bkd389 @dihedral:type367  $atom:plga41/C2 $atom:plga42/O2 $atom:plga42/C3 $atom:plga42/O1
+    $dihedral:bkd390 @dihedral:type1150 $atom:plga42/O2 $atom:plga42/C3 $atom:plga42/C2 $atom:plga43/O3
+    $dihedral:bkd391 @dihedral:type1154 $atom:plga42/O1 $atom:plga42/C3 $atom:plga42/C2 $atom:plga43/O3
+    $dihedral:bkd392 @dihedral:type1153 $atom:plga42/C3 $atom:plga42/C2 $atom:plga43/O3 $atom:plga43/C5
+    $dihedral:bkd393 @dihedral:type200  $atom:plga42/C1 $atom:plga42/C2 $atom:plga43/O3 $atom:plga43/C5
+    $dihedral:bkd394 @dihedral:type201  $atom:plga42/H1 $atom:plga42/C2 $atom:plga43/O3 $atom:plga43/C5
+    $dihedral:bkd395 @dihedral:type520  $atom:plga42/H2 $atom:plga42/C1 $atom:plga42/C2 $atom:plga43/O3
+    $dihedral:bkd396 @dihedral:type520  $atom:plga42/H3 $atom:plga42/C1 $atom:plga42/C2 $atom:plga43/O3
+    $dihedral:bkd397 @dihedral:type520  $atom:plga42/H4 $atom:plga42/C1 $atom:plga42/C2 $atom:plga43/O3
+    $dihedral:bkd398 @dihedral:type373  $atom:plga42/C2 $atom:plga43/O3 $atom:plga43/C5 $atom:plga43/C4
+    $dihedral:bkd399 @dihedral:type367  $atom:plga42/C2 $atom:plga43/O3 $atom:plga43/C5 $atom:plga43/O4
+    $dihedral:bkd400 @dihedral:type1144 $atom:plga43/O3 $atom:plga43/C5 $atom:plga43/C4 $atom:plga44/O2
+    $dihedral:bkd401 @dihedral:type1149 $atom:plga43/O4 $atom:plga43/C5 $atom:plga43/C4 $atom:plga44/O2
+    $dihedral:bkd402 @dihedral:type1156 $atom:plga43/C5 $atom:plga43/C4 $atom:plga44/O2 $atom:plga44/C3
+    $dihedral:bkd403 @dihedral:type201  $atom:plga43/H5 $atom:plga43/C4 $atom:plga44/O2 $atom:plga44/C3
+    $dihedral:bkd404 @dihedral:type201  $atom:plga43/H6 $atom:plga43/C4 $atom:plga44/O2 $atom:plga44/C3
+    $dihedral:bkd405 @dihedral:type373  $atom:plga43/C4 $atom:plga44/O2 $atom:plga44/C3 $atom:plga44/C2
+    $dihedral:bkd406 @dihedral:type367  $atom:plga43/C4 $atom:plga44/O2 $atom:plga44/C3 $atom:plga44/O1
+    $dihedral:bkd407 @dihedral:type1150 $atom:plga44/O2 $atom:plga44/C3 $atom:plga44/C2 $atom:plga45/O2
+    $dihedral:bkd408 @dihedral:type1154 $atom:plga44/O1 $atom:plga44/C3 $atom:plga44/C2 $atom:plga45/O2
+    $dihedral:bkd409 @dihedral:type1153 $atom:plga44/C3 $atom:plga44/C2 $atom:plga45/O2 $atom:plga45/C3
+    $dihedral:bkd410 @dihedral:type200  $atom:plga44/C1 $atom:plga44/C2 $atom:plga45/O2 $atom:plga45/C3
+    $dihedral:bkd411 @dihedral:type201  $atom:plga44/H1 $atom:plga44/C2 $atom:plga45/O2 $atom:plga45/C3
+    $dihedral:bkd412 @dihedral:type520  $atom:plga44/H2 $atom:plga44/C1 $atom:plga44/C2 $atom:plga45/O2
+    $dihedral:bkd413 @dihedral:type520  $atom:plga44/H3 $atom:plga44/C1 $atom:plga44/C2 $atom:plga45/O2
+    $dihedral:bkd414 @dihedral:type520  $atom:plga44/H4 $atom:plga44/C1 $atom:plga44/C2 $atom:plga45/O2
+    $dihedral:bkd415 @dihedral:type373  $atom:plga44/C2 $atom:plga45/O2 $atom:plga45/C3 $atom:plga45/C2
+    $dihedral:bkd416 @dihedral:type367  $atom:plga44/C2 $atom:plga45/O2 $atom:plga45/C3 $atom:plga45/O1
+    $dihedral:bkd417 @dihedral:type1150 $atom:plga45/O2 $atom:plga45/C3 $atom:plga45/C2 $atom:plga46/O2
+    $dihedral:bkd418 @dihedral:type1154 $atom:plga45/O1 $atom:plga45/C3 $atom:plga45/C2 $atom:plga46/O2
+    $dihedral:bkd419 @dihedral:type1153 $atom:plga45/C3 $atom:plga45/C2 $atom:plga46/O2 $atom:plga46/C3
+    $dihedral:bkd420 @dihedral:type200  $atom:plga45/C1 $atom:plga45/C2 $atom:plga46/O2 $atom:plga46/C3
+    $dihedral:bkd421 @dihedral:type201  $atom:plga45/H1 $atom:plga45/C2 $atom:plga46/O2 $atom:plga46/C3
+    $dihedral:bkd422 @dihedral:type520  $atom:plga45/H2 $atom:plga45/C1 $atom:plga45/C2 $atom:plga46/O2
+    $dihedral:bkd423 @dihedral:type520  $atom:plga45/H3 $atom:plga45/C1 $atom:plga45/C2 $atom:plga46/O2
+    $dihedral:bkd424 @dihedral:type520  $atom:plga45/H4 $atom:plga45/C1 $atom:plga45/C2 $atom:plga46/O2
+    $dihedral:bkd425 @dihedral:type373  $atom:plga45/C2 $atom:plga46/O2 $atom:plga46/C3 $atom:plga46/C2
+    $dihedral:bkd426 @dihedral:type367  $atom:plga45/C2 $atom:plga46/O2 $atom:plga46/C3 $atom:plga46/O1
+    $dihedral:bkd427 @dihedral:type1150 $atom:plga46/O2 $atom:plga46/C3 $atom:plga46/C2 $atom:plga47/O3
+    $dihedral:bkd428 @dihedral:type1154 $atom:plga46/O1 $atom:plga46/C3 $atom:plga46/C2 $atom:plga47/O3
+    $dihedral:bkd429 @dihedral:type1153 $atom:plga46/C3 $atom:plga46/C2 $atom:plga47/O3 $atom:plga47/C5
+    $dihedral:bkd430 @dihedral:type200  $atom:plga46/C1 $atom:plga46/C2 $atom:plga47/O3 $atom:plga47/C5
+    $dihedral:bkd431 @dihedral:type201  $atom:plga46/H1 $atom:plga46/C2 $atom:plga47/O3 $atom:plga47/C5
+    $dihedral:bkd432 @dihedral:type520  $atom:plga46/H2 $atom:plga46/C1 $atom:plga46/C2 $atom:plga47/O3
+    $dihedral:bkd433 @dihedral:type520  $atom:plga46/H3 $atom:plga46/C1 $atom:plga46/C2 $atom:plga47/O3
+    $dihedral:bkd434 @dihedral:type520  $atom:plga46/H4 $atom:plga46/C1 $atom:plga46/C2 $atom:plga47/O3
+    $dihedral:bkd435 @dihedral:type373  $atom:plga46/C2 $atom:plga47/O3 $atom:plga47/C5 $atom:plga47/C4
+    $dihedral:bkd436 @dihedral:type367  $atom:plga46/C2 $atom:plga47/O3 $atom:plga47/C5 $atom:plga47/O4
+  }
+}

@@ -1,0 +1,15 @@
+21 April 2022
+
+Software to be installed:
+
+1. MOLTEMPLATE
+https://github.com/jewettaij/moltemplate
+
+2. LAMMPS (30 Oct 2019) Patched and including the USER-MOLC package.
+https://github.com/matteoeghirotta/lammps-30Oct19
+
+3. BACKMAP
+https://github.com/matteoeghirotta/backmap_legacy
+
+4. VMD
+http://www.ks.uiuc.edu/Research/vmd/

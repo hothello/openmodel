@@ -1,0 +1,41 @@
+# MOLC model of the molecule: Lactic Acid Monomer.
+# Model fitted on the OPLS force field for the PLGA polymer.
+# Default epsilon and sigma parameters from fitting of the LJ potential.
+# GB parameters optimised on the intramolecular energy and density computed for the referene AA model of pure LAC.
+#
+# Version: 1.1
+# Date:    4 April 2022
+#
+# moltemplate.sh -atomstyle "hybrid molecular ellipsoid" -molc test01.lt
+
+lac {
+#  Note: The "..." in "$mol:..." tells moltemplate that this molecule may
+#        be a part of a larger molecule, and (if so) to use the larger
+#        molecule's id number as it's own.
+  write("Data Atoms"){
+      $atom:la  @atom:b1 -0.0174 -0.0002 -0.0003 $mol:... 1 0.99062851
+  }
+  write("Data Ellipsoids"){
+      $atom:la 5.3394 4.3670 5.9584 -1. 0. 0. 0.
+  }
+  write_once("In Settings") {
+    mass @atom:b1 72.0634
+    
+    pair_style hybrid/overlay gayberne 1.0 1.0 -3.0 14. coul/long/offcentre 14. 4 &
+    @atom:b1    1.931251    0.539650    1.011545    0.0668 &
+    @atom:b1    0.446082    0.057700   -0.000000    0.6529 &
+    @atom:b1   -0.712230    1.072980    0.000000   -0.4227 &
+    @atom:b1   -0.653529   -1.140853    0.000000   -0.2970
+
+    # Electrostatics (after the DATA file).
+    kspace_style    pppm/offcentre 1e-4 4 &
+    @atom:b1    1.931251    0.539650    1.011545    0.0668 &
+    @atom:b1    0.446082    0.057700   -0.000000    0.6529 &
+    @atom:b1   -0.712230    1.072980    0.000000   -0.4227 &
+    @atom:b1   -0.653529   -1.140853    0.000000   -0.2970
+
+    # Gay-Berne parameters.
+    pair_coeff * * coul/long/offcentre
+    pair_coeff @{atom:b1} @{atom:b1} gayberne 1.0627 3.4740 0.97313 1 0.36835 0.97313 1 0.36835 14.
+  }
+}

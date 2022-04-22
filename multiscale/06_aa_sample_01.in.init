@@ -1,0 +1,14 @@
+    # Force field
+    atom_style full
+    units real
+    bond_style      harmonic
+    angle_style     harmonic
+    dihedral_style  opls
+variable run string 06_aa_sample_01
+variable temp equal 300.
+echo            log
+log             ${run}.log
+units           real
+neighbor        3.0 bin
+neigh_modify    check yes
+boundary        p p p

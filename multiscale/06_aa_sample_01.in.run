@@ -1,0 +1,20 @@
+# Physical observables.
+thermo          1000
+thermo_style custom step etotal evdwl ecoul elong ebond ke pe temp press pxx pyy pzz vol density cpu	
+thermo_modify flush yes
+dump 1 all dcd 10000 ${run}.dcd 
+dump_modify 1 unwrap yes
+
+# Rapid equilibration.
+minimize 0.001 0.001 200 200
+timestep        1.0
+velocity        all create ${temp} 391624 dist gaussian
+fix             2 all nvt temp ${temp} ${temp} 100.
+run             10000 post no
+
+# 1 ns annealing.
+unfix 2
+fix             alkyl all shake .0001 10 0 m 1.
+timestep        2.0
+fix             2 all npt temp ${temp} ${temp} 200. z 1 1 2000.
+run             500000

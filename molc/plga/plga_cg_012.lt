@@ -1,0 +1,130 @@
+import "lac_cg_02.lt"
+import "gly_cg_02.lt"
+
+PLGA12 {
+  # force all monomers to share the same molecule-ID
+  create_var {$mol}
+  plga0 = new lac.move(0,0,0)
+  plga1 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(3.25,1.60,0)
+  plga2 = new lac.move(6.50,3.20,0)
+  plga3 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(9.75,4.80,0)
+  plga4 = new lac.move(13.00,6.40,0)
+  plga5 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(16.25,8.00,0)
+  plga6 = new lac.move(19.50,9.60,0)
+  plga7 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(22.75,11.20,0)
+  plga8 = new lac.move(26.00,12.80,0)
+  plga9 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(29.25,14.40,0)
+  plga10 = new lac.move(32.50,16.00,0)
+  plga11 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(35.75,17.60,0)
+  plga12 = new lac.move(39.00,19.20,0)
+  plga13 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(42.25,20.80,0)
+  plga14 = new lac.move(45.50,22.40,0)
+  plga15 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(48.75,24.00,0)
+  plga16 = new lac.move(52.00,25.60,0)
+  plga17 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(55.25,27.20,0)
+  plga18 = new lac.move(58.50,28.80,0)
+  plga19 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(61.75,30.40,0)
+  plga20 = new lac.move(65.00,32.00,0)
+  plga21 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(68.25,33.60,0)
+  plga22 = new lac.move(71.50,35.20,0)
+  plga23 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(74.75,36.80,0)
+  plga24 = new lac.move(78.00,38.40,0)
+  plga25 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(81.25,40.00,0)
+  plga26 = new lac.move(84.50,41.60,0)
+  plga27 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(87.75,43.20,0)
+  plga28 = new lac.move(91.00,44.80,0)
+  plga29 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(94.25,46.40,0)
+  plga30 = new lac.move(97.50,48.00,0)
+  plga31 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(100.75,49.60,0)
+  plga32 = new lac.move(104.00,51.20,0)
+  plga33 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(107.25,52.80,0)
+  plga34 = new lac.move(110.50,54.40,0)
+  plga35 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(113.75,56.00,0)
+  plga36 = new lac.move(117.00,57.60,0)
+  plga37 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(120.25,59.20,0)
+  plga38 = new lac.move(123.50,60.80,0)
+  plga39 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(126.75,62.40,0)
+  plga40 = new lac.move(130.00,64.00,0)
+  plga41 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(133.25,65.60,0)
+  plga42 = new lac.move(136.50,67.20,0)
+  plga43 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(139.75,68.80,0)
+  plga44 = new lac.move(143.00,70.40,0)
+  plga45 = new lac.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(146.25,72.00,0)
+  plga46 = new lac.move(149.50,73.60,0)
+  plga47 = new gly.rot(180.0, 1,0,0).rot(60.0, 0,0,1).move(152.75,75.20,0)
+
+  write("Data Bonds") {
+    $bond:bkb0 @bond:plga $atom:plga0/la $atom:plga1/la
+    $bond:bkb1 @bond:plga $atom:plga1/la $atom:plga2/la
+    $bond:bkb2 @bond:plga $atom:plga2/la $atom:plga3/ga
+    $bond:bkb3 @bond:plga $atom:plga3/ga $atom:plga4/la
+    $bond:bkb4 @bond:plga $atom:plga4/la $atom:plga5/la
+    $bond:bkb5 @bond:plga $atom:plga5/la $atom:plga6/la
+    $bond:bkb6 @bond:plga $atom:plga6/la $atom:plga7/ga
+    $bond:bkb7 @bond:plga $atom:plga7/ga $atom:plga8/la
+    $bond:bkb8 @bond:plga $atom:plga8/la $atom:plga9/la
+    $bond:bkb9 @bond:plga $atom:plga9/la $atom:plga10/la
+    $bond:bkb10 @bond:plga $atom:plga10/la $atom:plga11/ga
+    $bond:bkb11 @bond:plga $atom:plga11/ga $atom:plga12/la
+    $bond:bkb12 @bond:plga $atom:plga12/la $atom:plga13/la
+    $bond:bkb13 @bond:plga $atom:plga13/la $atom:plga14/la
+    $bond:bkb14 @bond:plga $atom:plga14/la $atom:plga15/ga
+    $bond:bkb15 @bond:plga $atom:plga15/ga $atom:plga16/la
+    $bond:bkb16 @bond:plga $atom:plga16/la $atom:plga17/la
+    $bond:bkb17 @bond:plga $atom:plga17/la $atom:plga18/la
+    $bond:bkb18 @bond:plga $atom:plga18/la $atom:plga19/ga
+    $bond:bkb19 @bond:plga $atom:plga19/ga $atom:plga20/la
+    $bond:bkb20 @bond:plga $atom:plga20/la $atom:plga21/la
+    $bond:bkb21 @bond:plga $atom:plga21/la $atom:plga22/la
+    $bond:bkb22 @bond:plga $atom:plga22/la $atom:plga23/ga
+    $bond:bkb23 @bond:plga $atom:plga23/ga $atom:plga24/la
+    $bond:bkb24 @bond:plga $atom:plga24/la $atom:plga25/la
+    $bond:bkb25 @bond:plga $atom:plga25/la $atom:plga26/la
+    $bond:bkb26 @bond:plga $atom:plga26/la $atom:plga27/ga
+    $bond:bkb27 @bond:plga $atom:plga27/ga $atom:plga28/la
+    $bond:bkb28 @bond:plga $atom:plga28/la $atom:plga29/la
+    $bond:bkb29 @bond:plga $atom:plga29/la $atom:plga30/la
+    $bond:bkb30 @bond:plga $atom:plga30/la $atom:plga31/ga
+    $bond:bkb31 @bond:plga $atom:plga31/ga $atom:plga32/la
+    $bond:bkb32 @bond:plga $atom:plga32/la $atom:plga33/la
+    $bond:bkb33 @bond:plga $atom:plga33/la $atom:plga34/la
+    $bond:bkb34 @bond:plga $atom:plga34/la $atom:plga35/ga
+    $bond:bkb35 @bond:plga $atom:plga35/ga $atom:plga36/la
+    $bond:bkb36 @bond:plga $atom:plga36/la $atom:plga37/la
+    $bond:bkb37 @bond:plga $atom:plga37/la $atom:plga38/la
+    $bond:bkb38 @bond:plga $atom:plga38/la $atom:plga39/ga
+    $bond:bkb39 @bond:plga $atom:plga39/ga $atom:plga40/la
+    $bond:bkb40 @bond:plga $atom:plga40/la $atom:plga41/la
+    $bond:bkb41 @bond:plga $atom:plga41/la $atom:plga42/la
+    $bond:bkb42 @bond:plga $atom:plga42/la $atom:plga43/ga
+    $bond:bkb43 @bond:plga $atom:plga43/ga $atom:plga44/la
+    $bond:bkb44 @bond:plga $atom:plga44/la $atom:plga45/la
+    $bond:bkb45 @bond:plga $atom:plga45/la $atom:plga46/la
+    $bond:bkb46 @bond:plga $atom:plga46/la $atom:plga47/ga
+  }
+
+  write_once("In Settings") {
+    # 1-2 Bonded potential.
+    bond_style ellipsoid
+    special_bonds lj/coul 0.0 0.2 0.5
+
+    bond_coeff @bond:plga &
+    poly 2 0   -0.90854   -3.67091    21.0619    3.46926  &
+    cos  2 0   0.468392     1.5682    0.77494          0  &
+    cos  2 0   0.051231    1.55637   0.368657          0  &
+    cos  2 0   -0.63579    1.57002   -0.40024          0  &
+    cos  1 0  -0.291573       1.57  &
+    cos  2 0 -0.0454135    1.56739  -0.159876          0  &
+    cos  2 0  0.0689315    1.56411   0.326725          0  &
+    cos  2 0 -0.0380405    1.56469  -0.222524          0  &
+    cos  1 0   0.214176    1.57072  &
+    cos  2 0    0.06476      1.555   0.672605          0  &
+    poly 2 0    0.63728    2.15358     35.456   0.284144  &
+    cos  1 0    1.06641     4.7121  &
+    poly 0 0  &
+    poly 2 0    1.09113    2.29165    13.2812    1.04108  &
+    poly 2 0    1.29123    1.05776    4.62779   0.409837  &
+    poly 2 0    1.71005    1.02317    12.3945 -0.0340389
+
+  }
+}

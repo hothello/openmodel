@@ -1,0 +1,45 @@
+# All-Atom model of the molecule: Glycoloc Acid Monomer.
+# OPLS force field.
+#
+# Starting monomer of a polymer.
+#
+# Version: 1.0
+# Date:    21 April 2022
+#
+#
+gly1 inherits OPLS {
+    write("Data Atoms") {
+    $atom:H7 $mol:... @atom:opls_270  0.25   -1.37015  -1.31855  -0.00400
+    $atom:O3 $mol:... @atom:opls_467 -0.33   -0.42296  -1.24576   0.00180
+    $atom:C5 $mol:... @atom:opls_465  0.51   -0.07286   0.05354  -0.00697
+    $atom:O4 $mol:... @atom:opls_466 -0.43   -0.85681   0.98162   0.00221
+    $atom:C4 $mol:... @atom:opls_490  0.19    1.43362   0.23712   0.00168
+    $atom:H5 $mol:... @atom:opls_469  0.03    1.89918  -0.44469  -0.71757
+    $atom:H6 $mol:... @atom:opls_469  0.03    1.79124  -0.05218   1.00360
+  }
+  write("Data Bonds") {
+    $bond:b1 @bond:type55 $atom:O3 $atom:C5
+    $bond:b2 @bond:type40 $atom:C5 $atom:O4
+    $bond:b3 @bond:type21 $atom:C5 $atom:C4
+    $bond:b4 @bond:type192 $atom:C4 $atom:H5
+    $bond:b5 @bond:type192 $atom:C4 $atom:H6
+    $bond:b6 @bond:type255 $atom:O3 $atom:H7
+  }
+  write("Data Angles") {
+    $angle:a1 @angle:type729 $atom:O3 $atom:C5 $atom:O4
+    $angle:a2 @angle:type733 $atom:O3 $atom:C5 $atom:C4
+    $angle:a3 @angle:type93 $atom:O4 $atom:C5 $atom:C4
+    $angle:a4 @angle:type470 $atom:C5 $atom:C4 $atom:H5
+    $angle:a5 @angle:type470 $atom:C5 $atom:C4 $atom:H6
+    $angle:a6 @angle:type556 $atom:H5 $atom:C4 $atom:H6
+    $angle:a7 @angle:type718 $atom:C5 $atom:O3 $atom:H7
+  }
+  write("Data Dihedrals") {
+    $dihedral:d1 @dihedral:type537 $atom:O3 $atom:C5 $atom:C4 $atom:H5
+    $dihedral:d2 @dihedral:type537 $atom:O3 $atom:C5 $atom:C4 $atom:H6
+    $dihedral:d3 @dihedral:type538 $atom:O4 $atom:C5 $atom:C4 $atom:H5
+    $dihedral:d4 @dihedral:type538 $atom:O4 $atom:C5 $atom:C4 $atom:H6
+    $dihedral:d5 @dihedral:type235 $atom:C4 $atom:C5 $atom:O3 $atom:H7
+    $dihedral:d6 @dihedral:type559 $atom:O4 $atom:C5 $atom:O3 $atom:H7
+  }
+}

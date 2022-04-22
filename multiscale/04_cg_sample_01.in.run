@@ -1,0 +1,29 @@
+# Physical observables.
+compute q          all property/atom quatw quati quatj quatk
+compute shape           all property/atom shapex shapey shapez
+compute temp_trasl      all temp
+compute temp_rot        all temp/asphere dof rotate
+compute temp_rototrasl  all temp/asphere dof all
+compute press_trasl     all pressure temp_trasl
+
+# Output.
+thermo          1000
+thermo_style custom step etotal evdwl ecoul elong ebond ke pe temp press pxx pyy pzz vol density cpu
+thermo_modify temp temp_rototrasl
+thermo_modify press press_trasl
+thermo_modify flush yes
+
+dump 1 all custom 10000 ${run}.dump &
+id type xu yu zu c_q[1] c_q[2] c_q[3] c_q[4] &
+c_shape[1] c_shape[2] c_shape[3] vx vy vz &
+angmomx angmomy angmomz mol
+
+# 2 ns equilibration of the whole sample.
+# Relax the cell along the direction perpendicular to the slab.
+minimize 0.01 0.01 100 200
+timestep 20.
+fix             2 all nph/asphere z 1. 1. 20000.
+fix_modify      2 press press_trasl
+fix             3 all langevin ${temp} ${temp} 2000. 35785 angmom 0.9
+fix_modify      3 temp temp_rototrasl
+run    100000

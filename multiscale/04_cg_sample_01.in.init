@@ -1,0 +1,11 @@
+variable run string 04_cg_sample_01
+variable temp equal 300.
+echo            log
+log             ${run}.log
+units           real
+boundary        p p p
+atom_style      hybrid molecular ellipsoid
+
+# Neighbour list.
+neighbor        5.0 bin
+neigh_modify    check yes

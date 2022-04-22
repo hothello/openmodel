@@ -1,0 +1,53 @@
+# All-Atom model of the molecule: Glycoloc Acid Monomer.
+# OPLS force field.
+#
+# Ending monomer of a polymer.
+#
+# Version: 1.0
+# Date:    31 March 2022
+#
+#
+gly2 inherits OPLS {
+  write("Data Atoms") {
+    $atom:O3 $mol:... @atom:opls_467 -0.330   -0.42296  -1.24576   0.00180
+    $atom:C5 $mol:... @atom:opls_465  0.510   -0.07286   0.05354  -0.00697
+    $atom:O4 $mol:... @atom:opls_466 -0.430   -0.85681   0.98162   0.00221
+    $atom:C4 $mol:... @atom:opls_157  0.145    1.43362   0.23712   0.00168
+    $atom:H5 $mol:... @atom:opls_140  0.060    1.89918  -0.44469  -0.71757
+    $atom:H6 $mol:... @atom:opls_140  0.060    1.79124  -0.05218   1.00360
+    $atom:O5 $mol:... @atom:opls_154 -0.683    1.73898   1.54834  -0.30139
+    $atom:H8 $mol:... @atom:opls_155  0.418    2.68199   1.66326  -0.29597
+  }
+  write("Data Bonds") {
+    $bond:b1 @bond:type55  $atom:O3 $atom:C5
+    $bond:b2 @bond:type40  $atom:C5 $atom:O4
+    $bond:b3 @bond:type21  $atom:C5 $atom:C4
+    $bond:b4 @bond:type209 $atom:C4 $atom:O5
+    $bond:b5 @bond:type192 $atom:C4 $atom:H5
+    $bond:d6 @bond:type192 $atom:C4 $atom:H6
+    $bond:b7 @bond:type255 $atom:O5 $atom:H8
+  }
+  write("Data Angles") {
+    $angle:a1  @angle:type729 $atom:O3 $atom:C5 $atom:O4
+    $angle:a2  @angle:type733 $atom:O3 $atom:C5 $atom:C4
+    $angle:a3  @angle:type93  $atom:O4 $atom:C5 $atom:C4
+    $angle:a4  @angle:type590 $atom:C5 $atom:C4 $atom:O5
+    $angle:a5  @angle:type470 $atom:C5 $atom:C4 $atom:H5
+    $angle:a6  @angle:type470 $atom:C5 $atom:C4 $atom:H6
+    $angle:a7  @angle:type588 $atom:O5 $atom:C4 $atom:H5
+    $angle:a8  @angle:type588 $atom:O5 $atom:C4 $atom:H6
+    $angle:a9  @angle:type556 $atom:H5 $atom:C4 $atom:H6
+    $angle:a10 @angle:type722 $atom:C4 $atom:O5 $atom:H8
+  }
+  write("Data Dihedrals") {
+    $dihedral:d1  @dihedral:type1145 $atom:O3 $atom:C5 $atom:C4 $atom:O5
+    $dihedral:d2  @dihedral:type1148 $atom:O4 $atom:C5 $atom:C4 $atom:O5
+    $dihedral:d3  @dihedral:type537 $atom:O3 $atom:C5 $atom:C4 $atom:H5
+    $dihedral:d4  @dihedral:type537 $atom:O3 $atom:C5 $atom:C4 $atom:H6
+    $dihedral:d5  @dihedral:type538 $atom:O4 $atom:C5 $atom:C4 $atom:H5
+    $dihedral:d6  @dihedral:type538 $atom:O4 $atom:C5 $atom:C4 $atom:H6
+    $dihedral:d7  @dihedral:type1151 $atom:C5 $atom:C4 $atom:O5 $atom:H8
+    $dihedral:d8  @dihedral:type530 $atom:H5 $atom:C4 $atom:O5 $atom:H8
+    $dihedral:d9  @dihedral:type530 $atom:H6 $atom:C4 $atom:O5 $atom:H8
+  }
+}

@@ -1,0 +1,38 @@
+# All-Atom model of TIP4P/2005 water.
+# Ref: http://www.sklogwiki.org/SklogWiki/index.php/TIP4P/2005_model_of_water
+#
+# Force Field settings:
+#
+# units           real
+# atom_style      full
+# bond_style      harmonic
+# angle_style     charmm
+# dihedral_style  charmm
+#
+# moltemplate.sh -overlay-bonds -overlay-angles -overlay-dihedrals -overlay-impropers test01.lt
+
+TIP4 {
+  write("Data Atoms"){
+      $atom:O1     $mol @atom:OW  -1.1128   0.00000    0.000000   0.000000
+      $atom:H1     $mol @atom:HW   0.5564   0.75695    0.585882   0.000000
+      $atom:H2     $mol @atom:HW   0.5564  -0.75695    0.585882   0.000000
+  }
+  write("Data Bonds"){   
+      $bond:b1      @bond:g1   $atom:O1     $atom:H1
+      $bond:b2      @bond:g1   $atom:O1     $atom:H2
+  }
+  write("Data Angles"){
+      $angle:a1      @angle:g1 $atom:H2     $atom:O1     $atom:H1
+  }
+  write_once("In Settings") {
+     mass @atom:OW  15.9994
+     mass @atom:HW   1.0079
+
+     pair_style  lj/cut/tip4p/long @atom:OW @atom:HW @bond:g1 @angle:g1 0.1546 12.
+     pair_coeff  @atom:OW @atom:OW 0.18519 3.1589
+     pair_coeff  @atom:HW @atom:HW 0.0 0.0
+     kspace_style pppm/tip4p 0.0001 
+     bond_coeff  @bond:g1  450.0 0.9572
+     angle_coeff @angle:g1  55.0 104.52 0.0 0.0
+  }
+}

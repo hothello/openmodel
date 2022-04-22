@@ -1,0 +1,63 @@
+# All-Atom model of the molecule: l-Lactic Acid Monomer.
+# OPLS force field.
+#
+# Starting monomer of a polymer.
+#
+# Version: 1.0
+# Date:    31 March 2022
+#
+#
+lac1 inherits OPLS {
+  write("Data Atoms") {
+    $atom:H7 $mol:... @atom:opls_270  0.45    -1.85727  -1.11041   0.00976
+    $atom:C2 $mol:... @atom:opls_491  0.22     1.15037   0.02295   0.00049
+    $atom:H1 $mol:... @atom:opls_469  0.03     1.47878  -0.69681  -0.75925
+    $atom:C1 $mol:... @atom:opls_135 -0.18     1.67017  -0.41518   1.37806
+    $atom:H2 $mol:... @atom:opls_140  0.06     2.76384  -0.41823   1.36063
+    $atom:H3 $mol:... @atom:opls_140  0.06     1.31615  -1.41907   1.63036
+    $atom:H4 $mol:... @atom:opls_140  0.06     1.33451   0.28377   2.15139
+    $atom:C3 $mol:... @atom:opls_267  0.52    -0.37343   0.05579  -0.00422
+    $atom:O1 $mol:... @atom:opls_269 -0.44    -1.01565   1.08824   0.00134
+    $atom:O2 $mol:... @atom:opls_268 -0.53    -0.90966  -1.17724   0.00109
+  }
+  write("Data Bonds") {
+    $bond:b1 @bond:type39 $atom:C3 $atom:O1
+    $bond:b2 @bond:type20 $atom:C3 $atom:C2
+    $bond:b3 @bond:type43 $atom:C3 $atom:O2
+    $bond:b4 @bond:type188 $atom:C2 $atom:C1
+    $bond:b5 @bond:type192 $atom:C2 $atom:H1
+    $bond:b6 @bond:type192 $atom:C1 $atom:H2
+    $bond:b7 @bond:type192 $atom:C1 $atom:H3
+    $bond:b8 @bond:type192 $atom:C1 $atom:H4
+    $bond:b9 @bond:type255 $atom:O2 $atom:H7
+  }
+  write("Data Angles") {
+    $angle:a1  @angle:type92 $atom:O1 $atom:C3 $atom:C2
+    $angle:a2  @angle:type197 $atom:O1 $atom:C3 $atom:O2
+    $angle:a3  @angle:type117 $atom:C2 $atom:C3 $atom:O2
+    $angle:a4  @angle:type456 $atom:C3 $atom:C2 $atom:C1
+    $angle:a5  @angle:type469 $atom:C3 $atom:C2 $atom:H1
+    $angle:a6  @angle:type508 $atom:C1 $atom:C2 $atom:H1
+    $angle:a7  @angle:type508 $atom:C2 $atom:C1 $atom:H2
+    $angle:a8  @angle:type508 $atom:C2 $atom:C1 $atom:H3
+    $angle:a9  @angle:type508 $atom:C2 $atom:C1 $atom:H4
+    $angle:a10 @angle:type556 $atom:H2 $atom:C1 $atom:H3
+    $angle:a11 @angle:type556 $atom:H2 $atom:C1 $atom:H4
+    $angle:a12 @angle:type556 $atom:H3 $atom:C1 $atom:H4
+    $angle:a13 @angle:type718 $atom:C3 $atom:O2 $atom:H7
+  }
+  write("Data Dihedrals") {
+    $dihedral:d1  @dihedral:type267 $atom:O1 $atom:C3 $atom:C2 $atom:C1
+    $dihedral:d2  @dihedral:type502 $atom:O1 $atom:C3 $atom:C2 $atom:H1
+    $dihedral:d3  @dihedral:type263 $atom:O2 $atom:C3 $atom:C2 $atom:C1
+    $dihedral:d4  @dihedral:type499 $atom:O2 $atom:C3 $atom:C2 $atom:H1
+    $dihedral:d5  @dihedral:type559 $atom:O1 $atom:C3 $atom:O2 $atom:H7
+    $dihedral:d6  @dihedral:type235 $atom:C2 $atom:C3 $atom:O2 $atom:H7
+    $dihedral:d7  @dihedral:type27 $atom:C3 $atom:C2 $atom:C1 $atom:H2
+    $dihedral:d8  @dihedral:type27 $atom:C3 $atom:C2 $atom:C1 $atom:H3
+    $dihedral:d9  @dihedral:type27 $atom:C3 $atom:C2 $atom:C1 $atom:H4
+    $dihedral:d10 @dihedral:type512 $atom:H1 $atom:C2 $atom:C1 $atom:H2
+    $dihedral:d11 @dihedral:type512 $atom:H1 $atom:C2 $atom:C1 $atom:H3
+    $dihedral:d12 @dihedral:type512 $atom:H1 $atom:C2 $atom:C1 $atom:H4
+  }
+}

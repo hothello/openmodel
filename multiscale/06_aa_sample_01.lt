@@ -1,0 +1,46 @@
+# Annealing at room temperature of a polymer slab in a solvent box.
+
+# Force-field definition.
+import ../molc/plga/plga_aa_opls_tip4p.lt
+import ../molc/plga/plga_aa_012.lt
+import ../molc/tip4p/tip4p2005_aa_02.lt
+
+# Create the molecules.
+mol0 = new PLGA12[360]
+mol1 = new TIP4[77715]
+
+
+write("In Init"){
+variable run string 06_aa_sample_01
+variable temp equal 300.
+echo            log
+log             \$\{run\}.log
+units           real
+neighbor        3.0 bin
+neigh_modify    check yes
+boundary        p p p
+}
+
+write_once("In Run"){
+# Physical observables.
+thermo          1000
+thermo_style custom step etotal evdwl ecoul elong ebond ke pe temp press pxx pyy pzz vol density cpu	
+thermo_modify flush yes
+dump 1 all dcd 10000 \$\{run\}.dcd 
+dump_modify 1 unwrap yes
+
+# Rapid equilibration.
+minimize 0.001 0.001 200 200
+timestep        1.0
+velocity        all create \$\{temp\} 391624 dist gaussian
+fix             2 all nvt temp \$\{temp\} \$\{temp\} 100.
+run             10000 post no
+
+# 1 ns annealing.
+unfix 2
+fix             alkyl all shake .0001 10 0 m 1.
+timestep        2.0
+fix             2 all npt temp \$\{temp\} \$\{temp\} 200. z 1 1 2000.
+run             500000
+}
+

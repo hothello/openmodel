@@ -1,0 +1,118 @@
+OPLS {
+
+  ### LAMMPS commands for initialization
+  ### (These can be overridden later.)
+
+
+  write_once("In Init") {
+    atom_style full
+  }
+
+  write_once("In Settings") {
+    pair_coeff @atom:opls_135 @atom:opls_135 0.06597 3.50000
+    pair_coeff @atom:opls_140 @atom:opls_140 0.02999 2.50000
+    pair_coeff @atom:opls_154 @atom:opls_154 0.16992 3.12000
+    pair_coeff @atom:opls_155 @atom:opls_155 0.00000 0.00000
+    pair_coeff @atom:opls_157 @atom:opls_157 0.06597 3.50000
+    pair_coeff @atom:opls_267 @atom:opls_267 0.10495 3.75000
+    pair_coeff @atom:opls_268 @atom:opls_268 0.16992 3.00000
+    pair_coeff @atom:opls_269 @atom:opls_269 0.20990 2.96000
+    pair_coeff @atom:opls_270 @atom:opls_270 0.00000 0.00000
+    pair_coeff @atom:opls_465 @atom:opls_465 0.10495 3.75000
+    pair_coeff @atom:opls_466 @atom:opls_466 0.20990 2.96000
+    pair_coeff @atom:opls_467 @atom:opls_467 0.16992 3.00000
+    pair_coeff @atom:opls_469 @atom:opls_469 0.01499 2.42000
+    pair_coeff @atom:opls_490 @atom:opls_490 0.06597 3.50000
+    pair_coeff @atom:opls_491 @atom:opls_491 0.06597 3.50000
+  }
+
+  write_once("In Settings") {
+    bond_coeff @bond:type20 316.8485 1.5220
+    bond_coeff @bond:type21 316.8485 1.5220
+    bond_coeff @bond:type39 569.7277 1.2290
+    bond_coeff @bond:type40 569.7277 1.2290
+    bond_coeff @bond:type43 449.7850 1.3640
+    bond_coeff @bond:type55 213.8978 1.3270
+    bond_coeff @bond:type188 267.8720 1.5290
+    bond_coeff @bond:type192 339.8376 1.0900
+    bond_coeff @bond:type209 319.8471 1.4100
+    bond_coeff @bond:type214 319.8471 1.4100
+    bond_coeff @bond:type255 552.7358 0.9450
+  }
+
+  write_once("In Settings") {
+    angle_coeff @angle:type92 79.96178 120.40000
+    angle_coeff @angle:type93 79.96178 120.40000
+    angle_coeff @angle:type117 69.96656 108.00000
+    angle_coeff @angle:type197 79.96178 121.00000
+    angle_coeff @angle:type456 62.96990 111.10000
+    angle_coeff @angle:type457 62.96990 111.10000
+    angle_coeff @angle:type469 34.98328 109.50000
+    angle_coeff @angle:type470 34.98328 109.50000
+    angle_coeff @angle:type508 37.48208 110.70000
+    angle_coeff @angle:type540 49.97611 109.50000
+    angle_coeff @angle:type556 32.98423 107.80000
+    angle_coeff @angle:type588 34.98328 109.50000
+    angle_coeff @angle:type590 49.97611 109.50000
+    angle_coeff @angle:type593 34.98328 109.50000
+    angle_coeff @angle:type718 34.98328 113.00000
+    angle_coeff @angle:type722 54.97372 108.50000
+    angle_coeff @angle:type729 82.96034 123.40000
+    angle_coeff @angle:type731 82.96034 116.90000
+    angle_coeff @angle:type733 80.96130 111.40000
+    angle_coeff @angle:type888 49.97611 109.50000
+    angle_coeff @angle:type889 49.97611 109.50000
+  }
+
+  write_once("In Settings") {
+    dihedral_coeff @dihedral:type27 0.09995 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type199 0.07597 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type200 -1.64121 -0.12594 -0.00000 0.00000
+    dihedral_coeff @dihedral:type201 -0.19791 -0.00000 -0.00000 0.00000
+    dihedral_coeff @dihedral:type235 1.49928 5.49737 0.00000 0.00000
+    dihedral_coeff @dihedral:type263 0.54974 0.54574 -0.00000 0.00000
+    dihedral_coeff @dihedral:type267 -0.00000 0.54574 0.00000 0.00000
+    dihedral_coeff @dihedral:type327 0.55274 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type328 0.41680 1.22741 0.00000 0.00000
+    dihedral_coeff @dihedral:type367 -0.00000 5.12155 0.00000 0.00000
+    dihedral_coeff @dihedral:type373 4.66677 5.12155 0.00000 0.00000
+    dihedral_coeff @dihedral:type499 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type502 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type512 -0.29986 -0.00000 -0.00000 0.00000
+    dihedral_coeff @dihedral:type520 -0.46777 -0.00000 -0.00000 0.00000
+    dihedral_coeff @dihedral:type530 -0.44978 -0.00000 -0.00000 0.00000
+    dihedral_coeff @dihedral:type537 -0.13194 -0.00000 -0.00000 0.00000
+    dihedral_coeff @dihedral:type538 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type559 -0.00000 5.49737 0.00000 0.00000
+    dihedral_coeff @dihedral:type1144 -0.54974 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1145 -0.54974 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1146 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1148 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1149 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1150 -0.54974 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1151 -0.84760 -0.17392 -0.00000 0.00000
+    dihedral_coeff @dihedral:type1152 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1153 -0.01999 -0.24988 -0.00000 0.00000
+    dihedral_coeff @dihedral:type1154 -0.00000 -0.00000 0.00000 0.00000
+    dihedral_coeff @dihedral:type1155 -0.01999 -0.24988 -0.00000 0.00000
+    dihedral_coeff @dihedral:type1156 -0.01999 -0.24988 -0.00000 0.00000
+  }
+
+  write_once("Data Masses") {
+    @atom:opls_135 12.01100
+    @atom:opls_140 1.00800
+    @atom:opls_154 15.99940
+    @atom:opls_155 1.00800
+    @atom:opls_157 12.01100
+    @atom:opls_267 12.01100
+    @atom:opls_268 15.99940
+    @atom:opls_269 15.99940
+    @atom:opls_270 1.00800
+    @atom:opls_465 12.01100
+    @atom:opls_466 15.99940
+    @atom:opls_467 15.99940
+    @atom:opls_469 1.00800
+    @atom:opls_490 12.01100
+    @atom:opls_491 12.01100
+  }
+}
