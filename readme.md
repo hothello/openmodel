@@ -29,13 +29,9 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
 
 1. Create a 2x2x1 supercell from the bulk model the polymer, turn it into a slab, and create the input files
    for the first molecular dynamics simulation.  
-   | test    |
+   | Amorphous bulk structure of PLGA |
    | --- |
    |  1   |
-   |  3   |
-
-   <img src="images/plga_cg_amorphous.png" alt="plga_cg_amorphous.dump" width="45%"/>
-   Amorphous bulk structure of PLGA
    ```sh
    bash 01_preprocess.sh
    ```
