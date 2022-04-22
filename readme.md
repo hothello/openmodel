@@ -1,4 +1,4 @@
-Mesoscopic Multiscale Simulationations
+Mesoscopic Multiscale Simulations
 ==
 
 ###  Description
