@@ -4,14 +4,14 @@ Mesoscopic Multiscale Simulations
 ###  Description
 
 This Use Case for the [OpenModel](https://open-model.eu/) project describes the creation of a 2D-periodic membrane of poly-lactic-glycolic-acid (*PLGA*) surrounded by water (*TIP4P 2005* model). The workflow starts with a coarse-grained force field based on the [**MOLC**](https://doi.org/10.1039/c9cp04120f) model, implemented in a fork of [**LAMMPS**](https://lammps.org), version [30 Oct 2019](https://github.com/matteoeghirotta/lammps-30Oct19).
-The sample is first assembled in the desired configuration, annealed, and then converted to
+The sample is first assembled in the desired configuration, annealed, converted to
 atomistic coordinates with the program [**BACKMAP**](https://github.com/matteoeghirotta/backmap_legacy), and
-finally annealed with a type-I atomistic force field (*OPLS*). The resulting structure is suitable to run
+finally annealed with a type-I atomistic force field (*OPLS*). The resulting structure is suitable for
 ab-initio calculations (paper in preparation). However, this last step is already an established procedure
 and is not covered here.
 
 The whole procedure is based on open-source software and relies on a coarse-grained force field parametrised
-consistently with the atomistic force field. Since LAMMPS has limited capabilities to handle complex structure,
+consistently with the atomistic force field. Since LAMMPS has limited capabilities to handle complex structures,
 the strategy used here is to manipulate molecular samples with a custom-written program, [**dumptools**](./scripts/dumptools.pl), and to combine the structure with the force field using [MOLTEMPLATE](https://github.com/jewettaij/moltemplate).
 
 ### Software Dependency
@@ -25,7 +25,7 @@ This Use Case depends on the following software. Additional scripts are included
 
 ### Workflow
 
-Go to the [multiscale](./multiscale/) folder and execute the following commands.
+Go to the [multiscale](./multiscale/) folder and execute the following steps.
 
 1. Create a 2x2x1 supercell from the bulk model the polymer, turn it into a slab, and create the input files
    for the first molecular dynamics simulation.  
@@ -53,14 +53,14 @@ Go to the [multiscale](./multiscale/) folder and execute the following commands.
    | Initial structure | Relaxed structure |
    | --- | --- |
    | <img src="images/04_cg_sample_01.png" alt="03_merged.dump" width="100%"/> | <img src="images/04_cg_sample_02.png" alt="04_cg_sample_01.dump" width="90%"/> |
-5. Wrap the last frame of the CG structure and patch the bead types as to distinguish between the initial and final monomers in the polymer chain. Convert the wrapped structure to atomistic coordinates and write the input files for the following all-atom MD simulation.
+5. Wrap the last frame of the CG trajectory and patch the bead types to distinguish the initial and final monomers in the polymer chain. Convert the wrapped structure to atomistic coordinates and write the input files for an all-atom MD simulation.
    ```sh
    bash 05_postprocess.sh
    ```
    | Wrapped CG structure | Backmapped atomistic structure |
    | --- | --- |
    | <img src="images/04_cg_sample_03.png" alt="04_cg_sample_01_f100000.dump" width="100%"/> | <img src="images/05_sample_aa.png" alt="05_sample_aa.pdb" width="90%"/> | 
-6. Anneal the structure at room temperature. This simulation is computationally quite expensive.
+6. Anneal the structure at room temperature with a standard all-atom force field. This simulation is computationally quite expensive.
    ```
    mpirun -np 1280 lmp_bin -in 04_cg_sample_01.in
    ```
