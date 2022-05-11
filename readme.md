@@ -14,6 +14,8 @@ The whole procedure is based on open-source software and relies on a coarse-grai
 consistently with the atomistic force field. Since LAMMPS has limited capabilities to handle complex structures,
 the strategy used here is to manipulate molecular samples with a custom-written program, [**dumptools**](./scripts/dumptools.pl), and to combine the structure with the force field using [MOLTEMPLATE](https://github.com/jewettaij/moltemplate).
 
+We acknowledge PRACE for awarding us access to the ARCHER2 UK National Supercomputing Service ([https://www.archer2.ac.uk](https://www.archer2.ac.uk)) hosted by at EPCC, UK.
+
 ### Software Dependency
 
 This Use Case depends on the following software. Additional scripts are included in the
