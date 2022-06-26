@@ -1,0 +1,328 @@
+units           real
+boundary        p p p
+atom_style      full
+
+# Neighbour list.
+neighbor        3.0 bin
+neigh_modify    check yes
+
+# ----------------- Atom Definition Section -----------------
+read_data ${run}.data
+read_data 06_aa_sample_01.data
+Reading data file ...
+  orthogonal box = (0 0 0) to (149.891 144.052 182.142)
+  1 by 1 by 2 MPI processor grid
+  reading atoms ...
+  376785 atoms
+  scanning bonds ...
+  3 = max bonds/atom
+  scanning angles ...
+  6 = max angles/atom
+  scanning dihedrals ...
+  9 = max dihedrals/atom
+  reading bonds ...
+  298710 bonds
+  reading angles ...
+  328635 angles
+  reading dihedrals ...
+  306720 dihedrals
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     4 = max # of 1-2 neighbors
+     6 = max # of 1-3 neighbors
+    13 = max # of 1-4 neighbors
+    15 = max # of special neighbors
+  special bonds CPU = 0.089 seconds
+  read_data CPU = 2.259 seconds
+
+# Dummy Settings.
+pair_style zero 1.
+pair_coeff * *
+
+# Define the groups of atoms.
+group slab type 3:17
+143640 atoms in group slab
+group solvent type 1 2
+233145 atoms in group solvent
+
+# Compute the density profile.
+compute c1  slab chunk/atom bin/1d z -5.0 4 units box
+compute c2  slab chunk/atom bin/1d z -5.5 4 units box
+compute c3  slab chunk/atom bin/1d z -6.0 4 units box
+compute c4  slab chunk/atom bin/1d z -6.5 4 units box
+compute c5  slab chunk/atom bin/1d z -7.0 4 units box
+compute c6  slab chunk/atom bin/1d z -7.5 4 units box
+compute c7  slab chunk/atom bin/1d z -8.0 4 units box
+compute c8  slab chunk/atom bin/1d z -8.5 4 units box
+compute c9  solvent chunk/atom bin/1d z -5.0 4 units box
+compute c10 solvent chunk/atom bin/1d z -5.5 4 units box
+compute c11 solvent chunk/atom bin/1d z -6.0 4 units box
+compute c12 solvent chunk/atom bin/1d z -6.5 4 units box
+compute c13 solvent chunk/atom bin/1d z -7.0 4 units box
+compute c14 solvent chunk/atom bin/1d z -7.5 4 units box
+compute c15 solvent chunk/atom bin/1d z -8.0 4 units box
+compute c16 solvent chunk/atom bin/1d z -8.5 4 units box
+
+# Average the last 3 frames.
+fix f1 all ave/chunk $p $s $d c1 density/mass ave running file ${out}.out1
+fix f1 all ave/chunk 1 $s $d c1 density/mass ave running file ${out}.out1
+fix f1 all ave/chunk 1 10 $d c1 density/mass ave running file ${out}.out1
+fix f1 all ave/chunk 1 10 52 c1 density/mass ave running file ${out}.out1
+fix f1 all ave/chunk 1 10 52 c1 density/mass ave running file 09_aa_analysis.out1
+fix f2 all ave/chunk $p $s $d c2 density/mass ave running file ${out}.out2
+fix f2 all ave/chunk 1 $s $d c2 density/mass ave running file ${out}.out2
+fix f2 all ave/chunk 1 10 $d c2 density/mass ave running file ${out}.out2
+fix f2 all ave/chunk 1 10 52 c2 density/mass ave running file ${out}.out2
+fix f2 all ave/chunk 1 10 52 c2 density/mass ave running file 09_aa_analysis.out2
+fix f3 all ave/chunk $p $s $d c3 density/mass ave running file ${out}.out3
+fix f3 all ave/chunk 1 $s $d c3 density/mass ave running file ${out}.out3
+fix f3 all ave/chunk 1 10 $d c3 density/mass ave running file ${out}.out3
+fix f3 all ave/chunk 1 10 52 c3 density/mass ave running file ${out}.out3
+fix f3 all ave/chunk 1 10 52 c3 density/mass ave running file 09_aa_analysis.out3
+fix f4 all ave/chunk $p $s $d c4 density/mass ave running file ${out}.out4
+fix f4 all ave/chunk 1 $s $d c4 density/mass ave running file ${out}.out4
+fix f4 all ave/chunk 1 10 $d c4 density/mass ave running file ${out}.out4
+fix f4 all ave/chunk 1 10 52 c4 density/mass ave running file ${out}.out4
+fix f4 all ave/chunk 1 10 52 c4 density/mass ave running file 09_aa_analysis.out4
+fix f5 all ave/chunk $p $s $d c5 density/mass ave running file ${out}.out5
+fix f5 all ave/chunk 1 $s $d c5 density/mass ave running file ${out}.out5
+fix f5 all ave/chunk 1 10 $d c5 density/mass ave running file ${out}.out5
+fix f5 all ave/chunk 1 10 52 c5 density/mass ave running file ${out}.out5
+fix f5 all ave/chunk 1 10 52 c5 density/mass ave running file 09_aa_analysis.out5
+fix f6 all ave/chunk $p $s $d c6 density/mass ave running file ${out}.out6
+fix f6 all ave/chunk 1 $s $d c6 density/mass ave running file ${out}.out6
+fix f6 all ave/chunk 1 10 $d c6 density/mass ave running file ${out}.out6
+fix f6 all ave/chunk 1 10 52 c6 density/mass ave running file ${out}.out6
+fix f6 all ave/chunk 1 10 52 c6 density/mass ave running file 09_aa_analysis.out6
+fix f7 all ave/chunk $p $s $d c7 density/mass ave running file ${out}.out7
+fix f7 all ave/chunk 1 $s $d c7 density/mass ave running file ${out}.out7
+fix f7 all ave/chunk 1 10 $d c7 density/mass ave running file ${out}.out7
+fix f7 all ave/chunk 1 10 52 c7 density/mass ave running file ${out}.out7
+fix f7 all ave/chunk 1 10 52 c7 density/mass ave running file 09_aa_analysis.out7
+fix f8 all ave/chunk $p $s $d c8 density/mass ave running file ${out}.out8
+fix f8 all ave/chunk 1 $s $d c8 density/mass ave running file ${out}.out8
+fix f8 all ave/chunk 1 10 $d c8 density/mass ave running file ${out}.out8
+fix f8 all ave/chunk 1 10 52 c8 density/mass ave running file ${out}.out8
+fix f8 all ave/chunk 1 10 52 c8 density/mass ave running file 09_aa_analysis.out8
+fix f9 all ave/chunk $p $s $d c9 density/mass ave running file ${out}.out9
+fix f9 all ave/chunk 1 $s $d c9 density/mass ave running file ${out}.out9
+fix f9 all ave/chunk 1 10 $d c9 density/mass ave running file ${out}.out9
+fix f9 all ave/chunk 1 10 52 c9 density/mass ave running file ${out}.out9
+fix f9 all ave/chunk 1 10 52 c9 density/mass ave running file 09_aa_analysis.out9
+fix f10 all ave/chunk $p $s $d c10 density/mass ave running file ${out}.out10
+fix f10 all ave/chunk 1 $s $d c10 density/mass ave running file ${out}.out10
+fix f10 all ave/chunk 1 10 $d c10 density/mass ave running file ${out}.out10
+fix f10 all ave/chunk 1 10 52 c10 density/mass ave running file ${out}.out10
+fix f10 all ave/chunk 1 10 52 c10 density/mass ave running file 09_aa_analysis.out10
+fix f11 all ave/chunk $p $s $d c11 density/mass ave running file ${out}.out11
+fix f11 all ave/chunk 1 $s $d c11 density/mass ave running file ${out}.out11
+fix f11 all ave/chunk 1 10 $d c11 density/mass ave running file ${out}.out11
+fix f11 all ave/chunk 1 10 52 c11 density/mass ave running file ${out}.out11
+fix f11 all ave/chunk 1 10 52 c11 density/mass ave running file 09_aa_analysis.out11
+fix f12 all ave/chunk $p $s $d c12 density/mass ave running file ${out}.out12
+fix f12 all ave/chunk 1 $s $d c12 density/mass ave running file ${out}.out12
+fix f12 all ave/chunk 1 10 $d c12 density/mass ave running file ${out}.out12
+fix f12 all ave/chunk 1 10 52 c12 density/mass ave running file ${out}.out12
+fix f12 all ave/chunk 1 10 52 c12 density/mass ave running file 09_aa_analysis.out12
+fix f13 all ave/chunk $p $s $d c13 density/mass ave running file ${out}.out13
+fix f13 all ave/chunk 1 $s $d c13 density/mass ave running file ${out}.out13
+fix f13 all ave/chunk 1 10 $d c13 density/mass ave running file ${out}.out13
+fix f13 all ave/chunk 1 10 52 c13 density/mass ave running file ${out}.out13
+fix f13 all ave/chunk 1 10 52 c13 density/mass ave running file 09_aa_analysis.out13
+fix f14 all ave/chunk $p $s $d c14 density/mass ave running file ${out}.out14
+fix f14 all ave/chunk 1 $s $d c14 density/mass ave running file ${out}.out14
+fix f14 all ave/chunk 1 10 $d c14 density/mass ave running file ${out}.out14
+fix f14 all ave/chunk 1 10 52 c14 density/mass ave running file ${out}.out14
+fix f14 all ave/chunk 1 10 52 c14 density/mass ave running file 09_aa_analysis.out14
+fix f15 all ave/chunk $p $s $d c15 density/mass ave running file ${out}.out15
+fix f15 all ave/chunk 1 $s $d c15 density/mass ave running file ${out}.out15
+fix f15 all ave/chunk 1 10 $d c15 density/mass ave running file ${out}.out15
+fix f15 all ave/chunk 1 10 52 c15 density/mass ave running file ${out}.out15
+fix f15 all ave/chunk 1 10 52 c15 density/mass ave running file 09_aa_analysis.out15
+fix f16 all ave/chunk $p $s $d c16 density/mass ave running file ${out}.out16
+fix f16 all ave/chunk 1 $s $d c16 density/mass ave running file ${out}.out16
+fix f16 all ave/chunk 1 10 $d c16 density/mass ave running file ${out}.out16
+fix f16 all ave/chunk 1 10 52 c16 density/mass ave running file ${out}.out16
+fix f16 all ave/chunk 1 10 52 c16 density/mass ave running file 09_aa_analysis.out16
+
+# Output.
+thermo          1
+thermo_style custom step cpu
+thermo_modify flush yes
+
+# Analyse the trajectory.
+rerun ${run}.dcd dump x y z box yes format       molfile dcd /usr/local/lib/vmd/plugins/LINUXAMD64/molfile/
+rerun 06_aa_sample_01.dcd dump x y z box yes format       molfile dcd /usr/local/lib/vmd/plugins/LINUXAMD64/molfile/
+Dump reader uses molfile plugin: CHARMM,NAMD,XPLOR DCD Trajectory v1.16 by Axel Kohlmeyer, Justin Gullingsrud, John Stone
+WARNING: No fixes with time integration, atoms won't move (../verlet.cpp:60)
+  generated 0 of 136 mixed pair_coeff terms from geometric mixing rule
+WARNING: Bonds are defined but no bond style is set (../force.cpp:192)
+WARNING: Likewise 1-2 special neighbor interactions != 1.0 (../force.cpp:194)
+WARNING: Angles are defined but no angle style is set (../force.cpp:197)
+WARNING: Likewise 1-3 special neighbor interactions != 1.0 (../force.cpp:199)
+WARNING: Dihedrals are defined but no dihedral style is set (../force.cpp:202)
+WARNING: Likewise 1-4 special neighbor interactions != 1.0 (../force.cpp:204)
+Neighbor list info ...
+  update every 1 steps, delay 10 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 4
+  ghost atom cutoff = 4
+  binsize = 2, bins = 75 73 92
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair zero, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+WARNING: Inconsistent image flags (../domain.cpp:823)
+Per MPI rank memory allocation (min/avg/max) = 235.2 | 235.2 | 235.2 Mbytes
+   Step          CPU      
+         0   0            
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         1   1.9592437    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         2   2.8572695    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         3   3.7545171    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         4   4.6697779    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         5   5.5596293    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         6   6.4631523    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         7   7.3720224    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         8   8.2843215    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+         9   9.2051174    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        10   10.135395    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        11   11.059524    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        12   11.982157    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        13   12.908356    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        14   13.822331    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        15   14.757901    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        16   15.683259    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        17   16.617983    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        18   17.550688    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        19   18.486767    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        20   19.426313    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        21   20.373681    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        22   21.336053    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        23   22.297514    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        24   23.252096    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        25   24.204794    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        26   25.162681    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        27   26.114565    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        28   27.075332    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        29   28.030799    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        30   28.994427    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        31   29.959053    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        32   30.923008    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        33   31.911216    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        34   32.915223    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        35   33.911334    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        36   34.912483    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        37   35.922377    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        38   36.947915    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        39   37.963272    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        40   39.007568    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        41   40.028304    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        42   41.051926    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        43   42.112964    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        44   43.149749    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        45   44.213563    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        46   45.259511    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        47   46.287028    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        48   47.315551    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        49   48.339125    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        50   49.374085    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        51   50.403795    
+WARNING: Inconsistent image flags (../domain.cpp:823)
+        52   51.434276    
+Loop time of 51.4343 on 2 procs for 53 steps with 376785 atoms
+
+
+# Merge all output files:
+shell bash ../scripts/merge.sh ${out}.out1 ${out}.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 ${out}.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 > 09_aa_analysis_slab.out
+shell bash ../scripts/merge.sh ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 09_aa_analysis.out15 ${out}.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 09_aa_analysis.out15 09_aa_analysis.out16 > ${out}_solvent.out
+shell bash ../scripts/merge.sh 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 09_aa_analysis.out15 09_aa_analysis.out16 > 09_aa_analysis_solvent.out
+
+shell rm -f ${out}.out1 ${out}.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 ${out}.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 ${out}.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 ${out}.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 09_aa_analysis.out15 ${out}.out16
+shell rm -f 09_aa_analysis.out1 09_aa_analysis.out2 09_aa_analysis.out3 09_aa_analysis.out4 09_aa_analysis.out5 09_aa_analysis.out6 09_aa_analysis.out7 09_aa_analysis.out8 09_aa_analysis.out9 09_aa_analysis.out10 09_aa_analysis.out11 09_aa_analysis.out12 09_aa_analysis.out13 09_aa_analysis.out14 09_aa_analysis.out15 09_aa_analysis.out16
+Total wall time: 0:00:53

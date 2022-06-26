@@ -72,3 +72,10 @@ Go to the [multiscale](./multiscale/) folder and execute the following steps.
    ```
    ![Relaxed atomistic sample](./images/06_aa_sample_01.png)
 
+### Notes
+
+LAMMPS 30Oct19 has been compiled with the following packages enabled:
+```sh
+make yes-asphere yes-kspace yes-mc yes-misc yes-molecule yes-rigid yes-user-molfile yes-user-molc
+make -j4 g++_openmpi
+```

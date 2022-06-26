@@ -1,0 +1,85 @@
+# Analyse the trajectory with the command rerun and compute the density profile.
+variable run string 06_aa_sample_01
+variable out string 09_aa_analysis
+
+variable p   equal  1   # DUMP frequency.
+variable s   equal  10  # Sample interval
+variable d   equal  52  # Frequency for computing the average (here it is the last step of input trajectory).
+echo            log
+log             ${out}.log
+units           real
+boundary        p p p
+atom_style      full
+
+# Neighbour list.
+neighbor        3.0 bin
+neigh_modify    check yes
+
+# ----------------- Atom Definition Section -----------------
+read_data ${run}.data
+
+# Dummy Settings.
+pair_style zero 1.
+pair_coeff * *
+
+# Define the groups of atoms.
+group slab type 3:17
+group solvent type 1 2
+
+# Compute the density profile.
+compute c1  slab chunk/atom bin/1d z -5.0 4 units box
+compute c2  slab chunk/atom bin/1d z -5.5 4 units box
+compute c3  slab chunk/atom bin/1d z -6.0 4 units box
+compute c4  slab chunk/atom bin/1d z -6.5 4 units box
+compute c5  slab chunk/atom bin/1d z -7.0 4 units box
+compute c6  slab chunk/atom bin/1d z -7.5 4 units box
+compute c7  slab chunk/atom bin/1d z -8.0 4 units box
+compute c8  slab chunk/atom bin/1d z -8.5 4 units box
+compute c9  solvent chunk/atom bin/1d z -5.0 4 units box
+compute c10 solvent chunk/atom bin/1d z -5.5 4 units box
+compute c11 solvent chunk/atom bin/1d z -6.0 4 units box
+compute c12 solvent chunk/atom bin/1d z -6.5 4 units box
+compute c13 solvent chunk/atom bin/1d z -7.0 4 units box
+compute c14 solvent chunk/atom bin/1d z -7.5 4 units box
+compute c15 solvent chunk/atom bin/1d z -8.0 4 units box
+compute c16 solvent chunk/atom bin/1d z -8.5 4 units box
+
+# Average the last 3 frames.
+fix f1 all ave/chunk $p $s $d c1 density/mass ave running file ${out}.out1
+fix f2 all ave/chunk $p $s $d c2 density/mass ave running file ${out}.out2
+fix f3 all ave/chunk $p $s $d c3 density/mass ave running file ${out}.out3
+fix f4 all ave/chunk $p $s $d c4 density/mass ave running file ${out}.out4
+fix f5 all ave/chunk $p $s $d c5 density/mass ave running file ${out}.out5
+fix f6 all ave/chunk $p $s $d c6 density/mass ave running file ${out}.out6
+fix f7 all ave/chunk $p $s $d c7 density/mass ave running file ${out}.out7
+fix f8 all ave/chunk $p $s $d c8 density/mass ave running file ${out}.out8
+fix f9 all ave/chunk $p $s $d c9 density/mass ave running file ${out}.out9
+fix f10 all ave/chunk $p $s $d c10 density/mass ave running file ${out}.out10
+fix f11 all ave/chunk $p $s $d c11 density/mass ave running file ${out}.out11
+fix f12 all ave/chunk $p $s $d c12 density/mass ave running file ${out}.out12
+fix f13 all ave/chunk $p $s $d c13 density/mass ave running file ${out}.out13
+fix f14 all ave/chunk $p $s $d c14 density/mass ave running file ${out}.out14
+fix f15 all ave/chunk $p $s $d c15 density/mass ave running file ${out}.out15
+fix f16 all ave/chunk $p $s $d c16 density/mass ave running file ${out}.out16
+
+# Compute the average box length along z.
+variable dz equal lz
+fix BOX all ave/time $p $s $d v_dz mode scalar ave running
+
+# Output.
+thermo          1
+thermo_style custom step cpu
+thermo_modify flush yes
+
+# Analyse the trajectory.
+rerun ${run}.dcd dump x y z box yes format &
+      molfile dcd /usr/local/lib/vmd/plugins/LINUXAMD64/molfile/
+
+variable ave equal f_BOX
+print "Average Z length: ${ave}"
+
+# Merge all output files:
+shell bash ../scripts/merge.sh ${out}.out1 ${out}.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 > ${out}_slab.out
+shell bash ../scripts/merge.sh ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16 > ${out}_solvent.out
+
+shell rm -f ${out}.out1 ${out}.out2 ${out}.out3 ${out}.out4 ${out}.out5 ${out}.out6 ${out}.out7 ${out}.out8 ${out}.out9 ${out}.out10 ${out}.out11 ${out}.out12 ${out}.out13 ${out}.out14 ${out}.out15 ${out}.out16
