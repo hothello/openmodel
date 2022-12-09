@@ -2,7 +2,7 @@
 
 # Author: Otello M Roscioni
 # email om.roscioni@materialx.co.uk
-# Last revision: 21 April 2022
+# Last revision: 9 December 2022
 #
 # Unauthorized copying of this file, via any medium is strictly prohibited.
 # Proprietary and confidential.
@@ -14,7 +14,7 @@ use File::Basename;
 
 # Default values
 $start=localtime(time);
-$frame=0;
+$frame="";
 $stype=0;
 $deg2rad=3.14159265358979/180.;
 $half2rad=3.14159265358979/360.;
@@ -32,6 +32,7 @@ supercell => 0,
 external => 0,
 select => 0,
 delete => 0,
+do => 0,
 debug => 0
 );
 
@@ -76,6 +77,11 @@ rotation.\n
 Print the number of frames in the input system and other statistics.
 Example:
 dumptools -c file.dump\n
+*** Post-processing ***
+Perform one of the following tasks on the selected frames:
+* distance
+Example:
+dumptools -a distance file.dump\n
 *** Spatial operations ***
 Translate, rotate, wrap specific molecules or the whole sample. These
 operations are available when a frame is selected to be saved. Multiple
@@ -105,15 +111,19 @@ dumptools -s 1,2,2 -f 1 file.dump\n
  Option          Description
 ------------------------------------------------------------------------
   -h, --help     Print this help.
+  -a [task]      Apply one of the following post-processing tasks on the
+                 selected frames (default=use all frames):
+		 distance  Compute the distance between atom types using
+		           the minimum image convention.
   -o [basename]  Name of the output file. Default=basename(input)_f\%i.dump
   -p [integer]   Patch the atom types belonging to a polymer. This option
                  can be repeated multiple times.
   -c             Print the number of frames and atoms in the input file.
                  This mode disables the writing of a new file.
-  -f [input]     Save the selected frame. An interval can also be provided,
+  -f [interval]  Save the selected frame. An interval can also be provided,
                  extracting a sub-trajectory. Input values are flexible:
-                 \"last\" and \"first\" are valid keywords; -1 stands for
-                 the last frame.
+                 \"last\", \"first\", and \"all\" are valid keywords;
+                 -1 stands for the last frame, 0 for all frames.
   -m [interval]  Apply the operation to the specific molecule id(s).
                  Default=all.
   -x             Delete the selected molecules.
@@ -187,6 +197,7 @@ for my $i(0 .. $#ARGV){
 		$mode{save}=1;
 	}
         elsif ($ARGV[$i] eq "-u"){
+		$mode{wrap}=1;
 		$mode{fix}=1;
 		$mode{save}=1;
 	}
@@ -198,11 +209,20 @@ for my $i(0 .. $#ARGV){
                 $mode{delete}=1;
                 $mode{save}=1;
         }
+        elsif ($ARGV[$i] eq "-a"){
+                $mode{do}=$ARGV[$i+1];
+                $mode{save}=0;
+        }
         elsif ($ARGV[$i] eq "-d"){$mode{debug}=1;}
         elsif ($ARGV[$i] eq "-h"||$ARGV[$i] eq "--help"){die $help;}
 }
 $mode{save}=1 if ($frame && !$mode{polymer});
 $mode{save}=0 if ($mode{merge}); # Overwrite inconsistent input.
+$frame=1 if ($mode{count} && !$frame);
+if ($mode{do} =~ /distance/i){
+	$mode{save}=0;
+	$frame=0 if !$frame;
+}
 
 # Sort the array containing the atom types for polymers.
 @type = sort {$a <=> $b} @type if $#type > -1;
@@ -249,8 +269,15 @@ $record{$item_atoms[$_]}=$_ for 0 .. $#item_atoms;
 for (0 .. $#item_atoms){
 	if ($item_atoms[$_] =~ /^x/i){
 		$pos[0]=$_;
-	} elsif ($item_atoms[$_] =~ /^qw/i || $item_atoms[$_] =~ /^quatw/i || $item_atoms[$_] eq "c_q[1]"){
+	} elsif ($item_atoms[$_] =~ /^qw/i || $item_atoms[$_] =~ /^quatw/i || $item_atoms[$_] eq "c_q[1]" || $item_atoms[$_] eq "c_orient[4]"){
 		$pos[1]=$_;
+		$pos_quat[0]=$_;
+	} elsif ($item_atoms[$_] =~ /^qx/i || $item_atoms[$_] =~ /^quatx/i || $item_atoms[$_] eq "c_q[2]" || $item_atoms[$_] =~ /^quati/i || $item_atoms[$_] eq "c_orient[1]"){
+		$pos_quat[1]=$_;
+	} elsif ($item_atoms[$_] =~ /^qy/i || $item_atoms[$_] =~ /^quaty/i || $item_atoms[$_] eq "c_q[3]" || $item_atoms[$_] =~ /^quatj/i || $item_atoms[$_] eq "c_orient[2]"){
+		$pos_quat[2]=$_;
+	} elsif ($item_atoms[$_] =~ /^qx/i || $item_atoms[$_] =~ /^quatz/i || $item_atoms[$_] eq "c_q[4]" || $item_atoms[$_] =~ /^quatk/i || $item_atoms[$_] eq "c_orient[3]"){
+		$pos_quat[3]=$_;
 	} elsif ($item_atoms[$_] =~ /^type/i){
 		$pos[2]=$_;
 	}
@@ -292,11 +319,14 @@ if ($frame =~ /[:,]+/i){
 		printf STDERR "%i ",$trj[$_] for 0 .. $#trj;
 		print  STDERR "\n";
 	}
-	$frame=-1;
+	$frame=-2;
 	
-} elsif ($frame eq 0 || $frame eq -1 || $frame=~/^last/i){
+} elsif ($frame eq -1 || $frame=~/^last/i){
 	$frame=$time[1];	
 	$trj[0]=-1;
+} elsif ($frame eq 0 || $frame=~/^all/i){
+	$trj[0]=0;
+	$frame=-3;
 } elsif ($frame eq 1 || $frame=~/^first/i){
 	$frame=$time[0];
 	$trj[0]=-1;
@@ -310,22 +340,29 @@ if ($frame =~ /[:,]+/i){
 
 # Open the required files for writing the output.
 if ($mode{save} && !$mode{count}){
-	$output=$basename;
-	$output=basename($input) if $basename eq "";
-	$output =~ s/\.dump$//;
-	my $suff;
-	if ($frame>-1){
-		$suff=sprintf("f%i",$frame);
+	 if ($basename eq ""){
+		$output=basename($input);
+		$output =~ s/\.dump[\w]*+$//;
+		my $suff;
+		if ($frame == -3 && $trj[0]==0){
+			$suff="all";
+		} elsif ($frame == -2 && $#trj>0) {
+			$suff=sprintf("f%i-%i",$trj[0],$trj[$#trj]);
+		} elsif ($frame == -1 && $trj[0]>1){
+			$suff=sprintf("f%i",$trj[0]);
+		} elsif ($frame >= 0 && $trj[0] == -1){
+			$suff=sprintf("t%i",$frame);
+		}
+		$output=sprintf("%s_%s.dump",$output,$suff);
 	} else {
-		$suff=sprintf("f%i-%i",$trj[0],$trj[$#trj]);
+		$output=$basename.".dump";
 	}
-	$output=sprintf("%s_%s.dump",$output,$suff);
 	open(OUT,">$output");
 }
 if ($mode{polymer} && !$mode{count}){
 	my $output=$basename;
 	$output=basename($input) if $basename eq "";
-	$output =~ s/\.dump$//;
+	$output =~ s/\.dump[\w]*+$//;
 	if ($mode{external}){
 		$output .= ".dump";
 	} else {
@@ -345,7 +382,7 @@ if (!$mode{merge}){
 	$go=0; # Switch for processing the current frame.
 	$box=0; # Switch for reading the box vectors.
 	$stop=-1;
-	my $noa=4; # line storing the number of atoms.
+	my $noa=4; # line index in the DUMP telling the number of atoms (in case of grancanonical).
 	while(my $line=<DUMP>){
 		# Timestep interval
 		if ($tsc){
@@ -371,9 +408,9 @@ if (!$mode{merge}){
 		# Read the current frame.
 		# When $frame is used for the first or last frame, the eq operator must be used:
 		# print "You should have not seen this message!\n" if $frame == $timestep[$fc-1]; # true when @timestep is undefined.
-		if ($trj[$fi]==$fc || $frame eq $timestep[$fc-1]){
+		if ($trj[$fi]==$fc || $frame eq $timestep[$fc-1] || $trj[0]==0){
 			my @data=&field($line);
-			#print "DEBUG $line \n";
+			#print STDERR "DEBUG $line \n";
 			
 			# Store the header.
 			if (!$go){
@@ -427,8 +464,8 @@ if (!$mode{merge}){
 					printf STDERR "Number of molecules: %i\n",$test[$record{mol}] if $record{mol};
 				}
 				
-				# Print additional information.
-				if ($mode{count}){
+				# Print min and max coordinates, only if one frame is being analysed.
+				if ($mode{count} && $trj[0] != 0){
 					# Find min-max coordinates.
 					my @min=(1e10,1e10,1e10);
 					my @max=(-1e10,-1e10,-1e10);
@@ -438,14 +475,15 @@ if (!$mode{merge}){
 							$max[$j]=$coord[$i][$pos[0]+$j] if $coord[$i][$pos[0]+$j]>$max[$j];
 						}
 					}
+					printf "Current frame: %i\n",$fc;
 					print "Coordinates:  MIN             MAX\n";
 					printf "X %15g %15g\n",$min[0],$max[0];
 					printf "Y %15g %15g\n",$min[1],$max[1];
 					printf "Z %15g %15g\n",$min[2],$max[2];
 				}
 				
-				# This line was skipped and must be reintroduced.
-				unshift(@header, "ITEM: TIMESTEP") if $frame != -1;
+				# This line was skipped and must be reintroduced (only when saving the first and last frame).
+				unshift(@header, "ITEM: TIMESTEP") if $frame > -1;
 				@bb=&box(\@bb);
 				my $atoms=&frame_save(\@header,\@bb,\@coord) if ($mode{save} && !$mode{count});
 				&patch_polymer(\@header,\@bb,\@coord,\@ftype) if ($mode{polymer} && !$mode{count});
@@ -458,6 +496,12 @@ if (!$mode{merge}){
 					open(OUT,">>$output");
 					$noa+=$atoms+9;
 				}
+				# Post-processing.
+				if ($mode{do} =~ /distance/i){
+					my @test=&distance(\@bb,\@coord,\@ftype);
+					push @distance, @test;
+					@types=@ftype;
+				}
 				
 				# Reset the frame storage arrays.
 				undef @header;
@@ -466,7 +510,7 @@ if (!$mode{merge}){
 				undef @ftype;
 				
 				# Break out the while loop if the job is done.
-				last if ($trj[$#trj]==$fc || $frame==$timestep[$fc-1]);
+				last if ($trj[$#trj]==$fc || $frame==$timestep[$fc-1]) && (!$mode{count});
 			}
 		}
 	}
@@ -485,6 +529,40 @@ if ($mode{count}){
 	printf "Atoms in the last frame:  %i\n",$natm[$#natm] if $fc>1;
 }
 
+# Print more stuff.
+if ($mode{do}){
+	my $output=$basename;
+	$output=basename($input) if $basename eq "";
+	$output =~ s/\.dump[\w]*+$//;
+	$output .= ".postprocess";
+	open(OUT,">$output");
+	
+	# Print the header.
+	printf OUT "# Distance: ";
+	my $c=0;
+	for my $i(0 .. $#types){
+		for my $j($i .. $#types){
+			printf OUT "%i-%i ",$types[$i],$types[$j];
+			$c++;
+		}
+	}
+	$c--;
+	printf OUT "\n";
+	
+	# Print the table.
+	for my $i(0 .. $#distance){
+		for my $j(0 .. $c){
+			if ($distance[$i][$j] =~ /\d/){
+				printf OUT "%8g ",$distance[$i][$j];
+			} else {
+				printf OUT "-%7s","";
+			}
+		}
+		printf OUT "\n";
+	}
+	close(OUT);
+}
+
 # Merge two or more DUMP files.
 if ($mode{merge}){
 	my $output=$basename;
@@ -494,7 +572,7 @@ if ($mode{merge}){
 	
 	if ($basename eq ""){
 		$output .= basename($files[$_]) for 0 .. $#files;
-		$output =~ s/\.dump/_/g;
+		$output =~ s/\.dump[\w]*+$/_/g;
 	}
 	
 	if ($mode{external}){
@@ -698,7 +776,8 @@ sub frame_save {
 			@coord2=&wrap(\@coord2,\@bb) if $mode{wrap};
 			# Delete only selected molecules.
 			my $check = 1;
-			$check = 0 if ($molecule[$next-1]==$old && $mode{delete} && $#molecule > -1 );
+			#$check = 0 if ($molecule[$next-1]==$old && $mode{delete} && $#molecule > -1 ); # Apparently is a bug.
+			$check = 0 if ($molecule[$next]==$old && $mode{delete} && $#molecule > -1 );
 			
 			# Expression Select.
 			if ($mode{select}){
@@ -839,7 +918,7 @@ sub patch_polymer {
 	}
 }
 
-# Append the content of a new array to the previous one.
+# Append new atom type to the current array.
 sub append {
 	# Dereference the input array.
 	my @out=@{ $_[0] };
@@ -934,6 +1013,46 @@ sub merge2 {
 	return @coord;
 }
 
+# Post-process: compute the distance for the current frame.
+sub distance {
+	# dereference the input array.
+        my @bb=@{ $_[0] };
+	my @coord=@{ $_[1] };
+	my @ftype=@{ $_[2] };
+	my @out;
+	
+	# Initialize the output table.
+	my $c=0;
+	my @index;
+	my @tally;
+	for my $i(0 .. $#ftype){
+		for my $j($i .. $#ftype){
+			$index[ $ftype[$i] ][ $ftype[$j] ]=$c;
+			$index[ $ftype[$j] ][ $ftype[$i] ]=$c;
+			$out[0][$c]=0;
+			$tally[$c]=0;
+			$c++;
+		}
+	}
+	
+	# Process the frame.
+	for my $i(0 .. $#coord-1){
+		for my $j($i+1 .. $#coord){
+			my @data1=@{ $coord[$i] };
+			my @data2=@{ $coord[$j] };
+			my $type1=$data1[$record{type}];
+			my $type2=$data2[$record{type}];
+			my $c=$index[ $type1 ][ $type2 ];
+			my $d=&dmic(\@data1,\@data2,\@bb);
+			$out[ $tally[$c] ][$c]=$d;
+			#print "DEBUG DISTANCE: $d INDEX $c T1 $type1 T2 $type2\n";
+			$tally[$c]++;
+		}
+	}
+	
+	return @out;
+}
+
 # Split a string into an array
 sub field {
 	chomp $_[0];
@@ -996,6 +1115,35 @@ sub decomma {
 	return @out;
 }
 
+# Compute the distance between two points by applying the minimum image convention.
+# Todo: check if it works equally well with wrapped and unwrapped coordinates.
+sub dmic {
+	# dereference the input array.
+        my @p1=@{ $_[0] };
+        my @p2=@{ $_[1] };
+        my @bb=@{ $_[2] };
+	
+	# Translation vector.
+	my @tr=(0,0,0);
+	$tr[0]  =$bb[0][0];
+	$tr[$_]+=$bb[1][$_] for 0 .. 1;
+	$tr[$_]+=$bb[2][$_] for 0 .. 2;
+	
+	# The distance between two points cannot exceed half the lenth of the simulation box.
+	my @dist;
+	$dist[$_]=$p1[$pos[0]+$_]-$p2[$pos[0]+$_] for 0 .. 2;
+	my @box;
+	$box[$_]=sprintf("%.0f",$dist[$_]/$tr[$_]) for 0 .. 2;
+	
+	# Wrap the distance (minimum image convention).
+	$dist[$_]-=$tr[$_]*$box[$_] for 0 .. 2;
+	
+	# Compute the distance.
+	my $out=sqrt($dist[0]*$dist[0]+$dist[1]*$dist[1]+$dist[2]*$dist[2]);
+	
+	return $out;
+}
+
 # Wrap the coordinates of a single bead.
 sub wrap_single {
 	# dereference the input array.
@@ -1004,7 +1152,7 @@ sub wrap_single {
 	
 	# Translation vector.
 	my @tr=(0,0,0);
-	$tr[0] +=$bb[0][0];
+	$tr[0]  =$bb[0][0];
 	$tr[$_]+=$bb[1][$_] for 0 .. 1;
 	$tr[$_]+=$bb[2][$_] for 0 .. 2;
 	
@@ -1026,7 +1174,7 @@ sub wrap {
 	
 	# Translation vector.
 	my @tr=(0,0,0);
-	$tr[0] +=$bb[0][0];
+	$tr[0]  =$bb[0][0];
 	$tr[$_]+=$bb[1][$_] for 0 .. 1;
 	$tr[$_]+=$bb[2][$_] for 0 .. 2;
 	if ($mode{debug}){
@@ -1220,9 +1368,9 @@ sub rot_body {
 	
 	# 3. Multiply the quaternions, if present.
 	if ($pos[1]>-1){
-		my @quat=($data[$pos[1]],$data[$pos[1]+1],$data[$pos[1]+2],$data[$pos[1]+3]);
+		my @quat=($data[$pos_quat[0]],$data[$pos_quat[1]],$data[$pos_quat[2]],$data[$pos_quat[3]]);
 		@quat=&multquat(\@rq,\@quat);
-		$data[ $pos[1]+$_ ] = $quat[$_] for 0 .. 3;
+		$data[$pos_quat[$_ ]] = $quat[$_] for 0 .. 3;
 	}
 	
 	return @data;
