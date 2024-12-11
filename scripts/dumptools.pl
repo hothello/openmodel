@@ -2,7 +2,7 @@
 
 # Author: Otello M Roscioni
 # email om.roscioni@materialx.co.uk
-# Last revision: 9 December 2022
+# Last revision: 11 June 2024
 #
 # Unauthorized copying of this file, via any medium is strictly prohibited.
 # Proprietary and confidential.
@@ -20,6 +20,9 @@ $deg2rad=3.14159265358979/180.;
 $half2rad=3.14159265358979/360.;
 # numerical tolerance for zero.
 $tol=1e-6;
+for my $i(0 .. 2){
+	$boxop[$i][$_]=0 for (0 .. 1);
+}
 
 %mode=(
 polymer => 0,
@@ -28,6 +31,7 @@ save => 0,
 wrap => 0,
 fix => 0,
 merge => 0,
+slab => 0,
 supercell => 0,
 external => 0,
 select => 0,
@@ -131,7 +135,8 @@ dumptools -s 1,2,2 -f 1 file.dump\n
   -r [a,x,y,z]   Rotate by an angle a around the vector x,y,z.
   -s [a,b,c]     Create a supercell. Each dimension must be at least 1.
   -e \"condition\" Expression select: print only the molecules or atoms
-                 satisfying a logic operation on coordinates or atom types.
+                 satisfying a logic operation on coordinates (x, y, z) or
+		 atom types (t).
                  Examples: \"x > -10 & y < 7 & z >= 0\" or \"(x**2 + (y-4)**2) < 40\"
                            \"t < 3 || t == 5\" or \"x<300 && t == 1\".
   -w             Wrap molecules to the bounding box without splitting them.
@@ -139,6 +144,10 @@ dumptools -s 1,2,2 -f 1 file.dump\n
                  * hybrid full ellipsoid
                  * hybrid molecular ellipsoid
 		 * ellipsoid
+  --slab         Slab mode: do not wrap along the Z direction.
+  -b [i,lo,hi]   Modify the box bounds by adding the input values to the
+                 low and high i boundary (i can be x, y, or z). This option
+		 can be used multiple times and only for orthorombic boxes.
   -u             Fix wrapped coordinates of multi-bead molecules. For some
                  cases,this option needs to be used twice, i.e. wrap again
 		 the resulting dump file.
@@ -190,12 +199,23 @@ for my $i(0 .. $#ARGV){
 		$expression =~ s/\\//g;
 		$mode{select}=1;
 		$mode{save}=1;
+		# For molecules only:
+		$expression2=$expression;
+		$expression2=~s/(\$v\[3\]\s*\>\=|\$v\[3\]\s*\<\=|\$v\[3\]\s*\=\=|\$v\[3\]\s*\>|\$v\[3\]\s*\<)//;
+	}
+	elsif ($ARGV[$i] eq "-b"){
+		my @inp=&decomma($ARGV[$i+1]);
+		my $j=0;
+		$j=1 if $inp[0] =~ /y/i;
+		$j=2 if $inp[0] =~ /z/i;
+		$boxop[$j][$_]=$inp[$_+1] for (0 .. 1);
 	}
         elsif ($ARGV[$i] eq "-c"){$mode{count}=1;}
         elsif ($ARGV[$i] eq "-w"){
 		$mode{wrap}=1;
 		$mode{save}=1;
 	}
+        elsif ($ARGV[$i] eq "--slab"){$mode{slab}=1;}
         elsif ($ARGV[$i] eq "-u"){
 		$mode{wrap}=1;
 		$mode{fix}=1;
@@ -233,7 +253,7 @@ if ($mode{debug} && $#molecule > -1){
 	foreach (@molecule){print STDERR "$_ "};
 	print STDERR "\n";
 }
-print "\nExpression Selection: $expression\n" if ($mode{debug} && $mode{select});
+print "\nExpression Selection: $expression (type criterium removed: $expression2)\n" if ($mode{debug} && $mode{select});
 
 # Verify that the input file has been specified.
 if ($#files<0){
@@ -282,11 +302,13 @@ for (0 .. $#item_atoms){
 		$pos[2]=$_;
 	}
 }
-if ($mode{debug}){	
+if ($mode{debug}){
 	print  STDERR "\nRecords in the ATOMS section:\n";
 	printf STDERR "%2i %s\n",$_,$item_atoms[$_] for 0 .. $#item_atoms;
 	printf STDERR "X  column: %i\n",$pos[0];
-	printf STDERR "QW column: %i\n\n",$pos[1];
+	printf STDERR "QW column: %i\n",$pos[1];
+	printf STDERR "Type column: %i\n",$pos[1];
+	printf STDERR "Record{mol}: %i\n\n",$record{mol};
 }
 
 # Read the timestep of the first last frame.
@@ -312,7 +334,7 @@ while($time[1]==0 && $stop==0){
 # Process the input frames. Use @trj to identify the frame number,
 # and $frame the first or last timestep, which we need to locate
 # while reading the DUMP file.
-if ($frame =~ /[:,]+/i){
+if ( $frame =~ /[:,]+/i){
 	@trj=&decomma($frame);
 	if ($mode{debug}){
 		printf STDERR "%i frames were selected for saving:\n",$#trj+1;
@@ -334,8 +356,10 @@ if ($frame =~ /[:,]+/i){
 	$trj[0]=$frame;
 	$frame=-1;
 } else {
-	printf "ERROR: Invalid frame specified: %s\n\n",$frame;
-	exit;
+	if ( not($mode{merge}) ) {
+		printf "ERROR: Invalid frame specified: %s\n\n",$frame;
+		exit;
+	}
 }
 
 # Open the required files for writing the output.
@@ -461,7 +485,7 @@ if (!$mode{merge}){
 					@test=@{$coord[$#coord]};
 					printf STDERR "%s ",$test[$_] for 0 .. $#test;
 					printf STDERR "\n";
-					printf STDERR "Number of molecules: %i\n",$test[$record{mol}] if $record{mol};
+					printf STDERR "Number of molecules (last line): %i\n",$test[$record{mol}] if $record{mol};
 				}
 				
 				# Print min and max coordinates, only if one frame is being analysed.
@@ -728,7 +752,6 @@ sub frame_save {
 	for my $i(0 .. $#coord){
 		# Dereference the AoA into a separate array.
 		my @data=@{ $coord[$i] };
-		$next++ if $molecule[$next+1] == $data[$record{mol}];
 		
 		# Perform additional operations on the coordinates.
 		my $go=0;
@@ -776,7 +799,6 @@ sub frame_save {
 			@coord2=&wrap(\@coord2,\@bb) if $mode{wrap};
 			# Delete only selected molecules.
 			my $check = 1;
-			#$check = 0 if ($molecule[$next-1]==$old && $mode{delete} && $#molecule > -1 ); # Apparently is a bug.
 			$check = 0 if ($molecule[$next]==$old && $mode{delete} && $#molecule > -1 );
 			
 			# Expression Select.
@@ -785,21 +807,24 @@ sub frame_save {
 				my @v;
 				$v[$_]=$coord2[0][$pos[0]+$_] for 0 .. 2;
 				$v[3]=$coord2[0][$pos[2]];
-				if (eval($expression) && $check){
+				if (eval($expression2) && $check){
 					#printf STDERR "Molecule selected: %s Position: %.2f %.2f %.2f\n",
 					#$data[$record{mol}],$v[0],$v[1],$v[2] if ($mode{debug});
 					for my $j(0 .. $#coord2){
-						my @data2=@{ $coord2[$j] };
-						
-						# Overwrite the old molecular index with a sequential one.
-						# Maybe there are cases where we want to keep the original ones:
-						# if this necessity arises, make this substitution optional.
-						$data2[$record{mol}]=$mid;
-												
-						printf OUT "%g ",$aid;
-						printf OUT "%g ",$data2[$_] for 1 .. $#data2;
-						print OUT "\n";
-						$aid++;
+						# Check the type
+						$v[3]=$coord2[$j][$pos[2]];
+						if (eval($expression)){
+							my @data2=@{ $coord2[$j] };
+							# Overwrite the old molecular index with a sequential one.
+							# Maybe there are cases where we want to keep the original ones:
+							# if this necessity arises, make this substitution optional.
+							$data2[$record{mol}]=$mid;
+													
+							printf OUT "%g ",$aid;
+							printf OUT "%g ",$data2[$_] for 1 .. $#data2;
+							print OUT "\n";
+							$aid++;
+						}
 					}
 					$mid++;
 				}
@@ -813,6 +838,7 @@ sub frame_save {
 				}
 			}
 			# Update the molecule.
+			$next++ if $molecule[$next]==$old;
 			$old=$data[$record{mol}];
 			undef @coord2;
 		}
@@ -821,27 +847,32 @@ sub frame_save {
 		push @coord2, \@data if $record{mol};
 	}
 	# Print the last molecule.
-	@coord2=&wrap(\@coord2,\@bb) if $mode{wrap};
+	@coord2=&wrap(\@coord2,\@bb) if ($mode{wrap} && $record{mol});
+	
 	# Delete only selected molecules.
 	my $check = 1;
 	$check = 0 if ($molecule[$next]==$old && $mode{delete} && $#molecule > -1 );
 	
 	# Expression Select.
-	if ($mode{select} && $record{mol}){
+	if ($mode{select} && $record{mol} && $check){
 		#  Use the first ellipsoid for the expression selection.
 		my @v;
 		$v[$_]=$coord2[0][$pos[0]+$_] for 0 .. 2;
 		$v[3]=$coord2[0][$pos[2]];
-		if (eval($expression) && $check){
+		if ( eval($expression2) ){
 			#printf STDERR "Molecule selected: %s\nPosition: %.2f %.2f %.2f\n",
 			#$data[$record{mol}],$v[0],$v[1],$v[2] if ($mode{debug});
 			for my $j(0 .. $#coord2){
-				my @data2=@{ $coord2[$j] };
-				$data2[$record{mol}]=$mid;
-				printf OUT "%g ",$aid;
-				printf OUT "%g ",$data2[$_] for 1 .. $#data2;
-				print OUT "\n";
-				$aid++;
+				# Check the type
+				$v[3]=$coord2[$j][$pos[2]];
+				if (eval($expression)){
+					my @data2=@{ $coord2[$j] };
+					$data2[$record{mol}]=$mid;
+					printf OUT "%g ",$aid;
+					printf OUT "%g ",$data2[$_] for 1 .. $#data2;
+					print OUT "\n";
+					$aid++;
+				}
 			}
 		}
 	} elsif($check) {
@@ -1161,7 +1192,11 @@ sub wrap_single {
 	$box[$_]=sprintf("%.0f",$out[$pos[0]+$_]/$tr[$_]) for 0 .. 2;
 	
 	# Wrap the coordinates.
-	$out[$pos[0]+$_]-=$tr[$_]*$box[$_] for 0 .. 2;
+	if ($mode{slab}){
+		$out[$pos[0]+$_]-=$tr[$_]*$box[$_] for 0 .. 1;
+	} else {
+		$out[$pos[0]+$_]-=$tr[$_]*$box[$_] for 0 .. 2;
+	}
 	
 	return @out;
 }
@@ -1220,7 +1255,11 @@ sub wrap {
 		}
 		
 		# Wrap the coordinates.
-		$out[$i][$pos[0]+$_]-=$tr[$_]*$box2[$_] for 0 .. 2;
+		if ($mode{slab}){
+			$out[$i][$pos[0]+$_]-=$tr[$_]*$box2[$_] for 0 .. 1;
+		} else {
+			$out[$i][$pos[0]+$_]-=$tr[$_]*$box2[$_] for 0 .. 2;
+		}
 		if ($mode{debug}){
 			printf STDERR "WRAP OUT ";
 			printf STDERR "%10.3f ",$out[$i][$pos[0]+$_] for 0 .. 2;
@@ -1421,12 +1460,10 @@ sub box {
 	# Append the original bounding box to the Cartesian matrix.
 	push @box, @out;
 	if ($mode{debug}){
-		printf STDERR "%8.3f ", $box[0][$_] for 0 .. 2;
-		print  STDERR "\n";
-		printf STDERR "%8.3f ", $box[1][$_] for 0 .. 2;
-		print  STDERR "\n";
-		printf STDERR "%8.3f ", $box[2][$_] for 0 .. 2;
-		print  STDERR "\n";
+		for my $i (0 .. $#box){
+			printf STDERR "%8.3f ", $box[$i][$_] for 0 .. 2;
+			print  STDERR "\n";
+		}
 	}
 	return @box;
 }
@@ -1500,7 +1537,7 @@ sub cm_format {
 			print  STDERR "Triclinic no wrap\n" if $mode{debug};
 		} else {
 			# Orthorombic.
-			printf OUT "%g %g\n",$bb[$_][0],$bb[$_][1] for 3 .. 5;
+			printf OUT "%g %g\n",$bb[$_][0]+$boxop[$_-3][0],$bb[$_][1]+$boxop[$_-3][1] for 3 .. 5;
 			print  STDERR "Orthorombic no wrap\n" if $mode{debug};
 		}
 	} else {
@@ -1517,7 +1554,12 @@ sub cm_format {
 			print  STDERR "Triclinic wrap\n" if $mode{debug};
 		} else {
 			# Orthorombic.
-			printf OUT "%g %g\n",-$bb[$_][$_]/2,$bb[$_][$_]/2 for 0 .. 2;
+			if (!$mode{slab}) {
+				printf OUT "%g %g\n",-$bb[$_][$_]/2+$boxop[$_][0],$bb[$_][$_]/2+$boxop[$_][1] for 0 .. 2;
+			} else {
+				printf OUT "%g %g\n",-$bb[$_][$_]/2+$boxop[$_][0],$bb[$_][$_]/2+$boxop[$_][1] for 0 .. 1;
+				printf OUT "%g %g\n",$bb[5][0]+$boxop[2][0],$bb[5][1]+$boxop[2][1];
+			}
 			print  STDERR "Orthorombic wrap\n" if $mode{debug};
 		}
 	}
