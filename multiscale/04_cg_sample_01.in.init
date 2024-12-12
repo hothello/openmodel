@@ -1,11 +1,23 @@
-variable run string 04_cg_sample_01
-variable temp equal 300.
-echo            log
-log             ${run}.log
-units           real
+# Input variables
+variable run    string 04_cg_sample_01
+variable ts     equal  20.          # timestep
+variable tf     equal  300.         # Equilibrium temperature
+variable pf     equal  1.           # Equilibrium pressure
+variable cutoff equal  14.          # For interactions in real space      
+variable skin   equal  4.           # Skin distance for neighbour list      
+variable s      equal  5            # sample interval for averaging
+variable cl     equal  200          # correlation length for averaging      
+variable prod   equal  100000       # Equilibration steps (2 ns)
+
+
+# Force field setup.
 boundary        p p p
-atom_style      hybrid molecular ellipsoid
+units           real
+atom_style hybrid molecular ellipsoid
+bond_style ellipsoid
+special_bonds lj/coul 0.0 0.2 0.5
+# gamma upsilon mu lj_cutoff coul_cutoff
+pair_style molc/long 1 1 -3 ${cutoff} ${cutoff}
 
 # Neighbour list.
-neighbor        5.0 bin
-neigh_modify    check yes
+neighbor        ${skin} bin

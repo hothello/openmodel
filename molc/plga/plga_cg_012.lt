@@ -1,5 +1,5 @@
-import "lac_cg_02.lt"
-import "gly_cg_02.lt"
+import "lac_cg_03.lt"
+import "gly_cg_03.lt"
 
 PLGA12 {
   # force all monomers to share the same molecule-ID
@@ -104,10 +104,8 @@ PLGA12 {
   }
 
   write_once("In Settings") {
-    # 1-2 Bonded potential.
-    bond_style ellipsoid
-    special_bonds lj/coul 0.0 0.2 0.5
 
+    # 1-2 Bonded potential.
     bond_coeff @bond:plga &
     poly 2 0   -0.90854   -3.67091    21.0619    3.46926  &
     cos  2 0   0.468392     1.5682    0.77494          0  &

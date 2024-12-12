@@ -39,7 +39,7 @@ Go to the [multiscale](./multiscale/) folder and execute the following steps.
    ```
 2. Anneal the slab in vacuum. LAMMPS is typically executed in parallel, depending on the architecture on which it has been compiled. A batch script for the SLURM workload manager is also provided as an example of usage on HPC facilities.
    ```
-   mpirun -np 128 lmp_bin -in 02_cg_slab_01.in
+   mpirun -np 32 lmp_bin -in 02_cg_slab_01.in -l 02_cg_slab_01.log
    ```
    | Initial structure | Relaxed structure |
    | --- | --- |
@@ -50,7 +50,7 @@ Go to the [multiscale](./multiscale/) folder and execute the following steps.
    ```
 4. Relax the structure along Z (i.e. the direction perpendicular to the slab surface).
    ```
-   mpirun -np 128 lmp_bin -in 04_cg_sample_01.in
+   mpirun -np 32 lmp_bin -in 04_cg_sample_01.in -l 04_cg_sample_01.log
    ```
    | Initial structure | Relaxed structure |
    | --- | --- |
@@ -64,7 +64,7 @@ Go to the [multiscale](./multiscale/) folder and execute the following steps.
    | <img src="images/04_cg_sample_03.png" alt="04_cg_sample_01_f100000.dump" width="100%"/> | <img src="images/05_sample_aa.png" alt="05_sample_aa.pdb" width="90%"/> | 
 6. Anneal the structure at room temperature with a standard all-atom force field. This simulation is computationally quite expensive.
    ```
-   mpirun -np 1280 lmp_bin -in 04_cg_sample_01.in
+   mpirun -np 1280 lmp_bin -in 04_cg_sample_01.in -l 04_cg_sample_01.log
    ```
 7. Extract the last (relaxed) snapshot from the binary MD trajectory, and save it as a PDB file for later use.
    ```sh
@@ -74,8 +74,8 @@ Go to the [multiscale](./multiscale/) folder and execute the following steps.
 
 ### Notes
 
-LAMMPS 30Oct19 has been compiled with the following packages enabled:
+LAMMPS (29 Aug 2024 - Dev) has been compiled with the following packages enabled:
 ```sh
-make yes-asphere yes-kspace yes-mc yes-misc yes-molecule yes-rigid yes-user-molfile yes-user-molc
-make -j4 g++_openmpi
+make yes-asphere yes-kspace yes-misc yes-molecule yes-rigid yes-molfile yes-molc yes-extra-dump
+make -j16 g++_openmpi
 ```

@@ -1,0 +1,31 @@
+# MOLC model of the molecule: Lactic Acid Monomer.
+# Model fitted on the OPLS force field for the PLGA polymer.
+# Default epsilon and sigma parameters from fitting of the LJ potential.
+# GB parameters optimised on the intramolecular energy and density computed for the referene AA model of pure LAC.
+#
+# Version: 1.1
+# Date:    9 August 2024
+#
+# moltemplate.sh -atomstyle "hybrid molecular ellipsoid" -molc test01.lt
+
+lac {
+#  Note: The "..." in "$mol:..." tells moltemplate that this molecule may
+#        be a part of a larger molecule, and (if so) to use the larger
+#        molecule's id number as it's own.
+  write("Data Atoms"){
+      $atom:la  @atom:t1 -0.0174 -0.0002 -0.0003 $mol:... 1 0.99062851
+  }
+  write("Data Ellipsoids"){
+      $atom:la 5.3394 4.3670 5.9584 -1. 0. 0. 0.
+  }
+  write_once("In Settings") {
+    mass @atom:t1 72.0634
+    
+    # MOLC parameters.
+    pair_coeff @atom:t1 @atom:t1 1.0627 3.4740 0.97313 1 0.36835 4 &
+     1.931251    0.539650    1.011545    0.0668 &
+     0.446082    0.057700   -0.000000    0.6529 &
+    -0.712230    1.072980    0.000000   -0.4227 &
+    -0.653529   -1.140853    0.000000   -0.2970
+  }
+}

@@ -20,7 +20,7 @@ delta=5 # This distance should be the sum of the largest sigma of the slab and t
 
 # 1. Extract the last configuration of the slab, after a short annealing.
 perl ../scripts/dumptools.pl -f last $polymer_dump
-last=${polymer_dump/.dump/}_f*.dump
+last=${polymer_dump/.dump/}_t*.dump
 
 # 2. Find the max value along Z of the slab coordinates.
 z_min=$(perl ../scripts/dumptools.pl -c $last | awk '$1~/^Z/{print $2}')
@@ -42,16 +42,16 @@ done
 # 5.1 Create a supercell of solvent.
 echo "Creating a "${ind[0]}"x"${ind[1]}"x"${ind[2]} "supercell of solvent..."
 out="tmp_water"
-perl ../scripts/dumptools.pl -s ${ind[0]},${ind[1]},${ind[2]} -o $out $solvent_dump
+perl ../scripts/dumptools.pl -s ${ind[0]},${ind[1]},${ind[2]} -o $out -f 1 $solvent_dump
 
 # 5.2 Center the supercell.
 echo "Centering the supercell..."
-mv -f ${out}_f*dump /tmp/solvent.dump
-perl ../scripts/dumptools.pl -w -o $out /tmp/solvent.dump
+mv -f ${out}.dump /tmp/solvent.dump
+perl ../scripts/dumptools.pl -w -o $out -f 1 /tmp/solvent.dump
 
 # 5.3 Cut the solvent supercell to fit on top of the slab.
 echo "Cutting the solvent supercell to fit on top of the slab..."
-mv -f ${out}_f*dump /tmp/solvent.dump
+mv -f ${out}.dump /tmp/solvent.dump
 vect3=$(grep -A 3 "ITEM: BOX" $last |tail -n+2 | awk '{printf "%g %g ",$1,$2}')
 vect4=$(grep -A 3 "ITEM: BOX" /tmp/solvent.dump |tail -n+2 | awk '{printf "%g %g ",$1,$2}')
 read -r -a pbc3 <<< "$vect3"
@@ -59,17 +59,17 @@ read -r -a pbc4 <<< "$vect4"
 # The upper limit should not overlap with the bottom of the slab.
 upper=$(awk -v zmin=${pbc3[4]} -v zmax=${pbc3[5]} -v slab=$z_min -v c=$delta 'BEGIN{printf "%g",zmax-zmin+slab-c}')
 zshift=$(awk -v a=${pbc4[4]} -v b=$z_max -v c=$delta 'BEGIN{printf "%g",b+c-a}')
-perl ../scripts/dumptools.pl -t 0,0,$zshift -e "x > ${pbc3[0]} & x < ${pbc3[1]} & y > ${pbc3[2]} & y < ${pbc3[3]} & z < $upper" -o $out /tmp/solvent.dump
+perl ../scripts/dumptools.pl -t 0,0,$zshift -e "x > ${pbc3[0]} & x < ${pbc3[1]} & y > ${pbc3[2]} & y < ${pbc3[3]} & z < $upper" -o $out -f 1 /tmp/solvent.dump
 
 # 6. Merge the slab and the solvent into a single sample.
 echo "Merge the slab and the solvent together..."
-perl ../scripts/dumptools.pl -g s -o $merged $last ${out}_f*dump
+perl ../scripts/dumptools.pl -g s -o $merged $last ${out}.dump
 
 # 7.1 Update the number of molecules in the template file for the next calculation.
-nslab=$(perl ../scripts/dumptools.pl -c $last -d 2>&1 | awk '$0~/Number of molecules:/{print $4}')
-nsolv=$(perl ../scripts/dumptools.pl -c ${out}_f*dump -d 2>&1 | awk '$0~/Number of molecules:/{print $4}')
+nslab=$(perl ../scripts/dumptools.pl -c $last -d 2>&1 | awk '$0~/Number of molecules/{print $6}')
+nsolv=$(perl ../scripts/dumptools.pl -c ${out}.dump -d 2>&1 | awk '$0~/Number of molecules/{print $6}')
 sed -e 's/REPL_SLAB/'$nslab'/; s/REPL_WATER/'$nsolv'/' $lt_template > $lt_input
 
 # 7.2 Render the input script with MOLTEMPLATE.
-moltemplate.sh -atomstyle "hybrid molecular ellipsoid" -molc -dump ${merged}.dump $lt_input
-rm -fr output_ttree $last ${out}_f*dump
+moltemplate.sh -atomstyle "hybrid molecular ellipsoid" -overlay-bonds -dump ${merged}.dump $lt_input
+rm -fr output_ttree $last ${out}.dump

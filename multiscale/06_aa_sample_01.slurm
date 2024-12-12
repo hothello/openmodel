@@ -23,7 +23,4 @@ module swap PrgEnv-cray PrgEnv-gnu
 module load cray-fftw
 export OMP_NUM_THREADS=1
 lmp=/work/pr1ush02/pr1ush02/shared/bin/lmp_archer2b
-srun --distribution=block:block --hint=nomultithread ${lmp} -in $inp 
-
-
-
+srun --distribution=block:block --hint=nomultithread ${lmp} -in $inp -l ${inp%??}log

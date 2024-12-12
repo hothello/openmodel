@@ -1,26 +1,32 @@
 # Physical observables.
-compute q          all property/atom quatw quati quatj quatk
-compute shape           all property/atom shapex shapey shapez
+compute q               all property/atom quatw quati quatj quatk
+compute diameter        all property/atom shapex shapey shapez
 compute temp_trasl      all temp
-compute temp_rot        all temp/asphere dof rotate
 compute temp_rototrasl  all temp/asphere dof all
 compute press_trasl     all pressure temp_trasl
 
+# Derived variables.
+variable d       equal ${cl}*$s          # thermo interval
+variable dcycle  equal ${prod}/$s        # dump interval
+
 # Output.
-thermo          1000
-thermo_style custom step etotal evdwl ecoul elong ebond ke pe temp press pxx pyy pzz vol density cpu
-thermo_modify temp temp_rototrasl
-thermo_modify press press_trasl
-thermo_modify flush yes
+thermo          $d
+thermo_style custom step etotal evdwl ecoul ebond ke pe temp press cpu
+thermo_modify temp temp_rototrasl press press_trasl flush yes
 
-dump 1 all custom 10000 ${run}.dump &
+# Save the trajectory.
+dump TRJ all custom ${dcycle} ${run}.dump &
 id type xu yu zu c_q[1] c_q[2] c_q[3] c_q[4] &
-c_shape[1] c_shape[2] c_shape[3] vx vy vz &
+c_diameter[1] c_diameter[2] c_diameter[3] vx vy vz &
 angmomx angmomy angmomz mol
+dump_modify TRJ colname c_q[1] quatw colname c_q[2] quati colname c_q[3] quatj colname c_q[4] quatk sort id
 
-# 1 ns equilibration of the slab in the vacuum.
-timestep 20.
-fix             2 all nve/asphere
-fix             3 all langevin ${temp} ${temp} 2000. 35785 angmom 0.9
-fix_modify      3 temp temp_rototrasl
-run    50000
+# Remove any drift from the starting configuration.
+velocity all zero linear
+
+# Equilibration of the slab in the vacuum.
+timestep        ${ts}
+fix             NVE all nve/asphere
+fix             TEMP all langevin ${tf} ${tf} $(dt*100) 35785 angmom 0.9
+fix_modify      TEMP temp temp_rototrasl
+run    ${prod}
