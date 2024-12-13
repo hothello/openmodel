@@ -7,7 +7,7 @@ import ../molc/tip4p/tip4p2005_aa_02.lt
 
 # Create the molecules.
 mol0 = new PLGA12[360]
-mol1 = new TIP4[77715]
+mol1 = new TIP4[81002]
 
 
 write("In Init"){
