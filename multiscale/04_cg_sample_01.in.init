@@ -1,13 +1,13 @@
 # Input variables
 variable run    string 04_cg_sample_01
-variable ts     equal  20.          # timestep
+variable ts     equal  15.          # timestep
 variable tf     equal  300.         # Equilibrium temperature
 variable pf     equal  1.           # Equilibrium pressure
 variable cutoff equal  14.          # For interactions in real space      
 variable skin   equal  4.           # Skin distance for neighbour list      
 variable s      equal  5            # sample interval for averaging
 variable cl     equal  200          # correlation length for averaging      
-variable prod   equal  100000       # Equilibration steps (2 ns)
+variable prod   equal  100000       # Equilibration steps (1.5 ns)
 
 
 # Force field setup.

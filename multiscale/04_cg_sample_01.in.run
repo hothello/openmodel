@@ -32,4 +32,7 @@ fix             NPH all nph/asphere z ${pf} ${pf} $(dt*1000)
 fix_modify      NPH press press_trasl
 fix             TEMP all langevin ${tf} ${tf} $(dt*100) 35785 angmom 0.9
 fix_modify      TEMP temp temp_rototrasl
-run    ${prod}
+# To avoid losing atoms, run a brief simulation to allow the box dimension to shrink.
+run    ${dcycle} upto
+# Run the remaining production steps.
+run    ${prod} upto
